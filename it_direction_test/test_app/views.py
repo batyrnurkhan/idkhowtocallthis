@@ -190,8 +190,8 @@ def survey_view(request, user_data_id):
             for answer in answers.values():
                 results[answer] += 1
             # Здесь можно сделать что-то с results, например, передать их в шаблон
-            TestResult.objects.create(user_data_id=user_data_id, test_name="Survey", result="Processed results")
-            return render(request, 'test_app/survey_result.html', {'categories': "Processed categories"})
+            TestResult.objects.create(user_data_id=user_data_id, test_name="Survey", result=categories)
+            return render(request, 'test_app/survey_result.html', {'categories': categories})
     else:
         form = SurveyForm()
 
