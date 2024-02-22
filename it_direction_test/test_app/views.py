@@ -26,7 +26,7 @@ def test_view(request, user_data_id):
                 profession_groups_count[value] += 1
         result = max(profession_groups_count, key=profession_groups_count.get)
         TestResult.objects.create(user_data_id=user_data_id, test_name="General Test", result=result)
-        return render(request, 'test_app/results.html', {'result': result})
+        return render(request, 'test_app/results.html', {'result': result, 'user_data_id': user_data_id})
     else:
         questions = Question.objects.all()
         return render(request, 'test_app/test.html', {'questions': questions, 'user_data_id': user_data_id})
@@ -55,7 +55,7 @@ def holland_test(request, user_data_id):
                     type_counts[type_key] -= 1
         max_type = max(type_counts, key=type_counts.get)
         TestResult.objects.create(user_data_id=user_data_id, test_name="Holland Test", result=max_type)
-        return render(request, 'test_app/result_template.html', {'result': max_type})
+        return render(request, 'test_app/result_template.html', {'result': max_type, 'user_data_id': user_data_id})
     else:
         questions = HollandQuestion.objects.all()
         return render(request, 'test_app/holland_test_template.html', {'questions': questions, 'user_data_id': user_data_id})
@@ -94,7 +94,7 @@ def preference_test_view(request, user_data_id):
                     scores[category] += int(request.POST.get(key + '_score'))
         preferred_category = max(scores, key=scores.get)
         TestResult.objects.create(user_data_id=user_data_id, test_name="Preference Test", result=preferred_category)
-        return render(request, 'test_app/preference_result.html', {'preferred_category': preferred_category})
+        return render(request, 'test_app/preference_result.html', {'preferred_category': preferred_category, 'user_data_id': user_data_id})
     else:
         questions = PreferenceQuestion.objects.all()
         return render(request, 'test_app/preference_test.html', {'questions': questions, 'user_data_id': user_data_id})
@@ -191,7 +191,7 @@ def survey_view(request, user_data_id):
                 results[answer] += 1
             # Здесь можно сделать что-то с results, например, передать их в шаблон
             TestResult.objects.create(user_data_id=user_data_id, test_name="Survey", result=categories)
-            return render(request, 'test_app/survey_result.html', {'categories': categories})
+            return render(request, 'test_app/survey_result.html', {'categories': categories, 'user_data_id': user_data_id})
     else:
         form = SurveyForm()
 
@@ -206,53 +206,45 @@ from .models import CareerAnchorQuestion
 
 
 def career_anchor_test_view(request, user_data_id):
-    if request.method == 'POST':
-        form = CareerAnchorForm(request.POST)
-        if form.is_valid():
-            # Dictionary to hold the sum of scores for each career orientation
-            career_orientations_scores = {
-                'Профессиональная компетентность': 0,
-                'Менеджмент': 0,
-                'Автономия (независимость)': 0,
-                'Стабильность работы': 0,
-                'Стабильность места жительства': 0,
-                'Служение': 0,
-                'Вызов': 0,
-                'Интеграция стилей жизни': 0,
-                'Предпринимательство': 0,
-            }
+    form = CareerAnchorForm(request.POST or None)
+    if request.method == 'POST' and form.is_valid():
+        career_orientations_scores = {
+            'Профессиональная компетентность': 0,
+            'Менеджмент': 0,
+            'Автономия (независимость)': 0,
+            'Стабильность работы': 0,
+            'Стабильность места жительства': 0,
+            'Служение': 0,
+            'Вызов': 0,
+            'Интеграция стилей жизни': 0,
+            'Предпринимательство': 0,
+        }
+        question_orientations_mapping = {
+            'Профессиональная компетентность': [1, 9, 17, 25, 33],
+            'Менеджмент': [2, 10, 18, 26, 34],
+            'Автономия (независимость)': [3, 11, 19, 27, 35],
+            'Стабильность работы': [4, 12, 36],
+            'Стабильность места жительства': [20, 28, 41],
+            'Служение': [5, 13, 21, 29, 37],
+            'Вызов': [6, 14, 22, 30, 38],
+            'Интеграция стилей жизни': [7, 15, 23, 31, 39],
+            'Предпринимательство': [8, 16, 24, 32, 40],
+        }
+        for question_id, score in form.cleaned_data.items():
+            q_id = int(question_id.split('_')[1])
+            score = int(score)
+            for orientation, questions in question_orientations_mapping.items():
+                if q_id in questions:
+                    career_orientations_scores[orientation] += score
+                    break
+        max_orientation = max(career_orientations_scores, key=career_orientations_scores.get)
+        TestResult.objects.create(user_data_id=user_data_id, test_name="Career Anchor Test", result=max_orientation)
+        return render(request, 'test_app/career_anchor_results.html', {
+            'max_orientation': max_orientation,
+            'user_data_id': user_data_id
+        })
 
-            # Mapping of question IDs to their respective career orientations
-            question_orientations_mapping = {
-                'Профессиональная компетентность': [1, 9, 17, 25, 33],
-                'Менеджмент': [2, 10, 18, 26, 34],
-                'Автономия (независимость)': [3, 11, 19, 27, 35],
-                'Стабильность работы': [4, 12, 36],
-                'Стабильность места жительства': [20, 28, 41],
-                'Служение': [5, 13, 21, 29, 37],
-                'Вызов': [6, 14, 22, 30, 38],
-                'Интеграция стилей жизни': [7, 15, 23, 31, 39],
-                'Предпринимательство': [8, 16, 24, 32, 40],
-            }
-
-            # Process each question response
-            for question_id, score in form.cleaned_data.items():
-                # Convert question_id from 'question_X' format to an integer X
-                q_id = int(question_id.split('_')[1])
-                score = int(score)  # Ensure score is an integer
-
-                # Update the relevant orientation score
-                for orientation, questions in question_orientations_mapping.items():
-                    if q_id in questions:
-                        career_orientations_scores[orientation] += score
-                        break
-
-            # Determine the career orientation with the highest score
-            max_orientation = max(career_orientations_scores, key=career_orientations_scores.get)
-
-            # Redirect to results page with the max_orientation as context
-            TestResult.objects.create(user_data_id=user_data_id, test_name="Career Anchor", result="Processed results")
-            return render(request, 'test_app/career_anchor_results.html', {'max_orientation': "Processed orientation"})
-        else:
-            form = CareerAnchorForm()
-        return render(request, 'test_app/career_anchor_test.html', {'form': form, 'user_data_id': user_data_id})
+    return render(request, 'test_app/career_anchor_test.html', {
+        'form': form,
+        'user_data_id': user_data_id
+    })
