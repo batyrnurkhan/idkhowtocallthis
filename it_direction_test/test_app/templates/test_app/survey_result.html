@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Результаты опроса</title>
+</head>
+<body>
+    <h2>Результаты опроса</h2>
+    <ul>
+        {% for profession, level in categories.items %}
+            <li>{{ profession }}: {{ level }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

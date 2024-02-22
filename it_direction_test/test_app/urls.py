@@ -1,9 +1,11 @@
 from django.urls import path
-from . import views
-from .views import holland_test, UserDataView
+from .views import *
 
 urlpatterns = [
-    path('first-test', views.test_view, name='test_view'),
-    path('holland-test/', holland_test, name='holland_test'),
-    path('', UserDataView.as_view(), name='userdata'),
+    path('test/<int:user_data_id>/', test_view, name='test_view'),
+    path('holland_test/<int:user_data_id>/', holland_test, name='holland_test'),
+    path('preference-test/<int:user_data_id>/', preference_test_view, name='preference_test'),
+    path('map-test/<int:user_data_id>/', survey_view, name='survey'),
+    path('career-anchor-test/<int:user_data_id>/', career_anchor_test_view, name='career_anchor_test'),
+    path('', collect_user_data_view, name='collect_user_data_view'),
 ]

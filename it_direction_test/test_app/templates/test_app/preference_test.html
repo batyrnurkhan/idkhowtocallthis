@@ -1,0 +1,12 @@
+<form method="post">
+    {% csrf_token %}
+    {% for question in questions %}
+        <div>
+            <p>{{ question.text }}</p>
+            <input type="radio" name="question_{{forloop.counter}}a" value="3a"> {{ question.option_a }} (3)
+            <input type="radio" name="question_{{forloop.counter}}a" value="2a"> {{ question.option_a }} (2)
+            <!-- Include other options similarly -->
+        </div>
+    {% endfor %}
+    <input type="submit" value="Submit">
+</form>

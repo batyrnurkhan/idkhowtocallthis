@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Career Anchor Test</title>
+</head>
+<body>
+    <h1>Career Anchor Test</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div>
+                <strong>{{ field.label }}</strong>
+                {% for choice in field %}
+                    <label>
+                        {{ choice.tag }}
+                        {{ choice.choice_label }}
+                    </label>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
