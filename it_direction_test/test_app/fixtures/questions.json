@@ -1,72 +1,1222 @@
 [
   {
-    "model": "test_app.mapquestion_kk",
+    "model": "test_app.mapquestion",
     "pk": 1,
     "fields": {
-      "text": "1. Еңбекшілікті кеңейту мен өзінің дамуын қамтамасыз ету"
+      "text": "1. Знакомиться с жизнью растений и животных."
     }
   },
   {
-    "model": "test_app.mapquestion_kk",
+    "model": "test_app.mapquestion",
     "pk": 2,
     "fields": {
-      "text": "2. Жарықтық физика және инженерлік техника бойынша маған қызығушылық береді"
+      "text": "2. Занятия и чтение книг по географии."
     }
   },
   {
-    "model": "test_app.mapquestion_kk",
+    "model": "test_app.mapquestion",
     "pk": 3,
     "fields": {
-      "text": "3. Техникалық және құрылыс ісі бойынша маған қызығушылық береді"
+      "text": "3. Читать художественную или научно-популярную литературу о геологических экспедициях."
     }
   },
   {
-    "model": "test_app.mapquestion_kk",
+    "model": "test_app.mapquestion",
     "pk": 4,
     "fields": {
-      "text": "4. Өнеркәсіп, ресми салмақтарды және техникалық тәжірибелерді адамга байлау"
+      "text": "4. Уроки и книги по анатомии и физиологии человека."
     }
   },
   {
-    "model": "test_app.mapquestion_kk",
+    "model": "test_app.mapquestion",
     "pk": 5,
     "fields": {
-      "text": "5. Сауналық және физикалық аза тапқан адамдардың жанын бақылау"
+      "text": "5. Выполнять ежедневную домашнюю работу."
     }
   },
   {
-    "model": "test_app.mapquestion_kk",
+    "model": "test_app.mapquestion",
     "pk": 6,
     "fields": {
-      "text": "6. Жасақ жасау мен оны техникалық қамтамасыз ету"
+      "text": "6. Читать научно-популярную литературу о физических открытиях, жизни и деятельности выдающихся физиков."
     }
   },
   {
-    "model": "test_app.mapquestion_kk",
+    "model": "test_app.mapquestion",
     "pk": 7,
     "fields": {
-      "text": "7. Адамның өмірі бойынша кейіпкерлік негіздерін тану"
+      "text": "7. Читать об открытиях в химии или о жизни и деятельности выдающихся химиков."
     }
   },
   {
-    "model": "test_app.mapquestion_kk",
+    "model": "test_app.mapquestion",
     "pk": 8,
     "fields": {
-      "text": "8. Құрылыс ісі және техникалық ережелерді тану"
+      "text": "8. Читать технические журналы."
     }
   },
   {
-    "model": "test_app.mapquestion_kk",
+    "model": "test_app.mapquestion",
     "pk": 9,
     "fields": {
-      "text": "9. Мемлекеттік органдар мен кіріспе бағыттарды қамтамасыз ету"
+      "text": "9. Читать статьи в научно-популярных журналах о достижениях в области электроники и радиотехники."
     }
   },
   {
-    "model": "test_app.mapquestion_kk",
+    "model": "test_app.mapquestion",
     "pk": 10,
     "fields": {
-      "text": "10. Мемлекеттік органдарды құру және тапсырмаларын орындау"
+      "text": "10. Знакомиться с разными металлами и их свойствами."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 11,
+    "fields": {
+      "text": "11. Узнавать о разных породах древесины и об их практическом применении."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 12,
+    "fields": {
+      "text": "12. Узнавать о достижениях в области строительства."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 13,
+    "fields": {
+      "text": "13. Читать книги, смотреть фильмы о водителях различных видов транспорта (автомобильного, железнодорожного и т.д.)."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 14,
+    "fields": {
+      "text": "14. Читать книги, смотреть фильмы о летчиках."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 15,
+    "fields": {
+      "text": "15. Знакомиться с военной техникой."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 16,
+    "fields": {
+      "text": "16. Читать книги об исторических событиях."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 17,
+    "fields": {
+      "text": "17. Читать произведения классиков русской и зарубежной литературы."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 18,
+    "fields": {
+      "text": "18. Читать и обсуждать публицистические статьи и очерки."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 19,
+    "fields": {
+      "text": "19. Обсуждать текущие дела и события в учебном заведении, городе, стране."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 20,
+    "fields": {
+      "text": "20. Интересоваться педагогической работой."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 21,
+    "fields": {
+      "text": "21. Читать книги, смотреть фильмы о работе милиции."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 22,
+    "fields": {
+      "text": "22. Заботиться о порядке в собственных вещах, красивом виде помещения."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 23,
+    "fields": {
+      "text": "23. Читать книги из серии 'Занимательная математика'."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 24,
+    "fields": {
+      "text": "24. Изучать экономическую географию."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 25,
+    "fields": {
+      "text": "25. Заниматься иностранным языком."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 26,
+    "fields": {
+      "text": "26. Знакомиться с жизнью выдающихся художников, историей искусства."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 27,
+    "fields": {
+      "text": "27. Знакомиться с жизнью выдающихся артистов, встречаться с ними, коллекционировать их фотографии."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 28,
+    "fields": {
+      "text": "28. Знакомиться с жизнью и творчеством выдающихся музыкантов, с вопросами теории музыки."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 29,
+    "fields": {
+      "text": "29. Читать спортивные газеты, журналы, литературу о спорте."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 30,
+    "fields": {
+      "text": "30. Изучать биологию, ботанику, зоологию."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 31,
+    "fields": {
+      "text": "31. Знакомиться с различными странами по книгам и телепередачам."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 32,
+    "fields": {
+      "text": "32. Читать о жизни и деятельности знаменитых геологов."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 33,
+    "fields": {
+      "text": "33. Интересоваться достижениями медицины."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 34,
+    "fields": {
+      "text": "34. Посещать с экскурсиями предприятия легкой промышленности."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 35,
+    "fields": {
+      "text": "35. Читать книги из серии 'Занимательная физика'."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 36,
+    "fields": {
+      "text": "36. Изучать химические явления в природе."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 37,
+    "fields": {
+      "text": "37. Знакомиться с новейшими достижениями техники."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 38,
+    "fields": {
+      "text": "38. Интересоваться работой радиотехника, электрика."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 39,
+    "fields": {
+      "text": "39. Знакомиться с различными измерительными инструментами, используемыми в процессе металлообработки."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 40,
+    "fields": {
+      "text": "40. Наблюдать за изготовлением изделий из дерева (например, мебели)."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 41,
+    "fields": {
+      "text": "41. Наблюдать за работой строителей."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 42,
+    "fields": {
+      "text": "42. Читать литературу о средствах передвижения."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 43,
+    "fields": {
+      "text": "43. Читать книги, смотреть фильмы и телепередачи о моряках."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 44,
+    "fields": {
+      "text": "44. Читать книги, смотреть фильмы и телепередачи на военные темы, знакомиться с историей крупных сражений."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 45,
+    "fields": {
+      "text": "45. Обсуждать текущие политические события в стране и за рубежом."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 46,
+    "fields": {
+      "text": "46. Читать литературно-критические статьи."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 47,
+    "fields": {
+      "text": "47. Слушать радио, смотреть теленовости и тематические телепередачи."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 48,
+    "fields": {
+      "text": "48. Узнавать о событиях, происходящих в городе, стране."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 49,
+    "fields": {
+      "text": "49. Объяснять учащимся трудные для понимания вопросы."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 50,
+    "fields": {
+      "text": "50. Справедливо рассудить поступок знакомого или литературного героя."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 51,
+    "fields": {
+      "text": "51. Обеспечивать семью продуктами, организовывать питание членов семьи."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 52,
+    "fields": {
+      "text": "52. Читать научно-популярную литературу об открытиях в математике, о жизни и деятельности выдающихся математиков."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 53,
+    "fields": {
+      "text": "53. Интересоваться экономическими передачами по телевидению."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 54,
+    "fields": {
+      "text": "54. Читать художественную литературу на иностранном языке."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 55,
+    "fields": {
+      "text": "55. Заниматься художественным оформлением праздников."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 56,
+    "fields": {
+      "text": "56. Посещать театр."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 57,
+    "fields": {
+      "text": "57. Слушать оперную или симфоническую музыку."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 58,
+    "fields": {
+      "text": "58. Посещать спортивные соревнования, смотреть спортивные передачи."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 59,
+    "fields": {
+      "text": "59. Посещать дополнительные занятия по биологии."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 60,
+    "fields": {
+      "text": "60. Посещать дополнительные занятия по географии."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 61,
+    "fields": {
+      "text": "61. Изучать строение и функции человеческого организма."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 62,
+    "fields": {
+      "text": "62. Изучать строение и функции животных."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 63,
+    "fields": {
+      "text": "63. Смотреть телепередачи о заболеваниях и их лечении."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 64,
+    "fields": {
+      "text": "64. Изучать жизнь и быт иностранных народов."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 65,
+    "fields": {
+      "text": "65. Путешествовать по разным странам."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 66,
+    "fields": {
+      "text": "66. Изучать астрономию."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 67,
+    "fields": {
+      "text": "67. Участвовать в спектаклях."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 68,
+    "fields": {
+      "text": "68. Читать романы, повести, рассказы."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 69,
+    "fields": {
+      "text": "69. Участвовать в школьных или внешкольных мероприятиях."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 70,
+    "fields": {
+      "text": "70. Собирать вещи какого-либо характера."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 71,
+    "fields": {
+      "text": "71. Слушать музыку, исполняемую на разных музыкальных инструментах."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 72,
+    "fields": {
+      "text": "72. Выполнять научные или технические расчеты, задачи."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 73,
+    "fields": {
+      "text": "73. Произносить речи, сообщения на публичных собраниях."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 74,
+    "fields": {
+      "text": "74. Участвовать в спортивных играх и соревнованиях."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 75,
+    "fields": {
+      "text": "75. Обсуждать книги, прочитанные или просмотренные фильмы."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 76,
+    "fields": {
+      "text": "76. Читать книги о природе, путешествиях, о жизни и обычаях народов."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 77,
+    "fields": {
+      "text": "77. Путешествовать, изучая природу и культуру."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 78,
+    "fields": {
+      "text": "78. Слушать рассказы, повести, легенды о природе и путешествиях."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 79,
+    "fields": {
+      "text": "79. Рисовать, лепить, создавать что-либо из природных материалов."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 80,
+    "fields": {
+      "text": "80. Заниматься уходом за животными."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 81,
+    "fields": {
+      "text": "81. Обсуждать с друзьями, знакомыми темы природы, путешествий."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 82,
+    "fields": {
+      "text": "82. Участвовать в путешествиях, экскурсиях."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 83,
+    "fields": {
+      "text": "83. Читать книги о науке, изучающие загадки природы и космоса."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 84,
+    "fields": {
+      "text": "84. Посещать музеи, выставки природы, техники."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 85,
+    "fields": {
+      "text": "85. Посещать зоологические сады, аквариумы, птичьи резерваты."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 86,
+    "fields": {
+      "text": "86. Смотреть телепередачи о природе, о путешествиях."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 87,
+    "fields": {
+      "text": "87. Выращивать комнатные, дачные растения, цветы."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 88,
+    "fields": {
+      "text": "88. Изучать природные явления и процессы."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 89,
+    "fields": {
+      "text": "89. Изучать болезни, их профилактику и лечение."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 90,
+    "fields": {
+      "text": "90. Заниматься спортивными играми."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 91,
+    "fields": {
+      "text": "91. Читать книги, журналы о здоровом образе жизни."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 92,
+    "fields": {
+      "text": "92. Путешествовать, посещая санатории, дома отдыха, лечебные учреждения."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 93,
+    "fields": {
+      "text": "93. Участвовать в спортивных соревнованиях."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 94,
+    "fields": {
+      "text": "94. Изучать строение и функции животных."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 95,
+    "fields": {
+      "text": "95. Изучать строение и функции человеческого организма."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 96,
+    "fields": {
+      "text": "96. Изучать природные явления и процессы."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 97,
+    "fields": {
+      "text": "97. Изучать болезни, их профилактику и лечение."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 98,
+    "fields": {
+      "text": "98. Заниматься спортивными играми."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 99,
+    "fields": {
+      "text": "99. Читать книги, журналы о здоровом образе жизни."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 100,
+    "fields": {
+      "text": "100. Путешествовать, посещая санатории, дома отдыха, лечебные учреждения."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 101,
+    "fields": {
+      "text": "101. Вести здоровый образ жизни."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 102,
+    "fields": {
+      "text": "102. Помогать больным и нуждающимся."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 103,
+    "fields": {
+      "text": "103. Общаться с детьми."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 104,
+    "fields": {
+      "text": "104. Ставить диагноз заболевания."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 105,
+    "fields": {
+      "text": "105. Выполнять назначения врача."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 106,
+    "fields": {
+      "text": "106. Помогать людям в разных ситуациях."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 107,
+    "fields": {
+      "text": "107. Работать на медицинском оборудовании."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 108,
+    "fields": {
+      "text": "108. Профессионально заниматься спортом."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 109,
+    "fields": {
+      "text": "109. Поить, кормить маленьких детей."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 110,
+    "fields": {
+      "text": "110. Разбираться в строении и функциях органов человека."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 111,
+    "fields": {
+      "text": "111. Понимать процессы в организме животных."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 112,
+    "fields": {
+      "text": "112. Лечить травмы и порезы."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 113,
+    "fields": {
+      "text": "113. Узнавать о заболеваниях и их лечении."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 114,
+    "fields": {
+      "text": "114. Смотреть телепередачи о болезнях и их лечении."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 115,
+    "fields": {
+      "text": "115. Ходить в музей истории медицины."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 116,
+    "fields": {
+      "text": "116. Оказывать первую помощь."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 117,
+    "fields": {
+      "text": "117. Изучать строение и функции животных."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 118,
+    "fields": {
+      "text": "118. Изучать строение и функции человеческого организма."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 119,
+    "fields": {
+      "text": "119. Изучать природные явления и процессы."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 120,
+    "fields": {
+      "text": "120. Изучать болезни, их профилактику и лечение."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 121,
+    "fields": {
+      "text": "121. Заниматься спортивными играми."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 122,
+    "fields": {
+      "text": "122. Читать книги, журналы о здоровом образе жизни."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 123,
+    "fields": {
+      "text": "123. Путешествовать, посещая санатории, дома отдыха, лечебные учреждения."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 124,
+    "fields": {
+      "text": "124. Заниматься физкультурой, спортом."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 125,
+    "fields": {
+      "text": "125. Помогать людям, занимающимся спортом."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 126,
+    "fields": {
+      "text": "126. Узнавать о научных достижениях в области медицины."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 127,
+    "fields": {
+      "text": "127. Принимать участие в спортивных соревнованиях."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 128,
+    "fields": {
+      "text": "128. Заниматься гимнастикой."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 129,
+    "fields": {
+      "text": "129. Помогать врачам в больнице."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 130,
+    "fields": {
+      "text": "130. Смотреть телепередачи о здоровом образе жизни."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 131,
+    "fields": {
+      "text": "131. Посещать бассейн."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 132,
+    "fields": {
+      "text": "132. Лечить народными методами."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 133,
+    "fields": {
+      "text": "133. Следить за здоровьем себя и своей семьи."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 134,
+    "fields": {
+      "text": "134. Оказывать медицинскую помощь дома."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 135,
+    "fields": {
+      "text": "135. Заниматься бегом, марафонами."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 136,
+    "fields": {
+      "text": "136. Лечиться самостоятельно, без врачей."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 137,
+    "fields": {
+      "text": "137. Помогать родителям по хозяйству."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 138,
+    "fields": {
+      "text": "138. Собирать коллекцию предметов природы."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 139,
+    "fields": {
+      "text": "139. Работать с маленькими детьми."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 140,
+    "fields": {
+      "text": "140. Изучать новые лечебные методы и средства."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 141,
+    "fields": {
+      "text": "141. Лечить животных."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 142,
+    "fields": {
+      "text": "142. Заниматься рукоделием."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 143,
+    "fields": {
+      "text": "143. Принимать участие в спортивных играх, соревнованиях."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 144,
+    "fields": {
+      "text": "144. Читать книги о спорте."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 145,
+    "fields": {
+      "text": "145. Изучать профессиональные методики врачей."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 146,
+    "fields": {
+      "text": "146. Посещать медицинские учебные заведения."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 147,
+    "fields": {
+      "text": "147. Принимать участие в уходе за больными людьми."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 148,
+    "fields": {
+      "text": "148. Смотреть телепередачи о здоровье, медицине."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 149,
+    "fields": {
+      "text": "149. Помогать в проведении спортивных мероприятий."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 150,
+    "fields": {
+      "text": "150. Заниматься физической культурой, спортом."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 151,
+    "fields": {
+      "text": "151. Поддерживать себя в тонусе физически."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 152,
+    "fields": {
+      "text": "152. Лечиться по народным методам."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 153,
+    "fields": {
+      "text": "153. Помогать близким и родным, когда они болеют."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 154,
+    "fields": {
+      "text": "154. Заниматься сельским хозяйством."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 155,
+    "fields": {
+      "text": "155. Следить за своим здоровьем, лечиться самостоятельно."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 156,
+    "fields": {
+      "text": "156. Заниматься медицинскими исследованиями."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 157,
+    "fields": {
+      "text": "157. Смотреть фильмы о медицине, врачах."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 158,
+    "fields": {
+      "text": "158. Оказывать помощь в уходе за животными."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 159,
+    "fields": {
+      "text": "159. Изучать правила здорового образа жизни."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 160,
+    "fields": {
+      "text": "160. Следить за развитием медицинской науки."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 161,
+    "fields": {
+      "text": "161. Обсуждать проблемы спорта, здоровья."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 162,
+    "fields": {
+      "text": "162. Слушать радиопередачи о здоровье, медицине."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 163,
+    "fields": {
+      "text": "163. Помогать родственникам и друзьям в лечении их болезней."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 164,
+    "fields": {
+      "text": "164. Помогать врачам в лечебных учреждениях."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 165,
+    "fields": {
+      "text": "165. Смотреть телепередачи о спорте."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 166,
+    "fields": {
+      "text": "166. Поить, кормить больных людей."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 167,
+    "fields": {
+      "text": "167. Заниматься медицинским творчеством (лечить, помогать людям)."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 168,
+    "fields": {
+      "text": "168. Изучать новые методы врачебной практики."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 169,
+    "fields": {
+      "text": "169. Принимать участие в мероприятиях по охране здоровья."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 170,
+    "fields": {
+      "text": "170. Заниматься научной работой в области медицины."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 171,
+    "fields": {
+      "text": "171. Принимать участие в походах, экспедициях."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 172,
+    "fields": {
+      "text": "172. Составлять программы физической культуры."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 173,
+    "fields": {
+      "text": "173. Посещать медицинские консультации, курсы здоровья."
+    }
+  },
+  {
+    "model": "test_app.mapquestion",
+    "pk": 174,
+    "fields": {
+      "text": "174. Помогать старикам."
     }
   }
+
+
 ]

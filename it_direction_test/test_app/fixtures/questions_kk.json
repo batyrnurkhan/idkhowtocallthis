@@ -1,0 +1,1220 @@
+[
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 1,
+    "fields": {
+      "text": "1. Өсімдіктер мен жануарлар өмірімен танысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 2,
+    "fields": {
+      "text": "2. География бойынша оқу және кітап оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 3,
+    "fields": {
+      "text": "3. Геологиялық экспедициялар туралы әдеби немесе ғылыми-танымал әдебиеттерді оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 4,
+    "fields": {
+      "text": "4. Адам анатомиясы мен физиологиясы бойынша сабақтар мен кітаптар."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 5,
+    "fields": {
+      "text": "5. Күнделікті үй тапсырмасын орындау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 6,
+    "fields": {
+      "text": "6. Физикалық ашылулар, көрнекті физиктердің өмірі мен қызметі туралы ғылыми-танымал әдебиеттерді оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 7,
+    "fields": {
+      "text": "7. Химиядағы ашылулар немесе көрнекті химиктердің өмірі мен қызметі туралы оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 8,
+    "fields": {
+      "text": "8. Техникалық журналдарды оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 9,
+    "fields": {
+      "text": "9. Электроника және радиотехника саласындағы жетістіктер туралы ғылыми-танымал журналдардағы мақалаларды оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 10,
+    "fields": {
+      "text": "10. Әртүрлі металдар мен олардың қасиеттерімен танысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 11,
+    "fields": {
+      "text": "11. Әртүрлі ағаш түрлері туралы және олардың практикалық қолданылуы туралы білу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 12,
+    "fields": {
+      "text": "12. Құрылыс саласындағы жетістіктер туралы білу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 13,
+    "fields": {
+      "text": "13. Әртүрлі көлік түрлерінің (автомобиль, темір жол және т.б.) жүргізушілері туралы кітаптарды оқып, фильмдерді көру."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 14,
+    "fields": {
+      "text": "14. Ұшқыштар туралы кітаптарды оқып, фильмдерді көру."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 15,
+    "fields": {
+      "text": "15. Әскери техникамен танысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 16,
+    "fields": {
+      "text": "16. Тарихи оқиғалар туралы кітаптарды оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 17,
+    "fields": {
+      "text": "17. Орыс және шетел классиктерінің шығармаларын оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 18,
+    "fields": {
+      "text": "18. Публицистикалық мақалалар мен очерктерді оқып, талқылау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 19,
+    "fields": {
+      "text": "19. Оқу орнында, қалада, елде болып жатқан ағымдағы істер мен оқиғаларды талқылау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 20,
+    "fields": {
+      "text": "20. Педагогикалық жұмыспен қызығушылық таныту."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 21,
+    "fields": {
+      "text": "21. Полиция жұмысы туралы кітаптарды оқып, фильмдерді көру."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 22,
+    "fields": {
+      "text": "22. Өз заттарыңыздың тәртібіне күтім жасау, бөлменің сұлу көрінісін қамтамасыз ету."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 23,
+    "fields": {
+      "text": "23. 'Қызықты математика' сериясынан кітаптарды оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 24,
+    "fields": {
+      "text": "24. Экономикалық географияны зерттеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 25,
+    "fields": {
+      "text": "25. Шет тілімен айналысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 26,
+    "fields": {
+      "text": "26. Көрнекті суретшілердің өмірімен, өнер тарихымен танысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 27,
+    "fields": {
+      "text": "27. Көрнекті әртістердің өмірімен танысу, олармен кездесу, олардың фотосуреттерін жинау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 28,
+    "fields": {
+      "text": "28. Көрнекті музыканттардың өмірі мен шығармашылығымен, музыка теориясы мәселелерімен танысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 29,
+    "fields": {
+      "text": "29. Спорт туралы газеттерді, журналдарды, әдебиеттерді оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 30,
+    "fields": {
+      "text": "30. Биология, ботаника, зоологияны зерттеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 31,
+    "fields": {
+      "text": "31. Кітаптар мен телебағдарламалар арқылы әртүрлі елдермен танысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 32,
+    "fields": {
+      "text": "32. Танымал геологтардың өмірі мен қызметі туралы оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 33,
+    "fields": {
+      "text": "33. Медицина саласындағы жетістіктерге қызығушылық таныту."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 34,
+    "fields": {
+      "text": "34. Жеңіл өнеркәсіп кәсіпорындарына экскурсияларға бару."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 35,
+    "fields": {
+      "text": "35. 'Қызықты физика' сериясынан кітаптарды оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 36,
+    "fields": {
+      "text": "36. Табиғаттағы химиялық құбылыстарды зерттеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 37,
+    "fields": {
+      "text": "37. Техниканың ең соңғы жетістіктерімен танысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 38,
+    "fields": {
+      "text": "38. Радиотехник, электрик жұмысына қызығушылық таныту."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 39,
+    "fields": {
+      "text": "39. Металл өңдеу процесінде қолданылатын әртүрлі өлшеу құралдарымен танысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 40,
+    "fields": {
+      "text": "40. Ағаштан жасалған бұйымдардың (мысалы, жиһаздардың) жасалуын бақылау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 41,
+    "fields": {
+      "text": "41. Құрылысшылардың жұмысын бақылау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 42,
+    "fields": {
+      "text": "42. Көлік құралдары туралы әдебиеттерді оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 43,
+    "fields": {
+      "text": "43. Теңізшілер туралы кітаптарды оқып, фильмдер мен телебағдарламаларды көру."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 44,
+    "fields": {
+      "text": "44. Әскери тақырыптардағы кітаптарды оқып, фильмдер мен телебағдарламаларды көру, ірі шайқастардың тарихымен танысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 45,
+    "fields": {
+      "text": "45. Ел ішіндегі және шетелдегі ағымдағы саяси оқиғаларды талқылау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 46,
+    "fields": {
+      "text": "46. Әдеби-сын мақалаларды оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 47,
+    "fields": {
+      "text": "47. Радио тыңдау, телехабарлар мен тақырыптық телебағдарламаларды көру."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 48,
+    "fields": {
+      "text": "48. Қалада, елде болып жатқан оқиғалар туралы білу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 49,
+    "fields": {
+      "text": "49. Оқушыларға түсіну қиын сұрақтарды түсіндіру."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 50,
+    "fields": {
+      "text": "50. Таныс адамның немесе әдеби кейіпкердің іс-әрекетін әділ бағалау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 51,
+    "fields": {
+      "text": "51. Отбасын азық-түлікпен қамтамасыз ету, отбасы мүшелерінің тамақтануын ұйымдастыру."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 52,
+    "fields": {
+      "text": "52. Математикадағы ашылулар, көрнекті математиктердің өмірі мен қызметі туралы ғылыми-танымал әдебиеттерді оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 53,
+    "fields": {
+      "text": "53. Теледидардан экономикалық бағдарламаларға қызығушылық таныту."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 54,
+    "fields": {
+      "text": "54. Шет тіліндегі әдебиеттерді оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 55,
+    "fields": {
+      "text": "55. Мерекелерді безендірумен айналысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 56,
+    "fields": {
+      "text": "56. Театрға бару."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 57,
+    "fields": {
+      "text": "57. Опера немесе симфониялық музыканы тыңдау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 58,
+    "fields": {
+      "text": "58. Спорттық жарыстарға бару, спорттық бағдарламаларды көру."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 59,
+    "fields": {
+      "text": "59. Биология бойынша қосымша сабақтарға бару."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 60,
+    "fields": {
+      "text": "60. География бойынша қосымша сабақтарға бару."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 61,
+    "fields": {
+      "text": "61. Адам организмінің құрылысы мен функцияларын зерттеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 62,
+    "fields": {
+      "text": "62. Жануарлардың құрылысы мен функцияларын зерттеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 63,
+    "fields": {
+      "text": "63. Аурулар мен олардың емделуі туралы телебағдарламаларды көру."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 64,
+    "fields": {
+      "text": "64. Шетел халықтарының өмірі мен тұрмысын зерттеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 65,
+    "fields": {
+      "text": "65. Әртүрлі елдерге саяхаттау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 66,
+    "fields": {
+      "text": "66. Астрономияны зерттеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 67,
+    "fields": {
+      "text": "67. Спектакльдерге қатысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 68,
+    "fields": {
+      "text": "68. Романдарды, әңгімелерді, әңгімелерді оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 69,
+    "fields": {
+      "text": "69. Мектептегі немесе мектептен тыс іс-шараларға қатысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 70,
+    "fields": {
+      "text": "70. Белгілі бір сипаттағы заттарды жинау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 71,
+    "fields": {
+      "text": "71. Әртүрлі музыкалық аспаптарда орындалатын музыканы тыңдау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 72,
+    "fields": {
+      "text": "72. Ғылыми немесе техникалық есептеулер, есептерді орындау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 73,
+    "fields": {
+      "text": "73. Жиналыстарда, жиындарда баяндамалар, хабарламалар жасау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 74,
+    "fields": {
+      "text": "74. Спорттық ойындарда, жарыстарда қатысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 75,
+    "fields": {
+      "text": "75. Оқыған кітаптарды, көрген фильмдерді талқылау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 76,
+    "fields": {
+      "text": "76. Табиғат, саяхат, халықтардың өмірі мен салт-дәстүрлері туралы кітаптарды оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 77,
+    "fields": {
+      "text": "77. Табиғат пен мәдениетті зерттей отырып, саяхаттау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 78,
+    "fields": {
+      "text": "78. Табиғат және саяхат туралы әңгімелерді, повестерді, аңыздарды тыңдау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 79,
+    "fields": {
+      "text": "79. Сурет салу, мүсіндеу, табиғи материалдардан бір нәрсе жасау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 80,
+    "fields": {
+      "text": "80. Жануарларға күтім жасаумен айналысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 81,
+    "fields": {
+      "text": "81. Достарыңызбен, таныстарыңызбен табиғат, саяхат тақырыптарын талқылау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 82,
+    "fields": {
+      "text": "82. Саяхаттарға, экскурсияларға қатысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 83,
+    "fields": {
+      "text": "83. Ғылым, табиғат пен космостың құпияларын зерттейтін кітаптарды оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 84,
+    "fields": {
+      "text": "84. Табиғат, техника мұражайларына, көрмелерге бару."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 85,
+    "fields": {
+      "text": "85. Зоологиялық бақтарға, аквариумдарға, құстар резерваттарына бару."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 86,
+    "fields": {
+      "text": "86. Табиғат, саяхат туралы телебағдарламаларды көру."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 87,
+    "fields": {
+      "text": "87. Бөлме, дача өсімдіктерін, гүлдерді өсіру."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 88,
+    "fields": {
+      "text": "88. Табиғи құбылыстар мен процестерді зерттеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 89,
+    "fields": {
+      "text": "89. Ауруларды, олардың алдын алу мен емдеуді зерттеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 90,
+    "fields": {
+      "text": "90. Спорттық ойындармен айналысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 91,
+    "fields": {
+      "text": "91. Денсаулықты сақтау туралы кітаптарды, журналдарды оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 92,
+    "fields": {
+      "text": "92. Санаторийлерге, демалыс үйлеріне, емдеу мекемелеріне саяхаттау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 93,
+    "fields": {
+      "text": "93. Спорттық жарыстарға қатысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 94,
+    "fields": {
+      "text": "94. Жануарлардың құрылысы мен функцияларын зерттеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 95,
+    "fields": {
+      "text": "95. Адам организмінің құрылысы мен функцияларын зерттеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 96,
+    "fields": {
+      "text": "96. Табиғи құбылыстар мен процестерді зерттеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 97,
+    "fields": {
+      "text": "97. Ауруларды, олардың алдын алу мен емдеуді зерттеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 98,
+    "fields": {
+      "text": "98. Спорттық ойындармен айналысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 99,
+    "fields": {
+      "text": "99. Денсаулықты сақтау туралы кітаптарды, журналдарды оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 100,
+    "fields": {
+      "text": "100. Санаторийлерге, демалыс үйлеріне, емдеу мекемелеріне саяхаттау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 101,
+    "fields": {
+      "text": "101. Денсаулық сақтау саласындағы өмір салтын ұстану."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 102,
+    "fields": {
+      "text": "102. Ауруларға және мұқтаж адамдарға көмек көрсету."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 103,
+    "fields": {
+      "text": "103. Балалармен қарым-қатынас жасау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 104,
+    "fields": {
+      "text": "104. Аурудың диагнозын қою."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 105,
+    "fields": {
+      "text": "105. Дәрігердің тағайындауларын орындау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 106,
+    "fields": {
+      "text": "106. Әртүрлі жағдайларда адамдарға көмек көрсету."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 107,
+    "fields": {
+      "text": "107. Медициналық жабдықтарда жұмыс істеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 108,
+    "fields": {
+      "text": "108. Спортпен кәсіби түрде айналысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 109,
+    "fields": {
+      "text": "109. Кішкентай балаларды суарып, тамақтандыру."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 110,
+    "fields": {
+      "text": "110. Адам органдарының құрылысы мен функцияларын түсіну."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 111,
+    "fields": {
+      "text": "111. Жануарлар организміндегі процестерді түсіну."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 112,
+    "fields": {
+      "text": "112. Жарақаттар мен кесулерді емдеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 113,
+    "fields": {
+      "text": "113. Аурулар мен олардың емделуі туралы білу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 114,
+    "fields": {
+      "text": "114. Аурулар мен олардың емделуі туралы телебағдарламаларды көру."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 115,
+    "fields": {
+      "text": "115. Медицина тарихы мұражайына бару."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 116,
+    "fields": {
+      "text": "116. Алғашқы көмек көрсету."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 117,
+    "fields": {
+      "text": "117. Жануарлардың құрылысы мен функцияларын зерттеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 118,
+    "fields": {
+      "text": "118. Адам организмінің құрылысы мен функцияларын зерттеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 119,
+    "fields": {
+      "text": "119. Табиғи құбылыстар мен процестерді зерттеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 120,
+    "fields": {
+      "text": "120. Ауруларды, олардың алдын алу мен емдеуді зерттеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 121,
+    "fields": {
+      "text": "121. Спорттық ойындармен айналысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 122,
+    "fields": {
+      "text": "122. Денсаулықты сақтау туралы кітаптарды, журналдарды оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 123,
+    "fields": {
+      "text": "123. Санаторийлерге, демалыс үйлеріне, емдеу мекемелеріне саяхаттау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 124,
+    "fields": {
+      "text": "124. Дене шынықтырумен, спортпен айналысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 125,
+    "fields": {
+      "text": "125. Спортпен айналысатын адамдарға көмек көрсету."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 126,
+    "fields": {
+      "text": "126. Медицина саласындағы ғылыми жетістіктер туралы білу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 127,
+    "fields": {
+      "text": "127. Спорттық жарыстарға қатысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 128,
+    "fields": {
+      "text": "128. Гимнастикамен айналысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 129,
+    "fields": {
+      "text": "129. Ауруханада дәрігерлерге көмек көрсету."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 130,
+    "fields": {
+      "text": "130. Денсаулықты сақтау туралы телебағдарламаларды көру."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 131,
+    "fields": {
+      "text": "131. Бассейнге бару."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 132,
+    "fields": {
+      "text": "132. Халық емімен емдеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 133,
+    "fields": {
+      "text": "133. Өзіңіздің және отбасыңыздың денсаулығын қадағалау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 134,
+    "fields": {
+      "text": "134. Үйде медициналық көмек көрсету."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 135,
+    "fields": {
+      "text": "135. Жүгірумен, марафондармен айналысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 136,
+    "fields": {
+      "text": "136. Дәрігерлерсіз өз бетінше емделу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 137,
+    "fields": {
+      "text": "137. Ата-аналарға шаруашылықта көмектесу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 138,
+    "fields": {
+      "text": "138. Табиғат заттарының коллекциясын жинау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 139,
+    "fields": {
+      "text": "139. Кішкентай балалармен жұмыс істеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 140,
+    "fields": {
+      "text": "140. Жаңа емдеу әдістері мен құралдарын зерттеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 141,
+    "fields": {
+      "text": "141. Жануарларды емдеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 142,
+    "fields": {
+      "text": "142. Қолөнермен айналысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 143,
+    "fields": {
+      "text": "143. Спорттық ойындарға, жарыстарға қатысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 144,
+    "fields": {
+      "text": "144. Спорт туралы кітаптарды оқу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 145,
+    "fields": {
+      "text": "145. Дәрігерлердің кәсіби әдістерін зерттеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 146,
+    "fields": {
+      "text": "146. Медициналық оқу орындарына бару."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 147,
+    "fields": {
+      "text": "147. Ауру адамдарға күтім жасауға қатысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 148,
+    "fields": {
+      "text": "148. Денсаулық, медицина туралы телебағдарламаларды көру."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 149,
+    "fields": {
+      "text": "149. Спорттық іс-шараларды өткізуге көмек көрсету."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 150,
+    "fields": {
+      "text": "150. Дене шынықтырумен, спортпен айналысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 151,
+    "fields": {
+      "text": "151. Өзіңізді физикалық тұрғыдан сау ұстау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 152,
+    "fields": {
+      "text": "152. Халық емімен емделу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 153,
+    "fields": {
+      "text": "153. Ауырған кезде жақындарыңызға және туыстарыңызға көмектесу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 154,
+    "fields": {
+      "text": "154. Ауыл шаруашылығымен айналысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 155,
+    "fields": {
+      "text": "155. Өз денсаулығыңызды қадағалау, өз бетіңізше емделу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 156,
+    "fields": {
+      "text": "156. Медициналық зерттеулермен айналысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 157,
+    "fields": {
+      "text": "157. Медицина, дәрігерлер туралы фильмдерді көру."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 158,
+    "fields": {
+      "text": "158. Жануарларға күтім жасауға көмек көрсету."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 159,
+    "fields": {
+      "text": "159. Денсаулық сақтау ережелерін зерттеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 160,
+    "fields": {
+      "text": "160. Медицина ғылымының дамуын бақылау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 161,
+    "fields": {
+      "text": "161. Спорт, денсаулық мәселелерін талқылау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 162,
+    "fields": {
+      "text": "162. Денсаулық, медицина туралы радиобағдарламаларды тыңдау."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 163,
+    "fields": {
+      "text": "163. Туыстарыңызға және достарыңызға олардың ауруларын емдеуге көмектесу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 164,
+    "fields": {
+      "text": "164. Емдеу мекемелерінде дәрігерлерге көмек көрсету."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 165,
+    "fields": {
+      "text": "165. Спорт туралы телебағдарламаларды көру."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 166,
+    "fields": {
+      "text": "166. Ауру адамдарды суарып, тамақтандыру."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 167,
+    "fields": {
+      "text": "167. Медициналық шығармашылықпен (емдеу, адамдарға көмектесу) айналысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 168,
+    "fields": {
+      "text": "168. Дәрігерлік тәжірибедегі жаңа әдістерді зерттеу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 169,
+    "fields": {
+      "text": "169. Денсаулықты сақтау іс-шараларына қатысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 170,
+    "fields": {
+      "text": "170. Медицина саласындағы ғылыми жұмыспен айналысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 171,
+    "fields": {
+      "text": "171. Жорықтарға, экспедицияларға қатысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 172,
+    "fields": {
+      "text": "172. Дене шынықтыру бағдарламаларын құру."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 173,
+    "fields": {
+      "text": "173. Медициналық кеңестерге, денсаулық курстарына қатысу."
+    }
+  },
+  {
+    "model": "test_app.mapquestion_kk",
+    "pk": 174,
+    "fields": {
+      "text": "174. Қарт адамдарға көмектесу."
+    }
+  }
+]
