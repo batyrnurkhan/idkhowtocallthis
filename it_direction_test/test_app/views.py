@@ -88,10 +88,12 @@ def preference_test_view(request, user_data_id):
 
         for key, value in request.POST.items():
             if key.startswith('question'):
-                question_id, option = key.split('_')[1], value
+                question_id, option = key.split('_')[1], value[-1]  # Assuming the last character is the option (a/b)
+                score = int(value[:-1])  # Assuming the score is everything except the last character
                 category = question_category_map.get(f'{question_id}{option}')
                 if category:
-                    scores[category] += int(request.POST.get(key + '_score'))
+                    scores[category] += score
+
         preferred_category = max(scores, key=scores.get)
         TestResult.objects.create(user_data_id=user_data_id, test_name="Preference Test", result=preferred_category)
         return render(request, 'test_app/preference_result.html', {'preferred_category': preferred_category, 'user_data_id': user_data_id})
