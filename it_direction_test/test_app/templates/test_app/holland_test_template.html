@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holland Test</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        {% for question in questions %}
+            <p>{{ question.text }}</p>
+            <input type="radio" id="{{ question.id }}_a" name="{{ question.id }}" value="a">
+            <label for="{{ question.id }}_a">{{ question.choice_a }}</label><br>
+            <input type="radio" id="{{ question.id }}_b" name="{{ question.id }}" value="b">
+            <label for="{{ question.id }}_b">{{ question.choice_b }}</label><br><br>
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

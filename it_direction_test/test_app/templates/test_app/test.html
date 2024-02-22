@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Career Orientation Test</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        {% for question in questions %}
+            <label>{{ question.text }}</label><br>
+            <input type="radio" id="question_{{ question.id }}_a" name="question_{{ question.id }}" value="Human-Nature" required>
+            <label for="question_{{ question.id }}_a">{{ question.choice_a }}</label><br>
+            <input type="radio" id="question_{{ question.id }}_b" name="question_{{ question.id }}" value="Human-Technique">
+            <label for="question_{{ question.id }}_b">{{ question.choice_b }}</label><br>
+        {% endfor %}
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
