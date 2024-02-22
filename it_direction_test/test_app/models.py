@@ -1,5 +1,4 @@
 from django.db import models
-
 class UserData(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -37,6 +36,9 @@ class PreferenceQuestion(models.Model):
 class MapQuestion(models.Model):
     text = models.TextField()
 
+
+class MapQuestion_kk(models.Model):
+    text = models.TextField()
 
 class CareerAnchorQuestion(models.Model):
     text = models.CharField(max_length=1024)

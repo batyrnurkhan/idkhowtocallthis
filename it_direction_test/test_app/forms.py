@@ -18,6 +18,22 @@ class SurveyForm(forms.Form):
             field_name = f'question_{i}'
             self.fields[field_name] = forms.ChoiceField(choices=self.CHOICES, widget=forms.RadioSelect,
                                                         label=question.text)
+class SurveyForm_kk(forms.Form):
+    CHOICES = [
+        ('++', 'Очень нравится'),
+        ('+', 'Нравится'),
+        ('0', 'Не знаю/Сомневаюсь'),
+        ('-', 'Не нравится'),
+        ('--', 'Очень не нравится')
+    ]
+
+    def __init__(self, *args, **kwargs):
+        super(SurveyForm_kk, self).__init__(*args, **kwargs)
+        questions = MapQuestion_kk.objects.all()
+        for i, question in enumerate(questions, start=1):
+            field_name = f'question_{i}'
+            self.fields[field_name] = forms.ChoiceField(choices=self.CHOICES, widget=forms.RadioSelect,
+                                                        label=question.text)
 
 
 from .models import CareerAnchorQuestion
