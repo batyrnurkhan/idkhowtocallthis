@@ -13,24 +13,28 @@ def collect_user_data_view(request):
     return render(request, 'test_app/userform.html', {'form': form})
 
 def test_view(request, user_data_id):
+    user_data = get_object_or_404(UserData, id=user_data_id)
+    language = user_data.language  # Assume language is stored in UserData model
+
     if request.method == 'POST':
+        # Your POST request handling remains unchanged
         profession_groups_count = {
             'Human-Nature': 0,
             'Human-Technique': 0,
             'Human-Human': 0,
             'Human-Sign Systems': 0,
-            'Human-Artistic Image': 0
+            'Human-Artistic Image': 0,
         }
         for key, value in request.POST.items():
             if key.startswith('question'):
                 profession_groups_count[value] += 1
         result = max(profession_groups_count, key=profession_groups_count.get)
         TestResult.objects.create(user_data_id=user_data_id, test_name="General Test", result=result)
-        return render(request, 'test_app/results.html', {'result': result, 'user_data_id': user_data_id})
+        return render(request, 'test_app/first_test/results.html', {'result': result, 'user_data_id': user_data_id})
     else:
-        questions = Question.objects.all()
-        return render(request, 'test_app/test.html', {'questions': questions, 'user_data_id': user_data_id})
-
+        questions = Question.objects.filter(language=language)  # Filter questions by language
+        template_name = 'test_app/first_test/test_kz.html' if language == 'KZ' else 'test_app/test.html'
+        return render(request, template_name, {'questions': questions, 'user_data_id': user_data_id})
 def holland_test(request, user_data_id):
     if request.method == 'POST':
         responses = request.POST.dict()

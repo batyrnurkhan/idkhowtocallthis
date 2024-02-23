@@ -5,15 +5,18 @@ class UserData(models.Model):
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
     phone_number = models.CharField(max_length=15)
+    language = models.CharField(max_length=2, choices=(('RU', 'Russian'), ('KZ', 'Kazakh')))
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
 
 
 class Question(models.Model):
     text = models.CharField(max_length=1024)
     choice_a = models.CharField(max_length=512)
     choice_b = models.CharField(max_length=512)
+    language = models.CharField(max_length=2, choices=(('RU', 'Russian'), ('KZ', 'Kazakh')), default=('RU', 'Russian'))
 
     def __str__(self):
         return self.text

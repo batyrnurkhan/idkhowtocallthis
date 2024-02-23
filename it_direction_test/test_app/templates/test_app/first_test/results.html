@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ language }}">
 <head>
     <meta charset="UTF-8">
     <title>Test Results</title>
@@ -25,8 +25,16 @@
     </style>
 </head>
 <body>
-    <h1>Your suggested profession group is: {{ result }}</h1>
-    <a href="{% url 'holland_test' user_data_id %}">Yes, continue to the next test</a>
+    <h1>
+        {% if language == 'KZ' %}
+        Сіздің ұсынылған мамандық тобыңыз: {{ result }}
+        {% else %}
+        Your suggested profession group is: {{ result }}
+        {% endif %}
+    </h1>
+    <a href="{% url 'holland_test' user_data_id %}">
+        {% if language == 'KZ' %}Иә, келесі тестке өтіңіз{% else %}Yes, continue to the next test{% endif %}
+    </a>
 
 </body>
 </html>

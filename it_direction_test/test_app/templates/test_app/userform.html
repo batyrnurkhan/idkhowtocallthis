@@ -45,7 +45,26 @@
 
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    <!-- Manually render form fields if you need specific customization -->
+    <p><label for="id_first_name">First Name</label><br>
+    <input type="text" name="first_name" id="id_first_name" required></p>
+
+    <p><label for="id_last_name">Last Name</label><br>
+    <input type="text" name="last_name" id="id_last_name" required></p>
+
+    <p><label for="id_email">Email</label><br>
+    <input type="email" name="email" id="id_email" required></p>
+
+    <p><label for="id_phone_number">Phone Number</label><br>
+    <input type="text" name="phone_number" id="id_phone_number" required></p>
+
+    <!-- Language selection dropdown -->
+    <p><label for="id_language">Language</label><br>
+    <select name="language" id="id_language" required>
+        <option value="RU">Russian</option>
+        <option value="KZ">Kazakh</option>
+    </select></p>
+
     <button type="submit">Submit</button>
 </form>
 </body>
