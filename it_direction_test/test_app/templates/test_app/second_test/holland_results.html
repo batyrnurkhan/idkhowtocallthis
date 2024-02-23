@@ -69,8 +69,8 @@
     <div class="logo">
         <img src="https://iitu.edu.kz/media/images/logo_ce8bCzm.original.png" alt="Logo" style="width:100%;">
     </div>
-    <h1>Your Holland Type</h1>
-    <p>The result of your Holland Test is: <strong>{{ result }}</strong></p>
-    <a href="{% url 'preference_test' user_data_id %}">Yes, continue to the next test</a>
+    <h1>{{ text1 }}</h1>
+    <p>{{ text2 }} <strong>{{ result }}</strong></p>
+<a href="{% url 'home' user_data_id %}" class="home-button">Go to Home Page</a>
 </body>
 </html>

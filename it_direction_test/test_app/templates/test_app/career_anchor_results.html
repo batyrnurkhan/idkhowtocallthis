@@ -56,8 +56,9 @@
     <div class="logo">
         <img src="https://iitu.edu.kz/media/images/logo_ce8bCzm.original.png" alt="Logo" style="width:100%;">
     </div>
-    <h1>Your Career Anchor Results</h1>
-    <p>Your dominant career orientation is: <strong>{{ max_orientation }}</strong></p>
-    <!-- Here you can optionally add more detailed descriptions or advice based on the dominant career orientation -->
+    <h1>{{ text1 }}</h1>
+    <p> {{ text2 }} <strong>{{ max_orientation }}</strong></p>
+    <a href="{% url 'home' user_data_id %}" class="home-button">Go to Home Page</a>
+
 </body>
 </html>
