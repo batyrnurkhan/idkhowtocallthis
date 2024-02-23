@@ -119,9 +119,28 @@ def holland_test(request, user_data_id):
                 elif question_id in keys and choice_selected == 'б':
                     type_counts[type_key] -= 1
         max_type = max(type_counts, key=type_counts.get)
+        if language == "KZ":
+            text1 = "Сіздің HOLLAND Түріңіз"
+            text2 = "Сіздің HOLLAND Тестіңіздің нәтижесі:"
+            if max_type == "Реалистический тип":
+                max_type = "Реалистік түрі"
+            elif max_type == "Интеллектуальный тип":
+                max_type = "Интеллектуалдық түр"
+            elif max_type == "Социальный тип":
+                max_type = "Әлеуметтік түр"
+            elif max_type == "Конвенциональный тип":
+                max_type = "Дәстүрлі түр"
+            elif max_type == "Предприимчивый тип":
+                max_type = "Кәсіпкерлік түр"
+            elif max_type == "Артистический тип":
+                max_type = "Өнер түрі"
+        else:
+            text1 = "Ваш HOLLAND Тип"
+            text2 = "Результат вашего теста HOLLAND"
+
         TestResult.objects.create(user_data_id=user_data_id, test_name="Holland Test", result=max_type)
-        results_template = 'test_app/second_test/holland_results_kz.html' if language == 'KZ' else 'test_app/second_test/holland_results.html'
-        return render(request, results_template, {'result': max_type, 'user_data_id': user_data_id})
+        return render(request, "test_app/second_test/holland_results.html",
+                      {'result': max_type, 'text1': text1, 'text2': text2 })
     else:
         if(language == "KZ"):
 
