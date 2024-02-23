@@ -32,13 +32,12 @@
     </style>
 </head>
 <body>
-    <h2>Результаты опроса</h2>
+    <h2> {{ text }} </h2>
     <ul>
         {% for profession, level in categories.items %}
             <li>{{ profession }}: {{ level }}</li>
         {% endfor %}
     </ul>
-    <a href="{% url 'career_anchor_test' user_data_id %}">Yes, continue to the next test</a>
 
 </body>
 </html>
