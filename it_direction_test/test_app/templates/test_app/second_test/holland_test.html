@@ -56,21 +56,36 @@
     </style>
 </head>
 <body>
-    <form method="post">
+    <form method="post" id="hollandQuestionsForm">
         {% csrf_token %}
         {% for question in questions %}
             <div class="question">
                 <!-- Question text -->
                 <p><strong>{{ forloop.counter }}. {{ question.text }}</strong></p>
                 <!-- Option A -->
-                <input type="radio" id="question_{{ question.id }}_a" name="{{ question.id }}" value="a">
+                <input type="radio" id="question_{{ question.id }}_a" name="question_{{ question.id }}" value="a">
                 <label for="question_{{ question.id }}_a">{{ question.choice_a }}</label>
                 <!-- Option B -->
-                <input type="radio" id="question_{{ question.id }}_b" name="{{ question.id }}" value="b">
+                <input type="radio" id="question_{{ question.id }}_b" name="question_{{ question.id }}" value="b">
                 <label for="question_{{ question.id }}_b">{{ question.choice_b }}</label>
             </div>
         {% endfor %}
         <button type="submit">Submit</button>
     </form>
+    <script>
+        document.getElementById('hollandQuestionsForm').onsubmit = function() {
+            var questions = document.querySelectorAll('.question');
+            for (var i = 0; i < questions.length; i++) {
+                var inputs = questions[i].querySelectorAll('input[type=radio]');
+                var answered = Array.from(inputs).some(input => input.checked);
+                if (!answered) {
+                    alert('Please answer all questions before submitting.');
+                    return false; // Prevent form submission
+                }
+            }
+            return true; // Allow form submission
+        };
+    </script>
 </body>
+
 </html>

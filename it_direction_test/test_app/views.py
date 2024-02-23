@@ -240,8 +240,7 @@ def preference_test_view(request, user_data_id):
             questions = PreferenceQuestion_kk.objects.all()
         else:
             questions = PreferenceQuestion.objects.all()
-        test_template = 'test_app/third_test/preference_test.html' if language == 'KZ' else 'test_app/third_test/preference_test_kz.html'
-        return render(request, test_template, {'questions': questions, 'user_data_id': user_data_id})
+        return render(request, 'test_app/third_test/preference_test.html', {'questions': questions, 'user_data_id': user_data_id})
 def survey_view(request, user_data_id):
     user_data = get_object_or_404(UserData, id=user_data_id)
     user_language = user_data.language
