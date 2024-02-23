@@ -92,10 +92,12 @@ def preference_test_view(request, user_data_id):
 
         for key, value in request.POST.items():
             if key.startswith('question'):
-                question_id, option = key.split('_')[1], value
+                question_id, option = key.split('_')[1], value[-1]  # Assuming the last character is the option (a/b)
+                score = int(value[:-1])  # Assuming the score is everything except the last character
                 category = question_category_map.get(f'{question_id}{option}')
                 if category:
-                    scores[category] += int(request.POST.get(key + '_score'))
+                    scores[category] += score
+
         preferred_category = max(scores, key=scores.get)
         TestResult.objects.create(user_data_id=user_data_id, test_name="Preference Test", result=preferred_category)
         return render(request, 'test_app/preference_result.html', {'preferred_category': preferred_category, 'user_data_id': user_data_id})
@@ -201,7 +203,103 @@ def survey_view(request, user_data_id):
 
     return render(request, 'test_app/survey_test.html', {'form': form})
 
+def survey_view_kk(request, user_data_id):
+    if request.method == 'POST':
+        form = SurveyForm_kk(request.POST)
+        if form.is_valid():
+            answers = form.cleaned_data
+            results = answers.values()
 
+            # Инициализация списка результатов для каждой категории
+            results_by_category = [0] * 29
+            levels_mapping = {
+                -12: "высшая степень отрицания данного интереса",
+                -11: "высшая степень отрицания данного интереса",
+                -10: "высшая степень отрицания данного интереса",
+                -9: "высшая степень отрицания данного интереса",
+                -8: "высшая степень отрицания данного интереса",
+                -7: "выраженный интерес",
+                -6: "выраженный интерес",
+                -5: "выраженный интерес",
+                -4: "интерес выражен слабо",
+                -3: "интерес выражен слабо",
+                -2: "интерес выражен слабо",
+                -1: "интерес выражен слабо",
+                0: "интерес отрицается",
+                1: "интерес выражен слабо",
+                2: "интерес выражен слабо",
+                3: "интерес выражен слабо",
+                4: "интерес выражен слабо",
+                5: "выраженный интерес",
+                6: "выраженный интерес",
+                7: "выраженный интерес",
+                8: "ярко выраженный интерес",
+                9: "ярко выраженный интерес",
+                10: "ярко выраженный интерес",
+                11: "ярко выраженный интерес",
+                12: "ярко выраженный интерес",
+            }
+
+            # Определение значений для каждой переменной в зависимости от ответов
+            for i, result in enumerate(results, start=1):
+                question_index = (i - 1) % 29  # Вычисляем индекс вопроса от 0 до 28 для каждого i
+                if result == '++':
+                    results_by_category[question_index] += 2
+                elif result == '+':
+                    results_by_category[question_index] += 1
+                elif result == '-':
+                    results_by_category[question_index] -= 1
+                elif result == '--':
+                    results_by_category[question_index] -= 2
+                else:
+                    pass  # Ничего не делаем, если ответ не указан
+
+            categories = {
+                "Биология": levels_mapping.get(results_by_category[0], "Недопустимое значение"),
+                "География": levels_mapping.get(results_by_category[1], "Недопустимое значение"),
+                "Геология": levels_mapping.get(results_by_category[2], "Недопустимое значение"),
+                "Медицина": levels_mapping.get(results_by_category[3], "Недопустимое значение"),
+                "Легкая и пищевая промышленность": levels_mapping.get(results_by_category[4], "Недопустимое значение"),
+                "Физика": levels_mapping.get(results_by_category[5], "Недопустимое значение"),
+                "Химия": levels_mapping.get(results_by_category[6], "Недопустимое значение"),
+                "Техника": levels_mapping.get(results_by_category[7], "Недопустимое значение"),
+                "Электро- и радиотехника": levels_mapping.get(results_by_category[8], "Недопустимое значение"),
+                "Металлообработка": levels_mapping.get(results_by_category[9], "Недопустимое значение"),
+                "Деревообработка": levels_mapping.get(results_by_category[10], "Недопустимое значение"),
+                "Строительство": levels_mapping.get(results_by_category[11], "Недопустимое значение"),
+                "Транспорт": levels_mapping.get(results_by_category[12], "Недопустимое значение"),
+                "Авиация, морское дело": levels_mapping.get(results_by_category[13], "Недопустимое значение"),
+                "Военные специальности": levels_mapping.get(results_by_category[14], "Недопустимое значение"),
+                "История": levels_mapping.get(results_by_category[15], "Недопустимое значение"),
+                "Литература": levels_mapping.get(results_by_category[16], "Недопустимое значение"),
+                "Журналистика": levels_mapping.get(results_by_category[17], "Недопустимое значение"),
+                "Общественная деятельность": levels_mapping.get(results_by_category[18], "Недопустимое значение"),
+                "Педагогика": levels_mapping.get(results_by_category[19], "Недопустимое значение"),
+                "Юриспруденция": levels_mapping.get(results_by_category[20], "Недопустимое значение"),
+                "Сфера обслуживания": levels_mapping.get(results_by_category[21], "Недопустимое значение"),
+                "Математика": levels_mapping.get(results_by_category[22], "Недопустимое значение"),
+                "Экономика": levels_mapping.get(results_by_category[23], "Недопустимое значение"),
+                "Иностранные языки": levels_mapping.get(results_by_category[24], "Недопустимое значение"),
+                "Изобразительное искусство": levels_mapping.get(results_by_category[25], "Недопустимое значение"),
+                "Сценическое искусство": levels_mapping.get(results_by_category[26], "Недопустимое значение"),
+                "Музыка": levels_mapping.get(results_by_category[27], "Недопустимое значение"),
+                "Физкультура и спорт": levels_mapping.get(results_by_category[28], "Недопустимое значение")
+            }
+            print(categories)
+
+
+
+            results = {'++': 0, '+': 0, '0': 0, '-': 0, '--': 0}
+
+            for answer in answers.values():
+                results[answer] += 1
+            # Здесь можно сделать что-то с results, например, передать их в шаблон
+            TestResult.objects.create(user_data_id=user_data_id, test_name="Survey", result=categories)
+            return render(request, 'test_app/survey_result.html', {'categories': categories, 'user_data_id': user_data_id})
+    else:
+        form = SurveyForm_kk()
+
+    return render(request, 'test_app/survey_test.html', {'form': form})
 
 
 from django.shortcuts import render
