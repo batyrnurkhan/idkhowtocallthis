@@ -7,7 +7,13 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #eef2f3;
+            background:
+                radial-gradient(circle, transparent 20%, #ba1f25 30%, #ba1f25 80%, transparent 80%, transparent),
+                radial-gradient(circle, transparent 20%, #a3171e 30%, #a3171e 80%, transparent 80%, transparent) 50px 50px,
+                linear-gradient(#ba1f251a 2px, transparent 2px) 0 -1px,
+                linear-gradient(90deg, #ba1f251a 2px, transparent 2px) -1px 0;
+            background-color: #ba1f25;
+            background-size: 100px 100px, 100px 100px, 25px 25px, 25px 25px;
             margin: 0;
             padding: 20px;
             display: flex;
@@ -15,13 +21,15 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            color: white; /* Adjusts text color for better contrast */
         }
         h1 {
-            color: #333;
+            color: white; /* Ensures title is visible against the dynamic background */
             margin-bottom: 20px;
         }
         p {
             background-color: #fff;
+            color: #333; /* Ensures text within is readable */
             padding: 15px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -29,14 +37,40 @@
             text-align: center;
         }
         strong {
-            color: #007bff;
+            color: #007bff; /* Keeps the strong element's color for emphasis */
             font-size: 1.2em;
+        }
+        a {
+            color: #007bff; /* Provides a familiar, clickable color */
+            text-decoration: none; /* Optional: removes underline */
+            padding: 10px 20px; /* Gives some padding around the text */
+            background-color: #ffffff; /* Background color for visibility */
+            border-radius: 5px; /* Rounds the corners */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Adds a subtle shadow */
+            display: inline-block; /* Allows block-level behaviors like padding */
+            margin-top: 20px; /* Additional spacing from the paragraph */
+        }
+        a:hover {
+            text-decoration: underline; /* Restores underline on hover for clarity */
+            background-color: #f0f0f0; /* Light background on hover */
+        }
+        /* Fixed Logo */
+        .logo {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 100px;
+            height: auto;
+            z-index: 1000;
         }
     </style>
 </head>
 <body>
-        <h1>{{ text1 }}</h1>
-    <p>{{ text2 }} <strong>{{ result }}</strong></p>
-
+    <div class="logo">
+        <img src="https://iitu.edu.kz/media/images/logo_ce8bCzm.original.png" alt="Logo" style="width:100%;">
+    </div>
+    <h1>Your Holland Type</h1>
+    <p>The result of your Holland Test is: <strong>{{ result }}</strong></p>
+    <a href="{% url 'preference_test' user_data_id %}">Yes, continue to the next test</a>
 </body>
 </html>

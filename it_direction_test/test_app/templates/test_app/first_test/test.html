@@ -6,9 +6,31 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
-            margin: 20px;
-            padding: 20px;
+            background:
+                radial-gradient(circle, transparent 20%, #ba1f25 30%, #ba1f25 80%, transparent 80%, transparent),
+                radial-gradient(circle, transparent 20%, #a3171e 30%, #a3171e 80%, transparent 80%, transparent) 50px 50px,
+                linear-gradient(#ba1f251a 2px, transparent 2px) 0 -1px,
+                linear-gradient(90deg, #ba1f251a 2px, transparent 2px) -1px 0;
+            background-color: #ba1f25;
+            background-size: 100px 100px, 100px 100px, 25px 25px, 25px 25px;
+            margin: 0;
+            padding: 0;
+            padding-top: 60px; /* Space for the title */
+            /*display: flex;*/
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            color: white; /* Ensures text is white */
+        }
+        h1 {
+            /*position: fixed; !* Fixes the title at the top *!*/
+            top: 0;
+            width: 100%;
+            text-align: center;
+            margin-top: 0;
+            padding: 20px 0;
+            /*background-color: rgba(0,0,0,0.7); !* Semi-transparent background *!*/
         }
         form {
             background-color: #fff;
@@ -16,23 +38,25 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             max-width: 600px;
+            width: 100%;
             margin: auto;
+            color: #000; /* Text color for form content */
         }
         .question {
             margin-bottom: 20px;
         }
         .question label {
             font-weight: normal;
-            margin-left: 5px; /* Adjust margin for label text */
-            display: block; /* Use 'block' to make labels appear on new line */
+            margin-left: 5px;
+            display: flex;
+            align-items: center;
         }
-        .question > label:first-of-type {
+        .question > div:first-of-type {
             font-weight: bold;
             margin-bottom: 10px;
         }
         input[type="radio"] {
-            margin-right: 10px; /* Space between radio button and label */
-            cursor: pointer;
+            margin-right: 10px;
         }
         input[type="submit"] {
             background-color: #007bff;
@@ -49,18 +73,35 @@
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
+        /* Fixed Logo */
+        .logo {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 100px;
+            height: auto;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
+    <h1>Career Orientation Test</h1>
+    <div class="logo">
+        <img src="https://iitu.edu.kz/media/images/logo_ce8bCzm.original.png" alt="Logo" style="width:100%;">
+    </div>
     <form method="post">
         {% csrf_token %}
         {% for question in questions %}
             <div class="question">
-                <label><strong>{{ forloop.counter }}. {{ question.text }}</strong></label>
-                <input type="radio" id="question_{{ question.id }}_a" name="question_{{ question.id }}" value="Human-Nature" required>
-                <label for="question_{{ question.id }}_a">{{ question.choice_a }}</label>
-                <input type="radio" id="question_{{ question.id }}_b" name="question_{{ question.id }}" value="Human-Technique">
-                <label for="question_{{ question.id }}_b">{{ question.choice_b }}</label>
+                <div><strong>{{ forloop.counter }}. {{ question.text }}</strong></div>
+                <label for="question_{{ question.id }}_a">
+                    <input type="radio" id="question_{{ question.id }}_a" name="question_{{ question.id }}" value="Human-Nature" required>
+                    {{ question.choice_a }}
+                </label>
+                <label for="question_{{ question.id }}_b">
+                    <input type="radio" id="question_{{ question.id }}_b" name="question_{{ question.id }}" value="Human-Technique">
+                    {{ question.choice_b }}
+                </label>
             </div>
         {% endfor %}
         <input type="submit" value="Submit">

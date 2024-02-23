@@ -7,8 +7,19 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background:
+                radial-gradient(circle, transparent 20%, #ba1f25 30%, #ba1f25 80%, transparent 80%, transparent),
+                radial-gradient(circle, transparent 20%, #a3171e 30%, #a3171e 80%, transparent 80%, transparent) 50px 50px,
+                linear-gradient(#ba1f251a 2px, transparent 2px) 0 -1px,
+                linear-gradient(90deg, #ba1f251a 2px, transparent 2px) -1px 0;
+            background-color: #ba1f25;
+            background-size: 100px 100px, 100px 100px, 25px 25px, 25px 25px;
             padding: 20px;
-            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: white; /* Ensures text is white for better contrast */
         }
         p {
             background-color: #ffffff;
@@ -19,10 +30,26 @@
             max-width: 600px;
             margin: 20px auto;
             font-size: 18px;
+            text-align: center; /* Centers the text for better readability */
+        }
+        a {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 20px auto;
+            font-size: 18px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        a:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <p>{{ text }} {{ preferred_category }}</p>
+    <p>Your preferred category is: {{ preferred_category }}</p>
+    <a href="{% url 'survey' user_data_id %}">Yes, continue to the next test</a>
 </body>
 </html>

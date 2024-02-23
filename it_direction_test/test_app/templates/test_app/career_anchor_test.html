@@ -6,20 +6,33 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background:
+                radial-gradient(circle, transparent 20%, #ba1f25 30%, #ba1f25 80%, transparent 80%, transparent),
+                radial-gradient(circle, transparent 20%, #a3171e 30%, #a3171e 80%, transparent 80%, transparent) 50px 50px,
+                linear-gradient(#ba1f251a 2px, transparent 2px) 0 -1px,
+                linear-gradient(90deg, #ba1f251a 2px, transparent 2px) -1px 0;
+            background-color: #ba1f25;
+            background-size: 100px 100px, 100px 100px, 25px 25px, 25px 25px;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            color: white; /* Ensures text is white for better contrast */
         }
         h1 {
             text-align: center;
-            color: #333;
+            color: white; /* Adjusted for visibility against the dynamic background */
         }
         form {
             max-width: 700px;
-            margin: auto;
+            width: 100%;
+            margin: 60px auto; /* Adjusted margin to account for fixed header */
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: #333; /* Text color inside form */
         }
         div {
             margin-bottom: 20px;
@@ -31,7 +44,8 @@
             font-size: 18px;
         }
         label {
-            display: block;
+            display: flex;
+            align-items: center; /* Aligns the radio buttons with the labels */
             margin-left: 20px;
             font-size: 16px;
             cursor: pointer;
@@ -39,6 +53,7 @@
         input[type="radio"],
         input[type="checkbox"] {
             margin-right: 10px;
+            cursor: pointer;
         }
         button {
             background-color: #007bff;
@@ -49,15 +64,26 @@
             cursor: pointer;
             font-size: 16px;
             display: block;
-            margin: auto;
-            margin-top: 20px;
+            margin: 20px auto;
         }
         button:hover {
-            background-color: #007bff;
+            background-color: #0056b3;
+        }
+        /* Fixed Logo */
+        .logo {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 100px;
+            height: auto;
+            z-index: 1000;
         }
     </style>
 </head>
 <body>
+    <div class="logo">
+        <img src="https://iitu.edu.kz/media/images/logo_ce8bCzm.original.png" alt="Logo" style="width:100%;">
+    </div>
     <h1>Career Anchor Test</h1>
     <form method="post">
         {% csrf_token %}
@@ -65,9 +91,13 @@
             <div>
                 <strong>{{ field.label }}</strong>
                 {% for choice in field %}
+
                     <label>
-                        {{ choice.tag }}
+
+<!--                        <input type="{{ choice.tag }}" name="{{ field.name }}" value="{{ choice.value }}" id="{{ choice.id }}">-->}}
+                        {{choice.tag}}
                         {{ choice.choice_label }}
+
                     </label>
                 {% endfor %}
             </div>

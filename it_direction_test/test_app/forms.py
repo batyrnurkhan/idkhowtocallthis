@@ -50,6 +50,7 @@ class CareerAnchorForm(forms.Form):
             field_name = f'question_{question.id}'
             choices = [(str(i), str(i)) for i in range(1, 11)]
             self.fields[field_name] = forms.ChoiceField(choices=choices, widget=forms.RadioSelect, label=question.text)
+
 class CareerAnchorForm_kk(forms.Form):
     def __init__(self, *args, **kwargs):
         language = kwargs.pop('language', 'RU')

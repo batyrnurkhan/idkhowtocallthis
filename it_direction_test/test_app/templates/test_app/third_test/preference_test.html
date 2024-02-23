@@ -7,44 +7,52 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f5f5;
+            background:
+                radial-gradient(circle, transparent 20%, #ba1f25 30%, #ba1f25 80%, transparent 80%, transparent),
+                radial-gradient(circle, transparent 20%, #a3171e 30%, #a3171e 80%, transparent 80%, transparent) 50px 50px,
+                linear-gradient(#ba1f251a 2px, transparent 2px) 0 -1px,
+                linear-gradient(90deg, #ba1f251a 2px, transparent 2px) -1px 0;
+            background-color: #ba1f25;
+            background-size: 100px 100px, 100px 100px, 25px 25px, 25px 25px;
             padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 0; /* Ensure there's no extra margin around the body */
+            margin: 0;
+            color: white;
         }
         form {
             max-width: 600px;
-            margin: 20px auto; /* Ensure there's some space around the form */
+            width: 100%;
+            margin: 60px auto;
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            /* Removed max-height and overflow properties to allow natural expansion */
+            color: #333;
         }
         div {
             margin-bottom: 20px;
         }
         p {
-            color: #333;
             font-size: 18px;
         }
         label {
-            margin-left: 5px;
             font-size: 16px;
-            display: block; /* Ensures label text is properly aligned */
+            display: flex;
+            align-items: center;
+            margin-left: 5px;
         }
         input[type="radio"] {
-            margin-top: 5px;
             margin-right: 10px;
+            cursor: pointer;
         }
         input[type="submit"] {
             display: block;
             width: 100%;
             padding: 10px;
             margin-top: 20px;
-            background-color: #0056b3;
+            background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
@@ -54,22 +62,50 @@
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
+        /* Fixed Logo */
+        .logo {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 100px;
+            height: auto;
+            z-index: 1000;
+        }
+        h1 {
+            /*position: fixed;*/
+            top: 0;
+            width: 100%;
+            text-align: center;
+            margin-top: 0;
+            padding: 20px 0;
+            /*background-color: rgba(0,0,0,0.7);*/
+            z-index: 900;
+            color: white;
+        }
     </style>
 </head>
 <body>
-<form method="post">
-    {% csrf_token %}
-    {% for question in questions %}
+    <div class="logo">
+        <img src="https://iitu.edu.kz/media/images/logo_ce8bCzm.original.png" alt="Logo" style="width:100%;">
+    </div>
+    <h1>Survey Form</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for question in questions %}
         <div>
             <p><strong>{{ forloop.counter }}. {{ question.text }}</strong></p>
-            <input type="radio" id="question_{{forloop.counter}}_a" name="question_{{forloop.counter}}" value="3a">
-            <label for="question_{{forloop.counter}}_a">{{ question.option_a }} (3)</label>
-            <input type="radio" id="question_{{forloop.counter}}_b" name="question_{{forloop.counter}}" value="2a">
-            <label for="question_{{forloop.counter}}_b">{{ question.option_a }} (2)</label>
-            <!-- Include other options similarly, ensuring they are associated with correct labels -->
+            <label for="question_{{forloop.counter}}_a">
+                <input type="radio" id="question_{{forloop.counter}}_a" name="question_{{forloop.counter}}" value="3a">
+                {{ question.option_a }} (3)
+            </label>
+            <label for="question_{{forloop.counter}}_b">
+                <input type="radio" id="question_{{forloop.counter}}_b" name="question_{{forloop.counter}}" value="2a">
+                {{ question.option_a }} (2)
+            </label>
+            <!-- Additional options can be included in a similar manner -->
         </div>
-    {% endfor %}
-    <input type="submit" value="Submit">
-</form>
+        {% endfor %}
+        <input type="submit" value="Submit">
+    </form>
 </body>
 </html>

@@ -7,36 +7,44 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f5f5;
+            background:
+                radial-gradient(circle, transparent 20%, #ba1f25 30%, #ba1f25 80%, transparent 80%, transparent),
+                radial-gradient(circle, transparent 20%, #a3171e 30%, #a3171e 80%, transparent 80%, transparent) 50px 50px,
+                linear-gradient(#ba1f251a 2px, transparent 2px) 0 -1px,
+                linear-gradient(90deg, #ba1f251a 2px, transparent 2px) -1px 0;
+            background-color: #ba1f25;
+            background-size: 100px 100px, 100px 100px, 25px 25px, 25px 25px;
             padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             margin: 0;
+            color: white;
         }
         form {
             max-width: 600px;
-            margin: 20px auto;
+            width: 100%;
+            margin: 60px auto;
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: #333;
         }
         .question {
             margin-bottom: 20px;
         }
         .question p {
-            color: #333;
             font-size: 18px;
         }
-        .question label {
-            margin-left: 5px;
-            font-size: 16px;
-            display: block;
+        .question div {
+            display: flex;
+            align-items: center; /* Aligns the radio buttons with the labels */
+            margin-bottom: 5px;
         }
         input[type="radio"] {
-            margin-top: 5px;
             margin-right: 10px;
+            cursor: pointer;
         }
         button {
             display: block;
@@ -51,41 +59,51 @@
             font-size: 18px;
         }
         button:hover {
-            background-color: #007bff;
+            background-color: #0056b3;
+        }
+        /* Fixed Logo */
+        .logo {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 100px;
+            height: auto;
+            z-index: 1000;
+        }
+        h1 {
+            /*position: fixed;*/
+            top: 0;
+            width: 100%;
+            text-align: center;
+            margin-top: 0;
+            padding: 20px 0;
+            /*background-color: rgba(0,0,0,0.7);*/
+            z-index: 900;
+            color: white;
         }
     </style>
 </head>
 <body>
-    <form method="post" id="hollandQuestionsForm">
+    <div class="logo">
+        <img src="https://iitu.edu.kz/media/images/logo_ce8bCzm.original.png" alt="Logo" style="width:100%;">
+    </div>
+    <h1>Holland Test</h1>
+    <form method="post">
         {% csrf_token %}
         {% for question in questions %}
             <div class="question">
-                <!-- Question text -->
                 <p><strong>{{ forloop.counter }}. {{ question.text }}</strong></p>
-                <!-- Option A -->
-                <input type="radio" id="question_{{ question.id }}_a" name="question_{{ question.id }}" value="a">
-                <label for="question_{{ question.id }}_a">{{ question.choice_a }}</label>
-                <!-- Option B -->
-                <input type="radio" id="question_{{ question.id }}_b" name="question_{{ question.id }}" value="b">
-                <label for="question_{{ question.id }}_b">{{ question.choice_b }}</label>
+                <div>
+                    <input type="radio" id="question_{{ question.id }}_a" name="{{ question.id }}" value="a">
+                    <label for="question_{{ question.id }}_a">{{ question.choice_a }}</label>
+                </div>
+                <div>
+                    <input type="radio" id="question_{{ question.id }}_b" name="{{ question.id }}" value="b">
+                    <label for="question_{{ question.id }}_b">{{ question.choice_b }}</label>
+                </div>
             </div>
         {% endfor %}
         <button type="submit">Submit</button>
     </form>
-    <script>
-        document.getElementById('hollandQuestionsForm').onsubmit = function() {
-            var questions = document.querySelectorAll('.question');
-            for (var i = 0; i < questions.length; i++) {
-                var inputs = questions[i].querySelectorAll('input[type=radio]');
-                var answered = Array.from(inputs).some(input => input.checked);
-                if (!answered) {
-                    alert('Please answer all questions before submitting.');
-                    return false; // Prevent form submission
-                }
-            }
-            return true; // Allow form submission
-        };
-    </script>
 </body>
-
 </html>

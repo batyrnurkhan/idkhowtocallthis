@@ -2,6 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Question, HollandQuestion, PreferenceQuestion, CareerAnchorQuestion, UserData, TestResult
 from .forms import *
 
+def index(request, user_data_id):
+    user_data = get_object_or_404(UserData, id=user_data_id)
+    return render(request, 'test_app/home.html', {
+        'user_data_id':user_data_id}
+                  )
+
 
 def collect_user_data_view(request):
     if request.method == 'POST':
@@ -13,6 +19,7 @@ def collect_user_data_view(request):
         form = UserDataForm()
     return render(request, 'test_app/userform.html', {'form': form})
 
+# In your views.py
 
 def test_view(request, user_data_id):
     user_data = get_object_or_404(UserData, id=user_data_id)
@@ -200,47 +207,19 @@ def preference_test_view(request, user_data_id):
                     scores[category] += score
 
         preferred_category = max(scores, key=scores.get)
-
-        if language == "KZ":
-            text = "Сіздің қалаған санатыңыз:"
-            if preferred_category == "Work with people":
-                preferred_category = "Адамдармен жұмыс"
-            elif preferred_category == "Intellectual work":
-                preferred_category = "Интеллектуалды жұмыс"
-            elif preferred_category == "Technical interests":
-                preferred_category = "Техникалық қызығушылықтар"
-            elif preferred_category == "Aesthetics and art":
-                preferred_category = "Эстетика және өнер"
-            elif preferred_category == "Physical work":
-                preferred_category = "Физикалық жұмыс"
-            elif preferred_category == "Material interests":
-                preferred_category = "Материалдық мүдделер"
-        elif language == "RU":
-            text = "Ваша предпочтительная категория - это:"
-            if preferred_category == "Work with people":
-                preferred_category = "Работа с людьми"
-            elif preferred_category == "Intellectual work":
-                preferred_category = "Интеллектуальная работа"
-            elif preferred_category == "Technical interests":
-                preferred_category = "Технические интересы"
-            elif preferred_category == "Aesthetics and art":
-                preferred_category = "Эстетика и искусство"
-            elif preferred_category == "Physical work":
-                preferred_category = "Физический труд"
-            elif preferred_category == "Material interests":
-                preferred_category = "Материальные интересы"
-
         TestResult.objects.create(user_data_id=user_data_id, test_name="Preference Test", result=preferred_category)
 
-        return render(request, 'test_app/third_test/preference_result.html',
-                      {'preferred_category': preferred_category, 'text': text})
+        results_template = 'test_app/third_test/preference_result.html' if language == 'KZ' else 'test_app/third_test/preference_result_kz.html'
+        return render(request, results_template,
+                      {'preferred_category': preferred_category, 'user_data_id': user_data_id})
     else:
         if(language == "KZ"):
 
             questions = PreferenceQuestion_kk.objects.all()
         else:
             questions = PreferenceQuestion.objects.all()
-        return render(request, 'test_app/third_test/preference_test.html', {'questions': questions, 'user_data_id': user_data_id})
+        test_template = 'test_app/third_test/preference_test.html'
+        return render(request, test_template, {'questions': questions, 'user_data_id': user_data_id})
 def survey_view(request, user_data_id):
     user_data = get_object_or_404(UserData, id=user_data_id)
     user_language = user_data.language
@@ -258,7 +237,7 @@ def survey_view(request, user_data_id):
 
             # Инициализация списка результатов для каждой категории
             results_by_category = [0] * 29
-            levels_mapping_ru = {
+            levels_mapping = {
                 -12: "высшая степень отрицания данного интереса",
                 -11: "высшая степень отрицания данного интереса",
                 -10: "высшая степень отрицания данного интереса",
@@ -286,38 +265,6 @@ def survey_view(request, user_data_id):
                 12: "ярко выраженный интерес",
             }
 
-            levels_mapping_kk = {
-                -12: "осы қызығушылықтың ең жоғары дәрежесінің теріске шығарылуы",
-                -11: "осы қызығушылықтың ең жоғары дәрежесінің теріске шығарылуы",
-                -10: "осы қызығушылықтың ең жоғары дәрежесінің теріске шығарылуы",
-                -9: "осы қызығушылықтың ең жоғары дәрежесінің теріске шығарылуы",
-                -8: "осы қызығушылықтың ең жоғары дәрежесінің теріске шығарылуы",
-                -7: "білдірілген қызығушылық",
-                -6: "білдірілген қызығушылық",
-                -5: "білдірілген қызығушылық",
-                -4: "қызығушылық аз білдірілген",
-                -3: "қызығушылық аз білдірілген",
-                -2: "қызығушылық аз білдірілген",
-                -1: "қызығушылық аз білдірілген",
-                0: "қызығушылық теріске шығарылады",
-                1: "қызығушылық аз білдірілген",
-                2: "қызығушылық аз білдірілген",
-                3: "қызығушылық аз білдірілген",
-                4: "қызығушылық аз білдірілген",
-                5: "білдірілген қызығушылық",
-                6: "білдірілген қызығушылық",
-                7: "білдірілген қызығушылық",
-                8: "қатты білдірілген қызығушылық",
-                9: "қатты білдірілген қызығушылық",
-                10: "қатты білдірілген қызығушылық",
-                11: "қатты білдірілген қызығушылық",
-                12: "қатты білдірілген қызығушылық",
-            }
-            if(user_language == "KZ"):
-                levels_mapping = levels_mapping_kk
-            else:
-                levels_mapping = levels_mapping_ru
-
             # Определение значений для каждой переменной в зависимости от ответов
             for i, result in enumerate(results, start=1):
                 question_index = (i - 1) % 29  # Вычисляем индекс вопроса от 0 до 28 для каждого i
@@ -332,7 +279,7 @@ def survey_view(request, user_data_id):
                 else:
                     pass  # Ничего не делаем, если ответ не указан
 
-            categories_ru = {
+            categories = {
                 "Биология": levels_mapping.get(results_by_category[0], "Недопустимое значение"),
                 "География": levels_mapping.get(results_by_category[1], "Недопустимое значение"),
                 "Геология": levels_mapping.get(results_by_category[2], "Недопустимое значение"),
@@ -363,46 +310,9 @@ def survey_view(request, user_data_id):
                 "Музыка": levels_mapping.get(results_by_category[27], "Недопустимое значение"),
                 "Физкультура и спорт": levels_mapping.get(results_by_category[28], "Недопустимое значение")
             }
-
-            categories_kk = {
-                "Биология": levels_mapping.get(results_by_category[0], "Жарамсыз мән"),
-                "География": levels_mapping.get(results_by_category[1], "Жарамсыз мән"),
-                "Геология": levels_mapping.get(results_by_category[2], "Жарамсыз мән"),
-                "Медицина": levels_mapping.get(results_by_category[3], "Жарамсыз мән"),
-                "Легкая и пищевая промышленность": levels_mapping.get(results_by_category[4], "Жарамсыз мән"),
-                "Физика": levels_mapping.get(results_by_category[5], "Жарамсыз мән"),
-                "Химия": levels_mapping.get(results_by_category[6], "Жарамсыз мән"),
-                "Техника": levels_mapping.get(results_by_category[7], "Жарамсыз мән"),
-                "Электро- и радиотехника": levels_mapping.get(results_by_category[8], "Жарамсыз мән"),
-                "Металлообработка": levels_mapping.get(results_by_category[9], "Жарамсыз мән"),
-                "Деревообработка": levels_mapping.get(results_by_category[10], "Жарамсыз мән"),
-                "Строительство": levels_mapping.get(results_by_category[11], "Жарамсыз мән"),
-                "Транспорт": levels_mapping.get(results_by_category[12], "Жарамсыз мән"),
-                "Авиация, морское дело": levels_mapping.get(results_by_category[13], "Жарамсыз мән"),
-                "Военные специальности": levels_mapping.get(results_by_category[14], "Жарамсыз мән"),
-                "История": levels_mapping.get(results_by_category[15], "Жарамсыз мән"),
-                "Литература": levels_mapping.get(results_by_category[16], "Жарамсыз мән"),
-                "Журналистика": levels_mapping.get(results_by_category[17], "Жарамсыз мән"),
-                "Общественная деятельность": levels_mapping.get(results_by_category[18], "Жарамсыз мән"),
-                "Педагогика": levels_mapping.get(results_by_category[19], "Жарамсыз мән"),
-                "Юриспруденция": levels_mapping.get(results_by_category[20], "Жарамсыз мән"),
-                "Сфера обслуживания": levels_mapping.get(results_by_category[21], "Жарамсыз мән"),
-                "Математика": levels_mapping.get(results_by_category[22], "Жарамсыз мән"),
-                "Экономика": levels_mapping.get(results_by_category[23], "Жарамсыз мән"),
-                "Иностранные языки": levels_mapping.get(results_by_category[24], "Жарамсыз мән"),
-                "Изобразительное искусство": levels_mapping.get(results_by_category[25], "Жарамсыз мән"),
-                "Сценическое искусство": levels_mapping.get(results_by_category[26], "Жарамсыз мән"),
-                "Музыка": levels_mapping.get(results_by_category[27], "Жарамсыз мән"),
-                "Физкультура и спорт": levels_mapping.get(results_by_category[28], "Жарамсыз мән")
-            }
+            print(categories)
 
 
-            if(user_language == "KZ"):
-                text = "Сауалнама нәтижелері"
-                categories = categories_kk
-            else:
-                text = "Результаты опроса"
-                categories = categories_ru
 
             results = {'++': 0, '+': 0, '0': 0, '-': 0, '--': 0}
 
@@ -410,7 +320,8 @@ def survey_view(request, user_data_id):
                 results[answer] += 1
             # Здесь можно сделать что-то с results, например, передать их в шаблон
             TestResult.objects.create(user_data_id=user_data_id, test_name="Survey", result=str(categories))
-            return render(request, "test_app/fourth_test/survey_result.html", {'categories': categories, 'text': text})
+            template_name = 'test_app/fourth_test/survey_result_kz.html' if user_language == 'KZ' else 'test_app/fourth_test/survey_result.html'
+            return render(request, template_name, {'categories': categories, 'user_data_id': user_data_id})
     else:
         if (user_language == "KZ"):
             print("kazakh")
@@ -426,85 +337,53 @@ from .models import CareerAnchorQuestion
 
 
 def career_anchor_test_view(request, user_data_id):
-    # Fetch the user's data based on the ID
     user_data = get_object_or_404(UserData, id=user_data_id)
     language = user_data.language
+    if language== "KZ":
 
-    # Initialize the correct form based on the user's language
-    if language == "KZ":
-        form_class = CareerAnchorForm_kk
+        form = CareerAnchorForm_kk()
     else:
-        form_class = CareerAnchorForm
+        form = CareerAnchorForm()
 
-    if request.method == 'POST':
-        form = form_class(request.POST)
-        if form.is_valid():
-            career_orientations_scores = {
-                'Профессиональная компетентность': 0,
-                'Менеджмент': 0,
-                'Автономия (независимость)': 0,
-                'Стабильность работы': 0,
-                'Стабильность места жительства': 0,
-                'Служение': 0,
-                'Вызов': 0,
-                'Интеграция стилей жизни': 0,
-                'Предпринимательство': 0,
-            }
-            question_orientations_mapping = {
-                'Профессиональная компетентность': [1, 9, 17, 25, 33],
-                'Менеджмент': [2, 10, 18, 26, 34],
-                'Автономия (независимость)': [3, 11, 19, 27, 35],
-                'Стабильность работы': [4, 12, 36],
-                'Стабильность места жительства': [20, 28, 41],
-                'Служение': [5, 13, 21, 29, 37],
-                'Вызов': [6, 14, 22, 30, 38],
-                'Интеграция стилей жизни': [7, 15, 23, 31, 39],
-                'Предпринимательство': [8, 16, 24, 32, 40],
-            }
+    if request.method == 'POST' and form.is_valid():
+        career_orientations_scores = {
+            'Профессиональная компетентность': 0,
+            'Менеджмент': 0,
+            'Автономия (независимость)': 0,
+            'Стабильность работы': 0,
+            'Стабильность места жительства': 0,
+            'Служение': 0,
+            'Вызов': 0,
+            'Интеграция стилей жизни': 0,
+            'Предпринимательство': 0,
+        }
+        question_orientations_mapping = {
+            'Профессиональная компетентность': [1, 9, 17, 25, 33],
+            'Менеджмент': [2, 10, 18, 26, 34],
+            'Автономия (независимость)': [3, 11, 19, 27, 35],
+            'Стабильность работы': [4, 12, 36],
+            'Стабильность места жительства': [20, 28, 41],
+            'Служение': [5, 13, 21, 29, 37],
+            'Вызов': [6, 14, 22, 30, 38],
+            'Интеграция стилей жизни': [7, 15, 23, 31, 39],
+            'Предпринимательство': [8, 16, 24, 32, 40],
+        }
+        for question_id, score in form.cleaned_data.items():
+            q_id = int(question_id.split('_')[1])
+            score = int(score)
+            for orientation, questions in question_orientations_mapping.items():
+                if q_id in questions:
+                    career_orientations_scores[orientation] += score
+                    break
+        max_orientation = max(career_orientations_scores, key=career_orientations_scores.get)
+        TestResult.objects.create(user_data_id=user_data_id, test_name="Career Anchor Test", result=max_orientation)
+        results_template = 'test_app/career_anchor_results_kz.html' if language == 'KZ' else 'test_app/career_anchor_results.html'
 
+        return render(request, results_template, {
+            'max_orientation': max_orientation,
+            'user_data_id': user_data_id
+        })
 
-            text1 = "Результаты закрепления вашей карьеры"
-            text2 = "Ваша доминирующая карьерная ориентация - это:"
-
-
-
-            for question_id, score in form.cleaned_data.items():
-                q_id = int(question_id.split('_')[1])
-                score = int(score)
-                for orientation, questions in question_orientations_mapping.items():
-                    if q_id in questions:
-                        career_orientations_scores[orientation] += score
-                        break
-            max_orientation = max(career_orientations_scores, key=career_orientations_scores.get)
-            if language == "KZ":
-                text1 = "Сіздің мансабыңызды бекіту нәтижелері"
-                text2 = "Сіздің басым мансаптық бағдарыңыз:"
-                if language == "KZ":
-                    if (max_orientation == "Менеджмент"):
-                        max_orientation = "Басқару"
-                    elif (max_orientation == "Автономия (независимость)"):
-                        max_orientation = "Автономия (тәуелсіздік)"
-                    elif (max_orientation == "Стабильность работы"):
-                        max_orientation = "Жұмыс стабильділігі"
-                    elif (max_orientation == "Стабильность места жительства"):
-                        max_orientation = "Тұрғын үй стабильділігі"
-                    elif (max_orientation == "Служение"):
-                        max_orientation = "Қызмет"
-                    elif (max_orientation == "Вызов"):
-                        max_orientation = "Сын"
-                    elif (max_orientation == "Интеграция стилей жизни"):
-                        max_orientation = "Өмір салтын интеграциялау"
-                    elif (max_orientation == "Предпринимательство"):
-                        max_orientation = "Кәсіпкерлік"
-
-            TestResult.objects.create(user_data_id=user_data_id, test_name="Career Anchor Test", result=max_orientation)
-            return render(request, 'test_app/career_anchor_results.html', {
-                'max_orientation': max_orientation,
-                'text1': text1,
-                'text2': text2,
-            })
-    else:
-        form = form_class()  # Initialize an empty form for GET request
 
     return render(request, 'test_app/career_anchor_test.html', {
         'form': form,

@@ -5,29 +5,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Form Styling Example</title>
 <style>
-    /* General form styling */
-    form {
-        background-color: #f2f2f2;
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background:
+            radial-gradient(circle, transparent 20%, #ba1f25 30%, #ba1f25 80%, transparent 80%, transparent),
+            radial-gradient(circle, transparent 20%, #a3171e 30%, #a3171e 80%, transparent 80%, transparent) 50px 50px,
+            linear-gradient(#ba1f251a 2px, transparent 2px) 0 -1px,
+            linear-gradient(90deg, #ba1f251a 2px, transparent 2px) -1px 0;
+        background-color: #ba1f25;
+        background-size: 100px 100px, 100px 100px, 25px 25px, 25px 25px;
         padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        color: white; /* Adjusts text color for better contrast */
     }
-    /* Style for the button */
-    button {
-        background-color: #4CAF50; /* Green */
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
+    form {
+        max-width: 600px;
+        margin: auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        color: #333; /* Ensures form text is readable */
     }
-    button:hover {
-        background-color: #45a049;
+    div {
+        margin-bottom: 20px;
     }
-    /* Style for individual form fields */
     p {
-        margin-bottom: 15px;
+        color: #333;
+        font-size: 18px;
+    }
+    label {
+        margin-left: 5px;
+        font-size: 16px;
+        display: block; /* Ensures labels are properly aligned */
+        color: #333; /* Text color for labels */
     }
     input, select, textarea {
         width: 100%;
@@ -39,33 +53,57 @@
         margin-bottom: 16px;
         resize: vertical;
     }
+    button {
+        background-color: #4CAF50; /* Green, as originally provided */
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 18px; /* Keeping font size for readability */
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+    /* Fixed Logo */
+    .logo {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        width: 100px;
+        height: auto;
+        z-index: 1000;
+    }
 </style>
 </head>
 <body>
-
+<div class="logo">
+    <img src="https://iitu.edu.kz/media/images/logo_ce8bCzm.original.png" alt="Logo" style="width:100%;">
+</div>
 <form method="post">
     {% csrf_token %}
-    <!-- Manually render form fields if you need specific customization -->
-    <p><label for="id_first_name">First Name</label><br>
-    <input type="text" name="first_name" id="id_first_name" required></p>
+    <div>
+        <p><label for="id_first_name">First Name</label><br>
+        <input type="text" name="first_name" id="id_first_name" required></p>
 
-    <p><label for="id_last_name">Last Name</label><br>
-    <input type="text" name="last_name" id="id_last_name" required></p>
+        <p><label for="id_last_name">Last Name</label><br>
+        <input type="text" name="last_name" id="id_last_name" required></p>
 
-    <p><label for="id_email">Email</label><br>
-    <input type="email" name="email" id="id_email" required></p>
+        <p><label for="id_email">Email</label><br>
+        <input type="email" name="email" id="id_email" required></p>
 
-    <p><label for="id_phone_number">Phone Number</label><br>
-    <input type="text" name="phone_number" id="id_phone_number" required></p>
+        <p><label for="id_phone_number">Phone Number</label><br>
+        <input type="text" name="phone_number" id="id_phone_number" required></p>
 
-    <!-- Language selection dropdown -->
-    <p><label for="id_language">Language</label><br>
-    <select name="language" id="id_language" required>
-        <option value="RU">Russian</option>
-        <option value="KZ">Kazakh</option>
-    </select></p>
+        <p><label for="id_language">Language</label><br>
+        <select name="language" id="id_language" required>
+            <option value="RU">Russian</option>
+            <option value="KZ">Kazakh</option>
+        </select></p>
 
-    <button type="submit">Submit</button>
+        <button type="submit">Submit</button>
+    </div>
 </form>
 </body>
 </html>

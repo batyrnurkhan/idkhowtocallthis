@@ -6,38 +6,54 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
+            background:
+                radial-gradient(circle, transparent 20%, #ba1f25 30%, #ba1f25 80%, transparent 80%, transparent),
+                radial-gradient(circle, transparent 20%, #a3171e 30%, #a3171e 80%, transparent 80%, transparent) 50px 50px,
+                linear-gradient(#ba1f251a 2px, transparent 2px) 0 -1px,
+                linear-gradient(90deg, #ba1f251a 2px, transparent 2px) -1px 0;
+            background-color: #ba1f25;
+            background-size: 100px 100px, 100px 100px, 25px 25px, 25px 25px;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            padding-top: 60px; /* Space for the title */
+            /*display: flex;*/
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            color: white; /* Ensures text is white */
         }
         h1 {
-            color: #333;
+            /*position: fixed; !* Fixes the title at the top *!*/
+            top: 0;
+            width: 100%;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 0;
+            padding: 20px 0;
+            color: white; /* Title color */
+            /*background-color: rgba(0,0,0,0.7); !* Semi-transparent background for readability *!*/
         }
         form {
-            background-color: #ffffff;
+            background-color: #fff;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             max-width: 600px;
-            margin: 20px auto; /* Adjusted for better spacing and readability */
-            overflow: auto; /* Ensures form is scrollable if it extends beyond viewport */
-            max-height: 80vh; /* Limits form height to ensure it fits within the viewport */
+            width: 100%;
+            margin: auto;
+            color: #000; /* Text color for form content */
+            position: relative; /* Ensures form is positioned correctly within the body */
+            top: 60px; /* Adjusts for fixed header */
         }
-        p {
+        p, label {
             margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
         }
         input[type="text"],
         input[type="email"],
         textarea,
         button {
-            width: 100%; /* Ensures full width within form */
-            box-sizing: border-box; /* Includes padding and border in element's total width */
+            width: 100%;
+            box-sizing: border-box;
             padding: 10px;
             margin-bottom: 20px;
             border: 1px solid #ccc;
@@ -49,13 +65,27 @@
             border: none;
             cursor: pointer;
             font-size: 16px;
+            display: block;
+            margin: 20px auto;
         }
         button:hover {
             background-color: #0056b3;
         }
+        /* Fixed Logo */
+        .logo {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 100px;
+            height: auto;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
+    <div class="logo">
+        <img src="https://iitu.edu.kz/media/images/logo_ce8bCzm.original.png" alt="Logo" style="width:100%;">
+    </div>
     <h1>Опрос</h1>
     <form method="post">
         {% csrf_token %}
