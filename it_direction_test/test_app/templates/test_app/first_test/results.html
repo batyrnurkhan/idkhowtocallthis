@@ -26,14 +26,10 @@
 </head>
 <body>
     <h1>
-        {% if language == 'KZ' %}
-        Сіздің ұсынылған мамандық тобыңыз: {{ result }}
-        {% else %}
-        Your suggested profession group is: {{ result }}
-        {% endif %}
+        {{ answer }} {{ result }}
+
     </h1>
-    <a href="{% url 'holland_test' user_data_id %}">
-        {% if language == 'KZ' %}Иә, келесі тестке өтіңіз{% else %}Yes, continue to the next test{% endif %}
+
     </a>
 
 </body>

@@ -26,10 +26,51 @@ def test_view(request, user_data_id):
             'Human-Sign Systems': 0,
             'Human-Artistic Image': 0,
         }
+        profession_groups_count_ru = {
+            "Человек-природа": 0,
+            "Человек-техника": 0,
+            "Человек-Человекочеловек": 0,
+            "Человек-знаковые системы": 0,
+            "Человек-художественный образ": 0,
+        }
+        profession_groups_count_kk = {
+            "Адам Табиғаты": 0,
+            "Адам Техникасы": 0,
+            "Адам-Адам": 0,
+            "Адам Белгілері Жүйелері": 0,
+            "Адам-Көркем Образ": 0,
+        }
         for key, value in request.POST.items():
             if key.startswith('question'):
                 profession_groups_count[value] += 1
         result = max(profession_groups_count, key=profession_groups_count.get)
+
+        answer = "Предлагаемая вами профессиональная группа - это:"
+        if language == "KZ":
+            answer = "Сіздің ұсынылған мамандық тобыңыз:"
+            if result == 'Human-Nature':
+                result = "Адам Табиғаты"
+            elif result == 'Human-Technique':
+                result = "Адам Техникасы"
+            elif result == 'Human-Human':
+                result = "Адам-Адам"
+            elif result == 'Human-Sign Systems':
+                result = "Адам Белгілері Жүйелері"
+            elif result == 'Human-Artistic Image':
+                result = "Адам-Көркем Образ"
+        elif language == "RU":
+
+            if result == 'Human-Nature':
+                result = "Человек-природа"
+            elif result == 'Human-Technique':
+                result = "Человек-техника"
+            elif result == 'Human-Human':
+                result = "Человек-человек"
+            elif result == 'Human-Sign Systems':
+                result = "Человек-знаковые системы"
+            elif result == 'Human-Artistic Image':
+                result = "Человек-художественный образ"
+
         print(result)
         TestResult.objects.create(user_data_id=user_data_id, test_name="General Test", result=result)
 
@@ -38,7 +79,7 @@ def test_view(request, user_data_id):
         # Render the results page with the chosen template
         return render(request, "test_app/first_test/results.html", {
             'result': result,
-            'user_data_id': user_data_id,
+            'answer': answer,
         })
     else:
         # For GET requests, display the test questions filtered by language
@@ -87,8 +128,7 @@ def holland_test(request, user_data_id):
             questions = HollandQuestion_kk.objects.all()
         else:
             questions = HollandQuestion.objects.all()
-        test_template = 'test_app/second_test/holland_test_kz.html' if language == 'KZ' else 'test_app/second_test/holland_test.html'
-        return render(request, test_template, {'questions': questions, 'user_data_id': user_data_id})
+        return render(request, "test_app/second_test/holland_test.html", {'questions': questions, 'user_data_id': user_data_id})
 
 
 def preference_test_view(request, user_data_id):
