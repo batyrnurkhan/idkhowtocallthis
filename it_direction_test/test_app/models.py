@@ -15,7 +15,14 @@ class Question(models.Model):
     text = models.CharField(max_length=1024)
     choice_a = models.CharField(max_length=512)
     choice_b = models.CharField(max_length=512)
-    language = models.CharField(max_length=2, choices=(('RU', 'Russian'), ('KZ', 'Kazakh')), default=('RU', 'Russian'))
+
+    def __str__(self):
+        return self.text
+
+class Question_kk(models.Model):
+    text = models.CharField(max_length=1024)
+    choice_a = models.CharField(max_length=512)
+    choice_b = models.CharField(max_length=512)
 
     def __str__(self):
         return self.text
@@ -28,16 +35,36 @@ class HollandQuestion(models.Model):
     def __str__(self):
         return f"Question {self.id}"
 
+
+class HollandQuestion_kk(models.Model):
+    text = models.CharField(max_length=1024, default='Из каждой пары профессий нужно указать одну, предпочитаемую')
+    choice_a = models.CharField(max_length=512)
+    choice_b = models.CharField(max_length=512)
+
+    def __str__(self):
+        return f"Question {self.id}"
+
 class PreferenceQuestion(models.Model):
     text = models.CharField(max_length=1024)
     option_a = models.CharField(max_length=512)
     option_b = models.CharField(max_length=512)
+    def __str__(self):
+        return self.text
 
+class PreferenceQuestion_kk(models.Model):
+    text = models.CharField(max_length=1024)
+    option_a = models.CharField(max_length=512)
+    option_b = models.CharField(max_length=512)
     def __str__(self):
         return self.text
 
 class MapQuestion(models.Model):
     text = models.TextField()
+    language = models.CharField(max_length=2, choices=(('RU', 'Russian'), ('KZ', 'Kazakh')), default=('RU', 'Russian'))
+
+    def __str__(self):
+        return self.text
+
 
 
 class MapQuestion_kk(models.Model):
@@ -45,8 +72,11 @@ class MapQuestion_kk(models.Model):
 
 class CareerAnchorQuestion(models.Model):
     text = models.CharField(max_length=1024)
-    # Since your test uses a rating scale from 1 to 10, no need for choice fields
+    def __str__(self):
+        return self.text
 
+class CareerAnchorQuestion_kk(models.Model):
+    text = models.CharField(max_length=1024)
     def __str__(self):
         return self.text
 

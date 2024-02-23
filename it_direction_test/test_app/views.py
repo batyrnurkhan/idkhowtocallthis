@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Question, HollandQuestion, PreferenceQuestion, CareerAnchorQuestion, UserData, TestResult
-from .forms import UserDataForm, SurveyForm, CareerAnchorForm
+from .forms import *
 
 def collect_user_data_view(request):
     if request.method == 'POST':
@@ -30,30 +30,32 @@ def test_view(request, user_data_id):
             if key.startswith('question'):
                 profession_groups_count[value] += 1
         result = max(profession_groups_count, key=profession_groups_count.get)
+        print(result)
         TestResult.objects.create(user_data_id=user_data_id, test_name="General Test", result=result)
 
         # Select the appropriate template based on the user's language preference
-        if language == 'KZ':
-            results_template = 'test_app/first_test/results_kz.html'
-        else:
-            results_template = 'test_app/first_test/results.html'
 
         # Render the results page with the chosen template
-        return render(request, results_template, {
+        return render(request, "test_app/first_test/results.html", {
             'result': result,
             'user_data_id': user_data_id,
         })
     else:
         # For GET requests, display the test questions filtered by language
-        questions = Question.objects.filter(language=language)
-        template_name = 'test_app/first_test/test_kz.html' if language == 'KZ' else 'test_app/first_test/test.html'
-        return render(request, template_name, {
+        if(language == "KZ"):
+            questions = Question_kk.objects.all()
+        else:
+            questions = Question.objects.all()
+        return render(request, 'test_app/first_test/test.html', {
             'questions': questions,
             'user_data_id': user_data_id
         })
 
 
 def holland_test(request, user_data_id):
+    user_data = get_object_or_404(UserData, id=user_data_id)
+    language = user_data.language
+
     if request.method == 'POST':
         responses = request.POST.dict()
         type_keys = {
@@ -77,55 +79,91 @@ def holland_test(request, user_data_id):
                     type_counts[type_key] -= 1
         max_type = max(type_counts, key=type_counts.get)
         TestResult.objects.create(user_data_id=user_data_id, test_name="Holland Test", result=max_type)
-        return render(request, 'test_app/result_template.html', {'result': max_type, 'user_data_id': user_data_id})
+        results_template = 'test_app/second_test/holland_results_kz.html' if language == 'KZ' else 'test_app/second_test/holland_results.html'
+        return render(request, results_template, {'result': max_type, 'user_data_id': user_data_id})
     else:
-        questions = HollandQuestion.objects.all()
-        return render(request, 'test_app/holland_test_template.html', {'questions': questions, 'user_data_id': user_data_id})
+        if(language == "KZ"):
+
+            questions = HollandQuestion_kk.objects.all()
+        else:
+            questions = HollandQuestion.objects.all()
+        test_template = 'test_app/second_test/holland_test_kz.html' if language == 'KZ' else 'test_app/second_test/holland_test.html'
+        return render(request, test_template, {'questions': questions, 'user_data_id': user_data_id})
+
 
 def preference_test_view(request, user_data_id):
+    user_data = get_object_or_404(UserData, id=user_data_id)
+    language = user_data.language
     if request.method == 'POST':
         scores = {
-            'work_with_people': 0,
-            'intellectual_work': 0,
-            'technical_interests': 0,
-            'aesthetics_and_art': 0,
-            'physical_work': 0,
-            'material_interests': 0,
+            'Work with people': 0,
+            'Intellectual work': 0,
+            'Technical interests': 0,
+            'Aesthetics and art': 0,
+            'Physical work': 0,
+            'Material interests': 0,
         }
 
         question_category_map = {
-            '2a': 'work_with_people', '4a': 'work_with_people', '6b': 'work_with_people', '9a': 'work_with_people', '12b': 'work_with_people',
-            '16a': 'work_with_people', '17b': 'work_with_people', '19b': 'work_with_people', '23b': 'work_with_people', '28b': 'work_with_people',
-            '4b': 'intellectual_work', '7a': 'intellectual_work', '10b': 'intellectual_work', '13a': 'intellectual_work', '14b': 'intellectual_work',
-            '18a': 'intellectual_work', '20a': 'intellectual_work', '21b': 'intellectual_work', '26b': 'intellectual_work', '30a': 'intellectual_work',
-            '1b': 'technical_interests', '3b': 'technical_interests', '6a': 'technical_interests', '8b': 'technical_interests', '12a': 'technical_interests',
-            '14a': 'technical_interests', '15b': 'technical_interests', '25a': 'technical_interests', '26a': 'technical_interests', '29b': 'technical_interests',
-            '1a': 'aesthetics_and_art', '5b': 'aesthetics_and_art', '8a': 'aesthetics_and_art', '10a': 'aesthetics_and_art', '11b': 'aesthetics_and_art',
-            '17a': 'aesthetics_and_art', '21a': 'aesthetics_and_art', '23a': 'aesthetics_and_art', '24b': 'aesthetics_and_art', '28a': 'aesthetics_and_art',
-            '2b': 'physical_work', '5a': 'physical_work', '13b': 'physical_work', '15a': 'physical_work', '18b': 'physical_work',
-            '20b': 'physical_work', '22a': 'physical_work', '24a': 'physical_work', '25b': 'physical_work', '27a': 'physical_work',
-            '3a': 'material_interests', '7b': 'material_interests', '9b': 'material_interests', '11a': 'material_interests', '16b': 'material_interests',
-            '19a': 'material_interests', '22b': 'material_interests', '27b': 'material_interests', '29a': 'material_interests', '30b': 'material_interests',
+            '2a': 'Work with people', '4a': 'Work with people', '6b': 'Work with people', '9a': 'Work with people',
+            '12b': 'Work with people',
+            '16a': 'Work with people', '17b': 'Work with people', '19b': 'Work with people', '23b': 'Work with people',
+            '28b': 'Work with people',
+            '4b': 'Intellectual work', '7a': 'Intellectual work', '10b': 'Intellectual work',
+            '13a': 'Intellectual work', '14b': 'Intellectual work',
+            '18a': 'Intellectual work', '20a': 'Intellectual work', '21b': 'Intellectual work',
+            '26b': 'Intellectual work', '30a': 'Intellectual work',
+            '1b': 'Technical interests', '3b': 'Technical interests', '6a': 'Technical interests',
+            '8b': 'Technical interests', '12a': 'Technical interests',
+            '14a': 'Technical interests', '15b': 'Technical interests', '25a': 'Technical interests',
+            '26a': 'Technical interests', '29b': 'Technical interests',
+            '1a': 'Aesthetics and art', '5b': 'Aesthetics and art', '8a': 'Aesthetics and art',
+            '10a': 'Aesthetics and art', '11b': 'Aesthetics and art',
+            '17a': 'Aesthetics and art', '21a': 'Aesthetics and art', '23a': 'Aesthetics and art',
+            '24b': 'Aesthetics and art', '28a': 'Aesthetics and art',
+            '2b': 'Physical work', '5a': 'Physical work', '13b': 'Physical work', '15a': 'Physical work',
+            '18b': 'Physical work',
+            '20b': 'Physical work', '22a': 'Physical work', '24a': 'Physical work', '25b': 'Physical work',
+            '27a': 'Physical work',
+            '3a': 'Material interests', '7b': 'Material interests', '9b': 'Material interests',
+            '11a': 'Material interests', '16b': 'Material interests',
+            '19a': 'Material interests', '22b': 'Material interests', '27b': 'Material interests',
+            '29a': 'Material interests', '30b': 'Material interests',
         }
 
         for key, value in request.POST.items():
             if key.startswith('question'):
-                question_id, option = key.split('_')[1], value[-1]  # Assuming the last character is the option (a/b)
-                score = int(value[:-1])  # Assuming the score is everything except the last character
+                question_id, option = key.split('_')[1], value[-1]
+                score = int(value[:-1])
                 category = question_category_map.get(f'{question_id}{option}')
                 if category:
                     scores[category] += score
 
         preferred_category = max(scores, key=scores.get)
         TestResult.objects.create(user_data_id=user_data_id, test_name="Preference Test", result=preferred_category)
-        return render(request, 'test_app/preference_result.html', {'preferred_category': preferred_category, 'user_data_id': user_data_id})
-    else:
-        questions = PreferenceQuestion.objects.all()
-        return render(request, 'test_app/preference_test.html', {'questions': questions, 'user_data_id': user_data_id})
 
+        results_template = 'test_app/third_test/preference_result.html' if language == 'KZ' else 'test_app/third_test/preference_result_kz.html'
+        return render(request, results_template,
+                      {'preferred_category': preferred_category, 'user_data_id': user_data_id})
+    else:
+        if(language == "KZ"):
+
+            questions = PreferenceQuestion_kk.objects.all()
+        else:
+            questions = PreferenceQuestion.objects.all()
+        test_template = 'test_app/third_test/preference_test.html' if language == 'KZ' else 'test_app/third_test/preference_test_kz.html'
+        return render(request, test_template, {'questions': questions, 'user_data_id': user_data_id})
 def survey_view(request, user_data_id):
+    user_data = get_object_or_404(UserData, id=user_data_id)
+    user_language = user_data.language
+    print(user_language)
+
     if request.method == 'POST':
-        form = SurveyForm(request.POST)
+        if(user_language == "KZ"):
+            print("kazakh")
+            form = SurveyForm_kk(request.POST)
+        else:
+            form = SurveyForm(request.POST)
         if form.is_valid():
             answers = form.cleaned_data
             results = answers.values()
@@ -214,110 +252,16 @@ def survey_view(request, user_data_id):
             for answer in answers.values():
                 results[answer] += 1
             # Здесь можно сделать что-то с results, например, передать их в шаблон
-            TestResult.objects.create(user_data_id=user_data_id, test_name="Survey", result=categories)
-            return render(request, 'test_app/survey_result.html', {'categories': categories, 'user_data_id': user_data_id})
+            TestResult.objects.create(user_data_id=user_data_id, test_name="Survey", result=str(categories))
+            template_name = 'test_app/fourth_test/survey_result_kz.html' if user_language == 'KZ' else 'test_app/fourth_test/survey_result.html'
+            return render(request, template_name, {'categories': categories, 'user_data_id': user_data_id})
     else:
-        form = SurveyForm()
-
-    return render(request, 'test_app/survey_test.html', {'form': form})
-
-def survey_view_kk(request, user_data_id):
-    if request.method == 'POST':
-        form = SurveyForm_kk(request.POST)
-        if form.is_valid():
-            answers = form.cleaned_data
-            results = answers.values()
-
-            # Инициализация списка результатов для каждой категории
-            results_by_category = [0] * 29
-            levels_mapping = {
-                -12: "высшая степень отрицания данного интереса",
-                -11: "высшая степень отрицания данного интереса",
-                -10: "высшая степень отрицания данного интереса",
-                -9: "высшая степень отрицания данного интереса",
-                -8: "высшая степень отрицания данного интереса",
-                -7: "выраженный интерес",
-                -6: "выраженный интерес",
-                -5: "выраженный интерес",
-                -4: "интерес выражен слабо",
-                -3: "интерес выражен слабо",
-                -2: "интерес выражен слабо",
-                -1: "интерес выражен слабо",
-                0: "интерес отрицается",
-                1: "интерес выражен слабо",
-                2: "интерес выражен слабо",
-                3: "интерес выражен слабо",
-                4: "интерес выражен слабо",
-                5: "выраженный интерес",
-                6: "выраженный интерес",
-                7: "выраженный интерес",
-                8: "ярко выраженный интерес",
-                9: "ярко выраженный интерес",
-                10: "ярко выраженный интерес",
-                11: "ярко выраженный интерес",
-                12: "ярко выраженный интерес",
-            }
-
-            # Определение значений для каждой переменной в зависимости от ответов
-            for i, result in enumerate(results, start=1):
-                question_index = (i - 1) % 29  # Вычисляем индекс вопроса от 0 до 28 для каждого i
-                if result == '++':
-                    results_by_category[question_index] += 2
-                elif result == '+':
-                    results_by_category[question_index] += 1
-                elif result == '-':
-                    results_by_category[question_index] -= 1
-                elif result == '--':
-                    results_by_category[question_index] -= 2
-                else:
-                    pass  # Ничего не делаем, если ответ не указан
-
-            categories = {
-                "Биология": levels_mapping.get(results_by_category[0], "Недопустимое значение"),
-                "География": levels_mapping.get(results_by_category[1], "Недопустимое значение"),
-                "Геология": levels_mapping.get(results_by_category[2], "Недопустимое значение"),
-                "Медицина": levels_mapping.get(results_by_category[3], "Недопустимое значение"),
-                "Легкая и пищевая промышленность": levels_mapping.get(results_by_category[4], "Недопустимое значение"),
-                "Физика": levels_mapping.get(results_by_category[5], "Недопустимое значение"),
-                "Химия": levels_mapping.get(results_by_category[6], "Недопустимое значение"),
-                "Техника": levels_mapping.get(results_by_category[7], "Недопустимое значение"),
-                "Электро- и радиотехника": levels_mapping.get(results_by_category[8], "Недопустимое значение"),
-                "Металлообработка": levels_mapping.get(results_by_category[9], "Недопустимое значение"),
-                "Деревообработка": levels_mapping.get(results_by_category[10], "Недопустимое значение"),
-                "Строительство": levels_mapping.get(results_by_category[11], "Недопустимое значение"),
-                "Транспорт": levels_mapping.get(results_by_category[12], "Недопустимое значение"),
-                "Авиация, морское дело": levels_mapping.get(results_by_category[13], "Недопустимое значение"),
-                "Военные специальности": levels_mapping.get(results_by_category[14], "Недопустимое значение"),
-                "История": levels_mapping.get(results_by_category[15], "Недопустимое значение"),
-                "Литература": levels_mapping.get(results_by_category[16], "Недопустимое значение"),
-                "Журналистика": levels_mapping.get(results_by_category[17], "Недопустимое значение"),
-                "Общественная деятельность": levels_mapping.get(results_by_category[18], "Недопустимое значение"),
-                "Педагогика": levels_mapping.get(results_by_category[19], "Недопустимое значение"),
-                "Юриспруденция": levels_mapping.get(results_by_category[20], "Недопустимое значение"),
-                "Сфера обслуживания": levels_mapping.get(results_by_category[21], "Недопустимое значение"),
-                "Математика": levels_mapping.get(results_by_category[22], "Недопустимое значение"),
-                "Экономика": levels_mapping.get(results_by_category[23], "Недопустимое значение"),
-                "Иностранные языки": levels_mapping.get(results_by_category[24], "Недопустимое значение"),
-                "Изобразительное искусство": levels_mapping.get(results_by_category[25], "Недопустимое значение"),
-                "Сценическое искусство": levels_mapping.get(results_by_category[26], "Недопустимое значение"),
-                "Музыка": levels_mapping.get(results_by_category[27], "Недопустимое значение"),
-                "Физкультура и спорт": levels_mapping.get(results_by_category[28], "Недопустимое значение")
-            }
-            print(categories)
-
-
-
-            results = {'++': 0, '+': 0, '0': 0, '-': 0, '--': 0}
-
-            for answer in answers.values():
-                results[answer] += 1
-            # Здесь можно сделать что-то с results, например, передать их в шаблон
-            TestResult.objects.create(user_data_id=user_data_id, test_name="Survey", result=categories)
-            return render(request, 'test_app/survey_result.html', {'categories': categories, 'user_data_id': user_data_id})
-    else:
-        form = SurveyForm_kk()
-
-    return render(request, 'test_app/survey_test.html', {'form': form})
+        if (user_language == "KZ"):
+            print("kazakh")
+            form = SurveyForm_kk(request.POST)
+        else:
+            form = SurveyForm(request.POST)
+        return render(request, "test_app/fourth_test/survey_test.html", {'form': form, 'user_data_id': user_data_id})
 
 
 from django.shortcuts import render
@@ -326,7 +270,14 @@ from .models import CareerAnchorQuestion
 
 
 def career_anchor_test_view(request, user_data_id):
-    form = CareerAnchorForm(request.POST or None)
+    user_data = get_object_or_404(UserData, id=user_data_id)
+    language = user_data.language
+    if language== "KZ":
+
+        form = CareerAnchorForm_kk()
+    else:
+        form = CareerAnchorForm()
+
     if request.method == 'POST' and form.is_valid():
         career_orientations_scores = {
             'Профессиональная компетентность': 0,
@@ -359,10 +310,13 @@ def career_anchor_test_view(request, user_data_id):
                     break
         max_orientation = max(career_orientations_scores, key=career_orientations_scores.get)
         TestResult.objects.create(user_data_id=user_data_id, test_name="Career Anchor Test", result=max_orientation)
-        return render(request, 'test_app/career_anchor_results.html', {
+        results_template = 'test_app/career_anchor_results_kz.html' if language == 'KZ' else 'test_app/career_anchor_results.html'
+
+        return render(request, results_template, {
             'max_orientation': max_orientation,
             'user_data_id': user_data_id
         })
+
 
     return render(request, 'test_app/career_anchor_test.html', {
         'form': form,

@@ -1,25 +1,41 @@
 from django.contrib import admin
-from .models import Question, HollandQuestion, PreferenceQuestion, MapQuestion, CareerAnchorQuestion, UserData
-
+from .models import *
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
+    list_display = ['text']
+
+@admin.register(Question_kk)
+class Question_kkAdmin(admin.ModelAdmin):
     list_display = ['text']
 
 @admin.register(HollandQuestion)
 class HollandQuestionAdmin(admin.ModelAdmin):
     list_display = ['text']
 
+@admin.register(HollandQuestion_kk)
+class HollandQuestion_kkAdmin(admin.ModelAdmin):
+    list_display = ['text']
 @admin.register(PreferenceQuestion)
 class PreferenceQuestionAdmin(admin.ModelAdmin):
+    list_display = ['text']
+
+@admin.register(PreferenceQuestion_kk)
+class PreferenceQuestion_kkAdmin(admin.ModelAdmin):
     list_display = ['text']
 
 @admin.register(MapQuestion)
 class MapQuestionAdmin(admin.ModelAdmin):
     list_display = ['text']
-
+@admin.register(MapQuestion_kk)
+class MapQuestionAdmin_kk(admin.ModelAdmin):
+    list_display = ['text']
 
 @admin.register(CareerAnchorQuestion)
 class CareerAnchorQuestionAdmin(admin.ModelAdmin):
+    list_display = ['text']
+
+@admin.register(CareerAnchorQuestion_kk)
+class CareerAnchorQuestion_kkAdmin(admin.ModelAdmin):
     list_display = ['text']
 
 from django.contrib import admin
