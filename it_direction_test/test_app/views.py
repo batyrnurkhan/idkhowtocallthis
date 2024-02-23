@@ -12,12 +12,13 @@ def collect_user_data_view(request):
         form = UserDataForm()
     return render(request, 'test_app/userform.html', {'form': form})
 
+
 def test_view(request, user_data_id):
     user_data = get_object_or_404(UserData, id=user_data_id)
-    language = user_data.language  # Assume language is stored in UserData model
+    language = user_data.language  # Retrieve the user's language preference from the UserData model
 
     if request.method == 'POST':
-        # Your POST request handling remains unchanged
+        # Your existing logic for processing POST requests remains unchanged
         profession_groups_count = {
             'Human-Nature': 0,
             'Human-Technique': 0,
@@ -30,11 +31,28 @@ def test_view(request, user_data_id):
                 profession_groups_count[value] += 1
         result = max(profession_groups_count, key=profession_groups_count.get)
         TestResult.objects.create(user_data_id=user_data_id, test_name="General Test", result=result)
-        return render(request, 'test_app/first_test/results.html', {'result': result, 'user_data_id': user_data_id})
+
+        # Select the appropriate template based on the user's language preference
+        if language == 'KZ':
+            results_template = 'test_app/first_test/results_kz.html'
+        else:
+            results_template = 'test_app/first_test/results.html'
+
+        # Render the results page with the chosen template
+        return render(request, results_template, {
+            'result': result,
+            'user_data_id': user_data_id,
+        })
     else:
-        questions = Question.objects.filter(language=language)  # Filter questions by language
-        template_name = 'test_app/first_test/test_kz.html' if language == 'KZ' else 'test_app/test.html'
-        return render(request, template_name, {'questions': questions, 'user_data_id': user_data_id})
+        # For GET requests, display the test questions filtered by language
+        questions = Question.objects.filter(language=language)
+        template_name = 'test_app/first_test/test_kz.html' if language == 'KZ' else 'test_app/first_test/test.html'
+        return render(request, template_name, {
+            'questions': questions,
+            'user_data_id': user_data_id
+        })
+
+
 def holland_test(request, user_data_id):
     if request.method == 'POST':
         responses = request.POST.dict()
