@@ -85,11 +85,20 @@
 <body>
     <div class="logo">
         <img src="https://iitu.edu.kz/media/images/logo_ce8bCzm.original.png" alt="Logo" style="width:100%;">
-    </div>
+   </div>
     <h1>Опрос</h1>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {% for field in form %}
+            <div class="question">
+                <!-- Make the label bold using the <strong> tag -->
+                <p><strong>{{ field.label }}</strong></p>
+                {{ field }} <!-- This will render the field input itself -->
+                {% if field.help_text %}
+                    <p class="help">{{ field.help_text }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
         <button type="submit">Отправить</button>
     </form>
 </body>
