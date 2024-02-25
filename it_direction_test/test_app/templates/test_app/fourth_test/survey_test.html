@@ -54,13 +54,16 @@
             border-radius: 5px;
         }
         button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
             background-color: #007bff;
             color: white;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
-            display: block;
-            margin: 20px auto;
+            font-size: 18px;
         }
         button:hover {
             background-color: #0056b3;
@@ -117,7 +120,7 @@
                 {% endif %}
             </div>
         {% endfor %}
-        <button type="submit">Отправить</button>
+        <button type="submit">Submit</button>
     </form>
 </body>
 </html>
