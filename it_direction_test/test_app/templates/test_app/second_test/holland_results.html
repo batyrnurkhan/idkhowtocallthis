@@ -21,15 +21,15 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            color: white; /* Adjusts text color for better contrast */
+            color: white;
         }
         h1 {
-            color: white; /* Ensures title is visible against the dynamic background */
+            color: white;
             margin-bottom: 20px;
         }
         p {
             background-color: #fff;
-            color: #333; /* Ensures text within is readable */
+            color: #333;
             padding: 15px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -37,32 +37,32 @@
             text-align: center;
         }
         strong {
-            color: #007bff; /* Keeps the strong element's color for emphasis */
+            color: #007bff;
             font-size: 1.2em;
         }
         a {
-            color: #007bff; /* Provides a familiar, clickable color */
-            text-decoration: none; /* Optional: removes underline */
-            padding: 10px 20px; /* Gives some padding around the text */
-            background-color: #ffffff; /* Background color for visibility */
-            border-radius: 5px; /* Rounds the corners */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Adds a subtle shadow */
-            display: inline-block; /* Allows block-level behaviors like padding */
-            margin-top: 20px; /* Additional spacing from the paragraph */
+            color: #007bff;
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: inline-block;
+            margin-top: 20px;
         }
         a:hover {
-            text-decoration: underline; /* Restores underline on hover for clarity */
-            background-color: #f0f0f0; /* Light background on hover */
+            text-decoration: underline;
+            background-color: #f0f0f0;
         }
         .home-button {
             display: inline-block;
             background-color: #007bff;
             color: white;
             padding: 10px 20px;
-            margin-top: 10px; /* Space above the button */
+            margin-top: 10px;
             border: none;
             border-radius: 5px;
-            text-decoration: none; /* Remove underline from the link */
+            text-decoration: none;
             cursor: pointer;
             font-size: 16px;
             transition: background-color 0.3s;
@@ -78,6 +78,28 @@
             width: 100px;
             height: auto;
             z-index: 1000;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                flex-direction: column;
+                justify-content: flex-start;
+            }
+            .logo {
+                position: absolute; /* Adjust logo position on smaller screens */
+            }
+            h1 {
+                font-size: 20px; /* Smaller font size for smaller screens */
+            }
+            p {
+                padding: 10px;
+                max-width: 100%; /* Full width on smaller screens */
+                font-size: 14px; /* Smaller font size for readability */
+            }
+            .home-button {
+                padding: 8px 16px; /* Smaller padding for smaller screens */
+                font-size: 14px; /* Adjust font size for smaller screens */
+            }
         }
     </style>
 </head>

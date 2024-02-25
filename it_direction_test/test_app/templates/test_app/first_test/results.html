@@ -66,6 +66,24 @@
             width: 100px;
             z-index: 1000; /* Ensures logo is above other content */
         }
+        @media (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+    body h1 {
+        font-size: 18px !important; /* Smaller font size for title */
+        padding: 15px !important; /* Less padding for a compact look */
+    }
+    .home-button {
+        padding: 8px 15px !important; /* Smaller padding for the button */
+        font-size: 14px !important; /* Smaller font size for button text */
+    }
+    .logo {
+        width: 60px !important; /* Smaller logo for smaller screens */
+        top: 10px;
+        left: 10px;
+    }
+}
     </style>
 </head>
 <body>
@@ -74,10 +92,8 @@
     </div>
     <h1>
         {{ answer }} {{ result }}
+                <a href="{% url 'home' user_data_id %}" class="home-button">Go to Home Page</a>
 
     </h1>
-
-    </a>
-    <a href="{% url 'home' user_data_id %}" class="home-button">Go to Home Page</a>
 </body>
 </html>

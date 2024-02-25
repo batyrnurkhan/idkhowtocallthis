@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Career Anchor Results</title>
     <style>
         body {
@@ -20,10 +21,11 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            color: white; /* Adjusts text color for better contrast */
+            color: white;
         }
         h1 {
-            color: white; /* Ensures title is visible against the dynamic background */
+            color: white;
+            margin: 0 0 20px;
         }
         p {
             background-color: #ffffff;
@@ -33,12 +35,12 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             margin-top: 20px;
             font-size: 18px;
-            width: 100%;
-            max-width: 600px;
+            width: 90%; /* Responsive width */
+            max-width: 600px; /* Max width to maintain readability */
             text-align: center;
         }
         strong {
-            color: #ef233c; /* Keeps the strong element's color for emphasis */
+            color: #ef233c;
             font-weight: bold;
         }
         .home-button {
@@ -46,10 +48,10 @@
             background-color: #007bff;
             color: white;
             padding: 10px 20px;
-            margin-top: 10px; /* Space above the button */
+            margin-top: 20px;
             border: none;
             border-radius: 5px;
-            text-decoration: none; /* Remove underline from the link */
+            text-decoration: none;
             cursor: pointer;
             font-size: 16px;
             transition: background-color 0.3s;
@@ -57,7 +59,6 @@
         .home-button:hover {
             background-color: #0056b3;
         }
-        /* Fixed Logo */
         .logo {
             position: fixed;
             top: 20px;
@@ -65,6 +66,16 @@
             width: 100px;
             height: auto;
             z-index: 1000;
+        }
+        /* Adaptive styles */
+        @media (max-width: 768px) {
+            p, .home-button {
+                padding: 15px;
+                font-size: 14px; /* Slightly smaller font size for smaller screens */
+            }
+            .logo {
+                width: 80px; /* Smaller logo for smaller screens */
+            }
         }
     </style>
 </head>
@@ -75,6 +86,5 @@
     <h1>{{ text1 }}</h1>
     <p> {{ text2 }} <strong>{{ max_orientation }}</strong></p>
     <a href="{% url 'home' user_data_id %}" class="home-button">Go to Home Page</a>
-
 </body>
 </html>

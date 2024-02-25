@@ -82,6 +82,32 @@
             height: auto;
             z-index: 1000;
         }
+         @media (max-width: 1000px) {
+             .question{
+                 font-size: 23px;
+             }
+        h1 {
+            font-size: 20px; /* Adjust font size for the title */
+            padding: 15px 10px; /* Adjust padding around the title */
+        }
+        form {
+            padding: 15px; /* Reduced padding within the form */
+            max-width: 60%; /* Allow form to stretch according to screen size */
+            width: auto; /* Adjust width for smaller screens */
+        }
+        .question > div:first-of-type {
+            font-size: 26px; /* Adjust question title size */
+        }
+        input[type="submit"] {
+            padding: 10px; /* Adjust padding for the submit button */
+            font-size: 14px; /* Adjust font size for the submit button */
+        }
+        .logo {
+            width: 60px; /* Smaller logo for smaller screens */
+            top: 10px;
+            left: 10px;
+        }
+    }
     </style>
 </head>
 <body>
@@ -106,6 +132,5 @@
         {% endfor %}
         <input type="submit" value="Submit">
     </form>
-
 </body>
 </html>

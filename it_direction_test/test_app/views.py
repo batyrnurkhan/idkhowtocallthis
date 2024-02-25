@@ -13,7 +13,7 @@ def collect_user_data_view(request):
         form = UserDataForm(request.POST)
         if form.is_valid():
             user_data = form.save()
-            return redirect('test_view', user_data_id=user_data.id)
+            return redirect('home', user_data_id=user_data.id)
     else:
         form = UserDataForm()
     return render(request, 'test_app/userform.html', {'form': form})

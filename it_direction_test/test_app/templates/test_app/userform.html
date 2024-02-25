@@ -20,8 +20,10 @@
         align-items: center;
         margin: 0;
         color: white; /* Adjusts text color for better contrast */
+        position: relative; /* For positioning the GasyrLab text */
     }
     form {
+        width: 70%; /* Adjusted for better mobile responsiveness */
         max-width: 600px;
         margin: auto;
         background-color: #fff;
@@ -74,6 +76,25 @@
         width: 100px;
         height: auto;
         z-index: 1000;
+    }
+    @media (max-width: 768px) {
+        .logo {
+            display: none; /* Hide logo on smaller screens */
+        }
+        body:before {
+            content: "GasyrLab";
+            font-size: 5em;
+            color: rgba(255, 255, 255, 0.2);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            z-index: 0;
+        }
+        form {
+            position: relative; /* Ensure form is above the GasyrLab background text */
+            z-index: 1;
+        }
     }
 </style>
 </head>
