@@ -52,30 +52,32 @@ def test_view(request, user_data_id):
         result = max(profession_groups_count, key=profession_groups_count.get)
 
         answer = "Предлагаемая вами профессиональная группа - это:"
+
         if language == "KZ":
             answer = "Сіздің ұсынылған мамандық тобыңыз:"
             if result == 'Human-Nature':
-                result = "Адам Табиғаты"
-            elif result == 'Human-Technique':
-                result = "Адам Техникасы"
-            elif result == 'Human-Human':
-                result = "Адам-Адам"
-            elif result == 'Human-Sign Systems':
-                result = "Адам Белгілері Жүйелері"
-            elif result == 'Human-Artistic Image':
-                result = "Адам-Көркем Образ"
-        elif language == "RU":
+                result = "Адам Табиғаты: Мұнда адам жансыз және тірі табиғаттың әртүрлі құбылыстарымен айналысатын профессорлар кіреді, мысалы, биолог, географ, геолог, математик, физик, химик және жаратылыстану ғылымдары санатына жататын басқа мамандықтар."
 
+            elif result == 'Human-Technique':
+                result = "Адам Техникасы: Бұл топқа адам техникамен, оны қолданумен немесе дизайнмен айналысатын әр түрлі жұмыс түрлері кіреді, мысалы, инженер, оператор, машинист, механизатор, дәнекерлеуші және т. б. профессор."
+            elif result == 'Human-Human':
+                result = "Адам-Адам: Мұнда адамдардың өзара әрекеттесуін көздейтін мамандықтың барлық түрлері ұсынылған, мысалы, саясат, дін, педагогика, психология, медицина, сауда, құқық."
+            elif result == 'Human-Sign Systems':
+                result = "Адам Белгілері Жүйелері: Бұл топқа құру, оқыту және пайдалануға қатысты мамандықтар кіредіәр түрлі белгілі жүйелер, лингвистика түрлері, математикалық бағдарламалау тілдері, зерттеу нәтижелерін графикалық бейнелеу мүмкіндіктері және т. б."
+            elif result == 'Human-Artistic Image':
+                result = "Адам-Көркем Образ: Бұл топ-көркем және шығармашылық жұмыстың әртүрлі түрлері, әдебиет, музыка, театр, бейнелеу өнері."
+
+        elif language == "RU":
             if result == 'Human-Nature':
-                result = "Человек-природа"
+                result = "Человек-природа: Здесь входят профессора, в которых человек владеет делом с разными явлениями неживой и живой природы, например биолог, географ, геолог, математик, физик, химик и другие профессии, относящиеся к разряду естественных наук."
             elif result == 'Human-Technique':
                 result = "Человек-техника"
-            elif result == 'Human-Human':
-                result = "Человек-человек"
+            elif result == 'Human-Human: В эту группу входят различные виды трудовой деятельности, в которых человек владеет делом с техникой, ее использованием или конструкцией, например, профессор инженера, оператора, машиниста, механизатора, сварщика и т. п.':
+                result = "Человек-человек: Здесь представлены все виды профессии, предполагающие взаимодействие людей, например политика, религ, педагогика, психология, медицина, торговля, право. "
             elif result == 'Human-Sign Systems':
-                result = "Человек-знаковые системы"
+                result = "Человек-знаковые системы В эту группу включены профессии, касающиеся создания, обучения и использования различных известных систем, видов лингвистики, языков математического программирования, возможностей графического представления результатов изучения и т. п."
             elif result == 'Human-Artistic Image':
-                result = "Человек-художественный образ"
+                result = "Человек-художественный образ:  Эта группа представляет собой различные виды художественно-творческого труда, тип литературы, музыки, театра, образное искусство."
 
         print(result)
 
@@ -85,7 +87,8 @@ def test_view(request, user_data_id):
         return render(request, "test_app/first_test/results.html", {
             'result': result,
             'answer': answer,
-            'user_data_id': user_data_id
+            'user_data_id': user_data_id,
+
         })
     else:
         # For GET requests, display the test questions filtered by language
@@ -128,6 +131,7 @@ def holland_test(request, user_data_id):
         if language == "KZ":
             text1 = "Сіздің HOLLAND Түріңіз"
             text2 = "Сіздің HOLLAND Тестіңіздің нәтижесі:"
+            text3 = ""
             if max_type == "Реалистический тип":
                 max_type = "Реалистік түрі"
             elif max_type == "Интеллектуальный тип":
@@ -141,12 +145,13 @@ def holland_test(request, user_data_id):
             elif max_type == "Артистический тип":
                 max_type = "Өнер түрі"
         else:
+            text3 = ""
             text1 = "Ваш HOLLAND Тип"
             text2 = "Результат вашего теста HOLLAND"
 
         TestResult.objects.create(user_data_id=user_data_id, test_name="Holland Test", result=max_type)
         return render(request, "test_app/second_test/holland_results.html",
-                      {'result': max_type, 'text1': text1, 'text2': text2, 'user_data_id': user_data_id})
+                      {'result': max_type, 'text1': text1, 'text2': text2, "text3" : text3, 'user_data_id': user_data_id})
     else:
         if(language == "KZ"):
 
@@ -502,12 +507,13 @@ def career_anchor_test_view(request, user_data_id):
                     elif (max_orientation == "Предпринимательство"):
                         max_orientation = "Кәсіпкерлік"
 
+
             TestResult.objects.create(user_data_id=user_data_id, test_name="Career Anchor Test", result=max_orientation)
             return render(request, 'test_app/career_anchor_results.html', {
                 'max_orientation': max_orientation,
                 'text1': text1,
                 'text2': text2,
-                'user_data_id': user_data_id
+                'user_data_id': user_data_id,
             })
     else:
         form = form_class()  # Initialize an empty form for GET request
