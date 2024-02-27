@@ -2,6 +2,7 @@
 <html lang="{{ language }}">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Test Results</title>
     <style>
         body {
@@ -60,11 +61,16 @@
         }
         /* Fixed Logo */
         .logo {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            width: 100px;
-            z-index: 1000; /* Ensures logo is above other content */
+            display: block;
+            width: 150px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+        .logo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%; /* Make the image circular */
         }
         @media (max-width: 768px) {
     body {
@@ -78,22 +84,18 @@
         padding: 8px 15px !important; /* Smaller padding for the button */
         font-size: 14px !important; /* Smaller font size for button text */
     }
-    .logo {
-        width: 60px !important; /* Smaller logo for smaller screens */
-        top: 10px;
-        left: 10px;
-    }
 }
     </style>
 </head>
 <body>
+<div style="display: flex ;flex-direction: column;">
     <div class="logo">
         <img src="https://iitu.edu.kz/media/images/logo_ce8bCzm.original.png" alt="Logo" style="width:100%;">
     </div>
     <h1>
         {{ answer }} {{ result }}
-                <a href="{% url 'home' user_data_id %}" class="home-button">Go to Home Page</a>
-
+        <a href="{% url 'home' user_data_id %}" class="home-button" >{{ submit_text }}</a>
     </h1>
+</div>
 </body>
 </html>

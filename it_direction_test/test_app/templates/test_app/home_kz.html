@@ -53,19 +53,21 @@
         }
         /* Fixed Logo */
         .logo {
-            position: fixed;
-            top: 50px; /* Adjusted for visual balance */
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px; /* Adjust if needed */
-            height: 100px; /* Adjust if needed */
-            border-radius: 50%;
-            z-index: 1000;
+            margin-top: 20px; /* Adjust as needed for your layout */
+    margin-bottom: 20px; /* Provides space before the next content */
+    width: 100px; /* Adjust if needed */
+    height: 100px; /* Adjust if needed */
+    border-radius: 50%;
+    z-index: 1000;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
         }
         .logo img {
             width: 100%;
             height: 100%;
             border-radius: 50%; /* Make the image circular */
+
         }
         @media (max-width: 768px) {
             .logo {
@@ -80,22 +82,21 @@
     <div class="logo">
         <img src="https://iitu.edu.kz/media/images/logo_ce8bCzm.original.png" alt="Logo" style="width:100%;">
     </div>
-    <h2>Все тесты</h2>
-
+    <h2>Барлық тесттер</h2>
     <div class="test-window">
-        <a href="{% url 'survey' user_data_id %}">Тест на индивидуальную особенность</a>
+        <a href="{% url 'survey' user_data_id %}">Тұлға тесті</a>
     </div>
     <div class="test-window">
-        <a href="{% url 'holland_test' user_data_id %}">Тест на профессиональные предпочтения</a>
+        <a href="{% url 'holland_test' user_data_id %}">Кәсіби артықшылықтарға арналған тест</a>
     </div>
     <div class="test-window">
-        <a href="{% url 'preference_test' user_data_id %}">Тест на карту интересов</a>
+        <a href="{% url 'preference_test' user_data_id %}">Қызығушылық картасы тесті</a>
     </div>
     <div class="test-window">
-        <a href="{% url 'career_anchor_test' user_data_id %}">Тест на диагностику ценностных ориентаций в карьере</a>
+        <a href="{% url 'career_anchor_test' user_data_id %}">Мансаптағы құндылық бағдарларын диагностикалауға арналған тест</a>
     </div>
     <div class="test-window">
-        <a href="{% url 'test_view' user_data_id %}">Тест на профессиональную ориентацию</a>
+        <a href="{% url 'test_view' user_data_id %}">Кәсіптік бағдар беру тесті</a>
     </div>
 </body>
 </html>

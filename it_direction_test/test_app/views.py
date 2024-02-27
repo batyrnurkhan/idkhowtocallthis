@@ -2,17 +2,34 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Question, HollandQuestion, PreferenceQuestion, CareerAnchorQuestion, UserData, TestResult
 from .forms import *
 
+
 def index(request, user_data_id):
     user_data = get_object_or_404(UserData, id=user_data_id)
-    return render(request, 'test_app/home.html', {
-        'user_data_id':user_data_id}
-                  )
+    # Retrieve submit_text from session or set based on user_data.language
+    submit_text = request.session.pop('submit_text', 'Отправить')  # Pop to clear after use
+
+    if user_data.language == 'KZ':
+        template_name = 'test_app/home_kz.html'
+    else:
+        template_name = 'test_app/home.html'
+
+    return render(request, template_name, {
+        'user_data_id': user_data_id,
+        'submit_text': submit_text  # Make sure to pass submit_text to your template
+    })
+
+
 
 def collect_user_data_view(request):
     if request.method == 'POST':
         form = UserDataForm(request.POST)
         if form.is_valid():
             user_data = form.save()
+            # Determine the submit text based on the user's language selection
+            if user_data.language == 'KZ':
+                request.session['submit_text'] = 'Жіберу'  # Kazakh
+            else:
+                request.session['submit_text'] = 'Отправить'  # Default to Russian
             return redirect('home', user_data_id=user_data.id)
     else:
         form = UserDataForm()
@@ -22,6 +39,7 @@ def collect_user_data_view(request):
 def test_view(request, user_data_id):
     user_data = get_object_or_404(UserData, id=user_data_id)
     language = user_data.language  # Retrieve the user's language preference from the UserData model
+    submit_text = "Бастау" if language == "KZ" else "Отправить"
 
     if request.method == 'POST':
         # Your existing logic for processing POST requests remains unchanged
@@ -54,6 +72,7 @@ def test_view(request, user_data_id):
         answer = "Предлагаемая вами профессиональная группа - это:"
 
         if language == "KZ":
+            submit = "Бастау"
             answer = "Сіздің ұсынылған мамандық тобыңыз:"
             if result == 'Human-Nature':
                 result = "Адам Табиғаты: Мұнда адам жансыз және тірі табиғаттың әртүрлі құбылыстарымен айналысатын профессорлар кіреді, мысалы, биолог, географ, геолог, математик, физик, химик және жаратылыстану ғылымдары санатына жататын басқа мамандықтар."
@@ -68,6 +87,7 @@ def test_view(request, user_data_id):
                 result = "Адам-Көркем Образ: Бұл топ-көркем және шығармашылық жұмыстың әртүрлі түрлері, әдебиет, музыка, театр, бейнелеу өнері."
 
         elif language == "RU":
+            submit = "отправить"
             if result == 'Human-Nature':
                 result = "Человек-природа: Здесь входят профессора, в которых человек владеет делом с разными явлениями неживой и живой природы, например биолог, географ, геолог, математик, физик, химик и другие профессии, относящиеся к разряду естественных наук."
             elif result == 'Human-Technique':
@@ -83,12 +103,11 @@ def test_view(request, user_data_id):
 
         # Select the appropriate template based on the user's language preference
         user_data = get_object_or_404(UserData, id=user_data_id)
-        # Render the results page with the chosen template
         return render(request, "test_app/first_test/results.html", {
             'result': result,
             'answer': answer,
             'user_data_id': user_data_id,
-
+            'submit_text': submit_text
         })
     else:
         # For GET requests, display the test questions filtered by language
@@ -98,13 +117,15 @@ def test_view(request, user_data_id):
             questions = Question.objects.all()
         return render(request, 'test_app/first_test/test.html', {
             'questions': questions,
-            'user_data_id': user_data_id
+            'user_data_id': user_data_id,
+            'submit_text': submit_text
         })
 
 
 def holland_test(request, user_data_id):
     user_data = get_object_or_404(UserData, id=user_data_id)
     language = user_data.language
+    submit_text = "Бастау" if language == "KZ" else "Отправить"
 
     if request.method == 'POST':
         responses = request.POST.dict()
@@ -130,8 +151,8 @@ def holland_test(request, user_data_id):
                     type_counts[type_key] -= 1
         max_type = max(type_counts, key=type_counts.get)
         if language == "KZ":
-            text1 = "Сіздің HOLLAND Түріңіз"
-            text2 = "Сіздің HOLLAND Тестіңіздің нәтижесі:"
+            text1 = "Сіздің Түріңіз"
+            text2 = "Сіздің Тестіңіздің нәтижесі:"
             if "Реалистический тип" in max_type:
                 max_type = "Реалистік түрі: Белсенділік, агрессивтілік, іскерлік, табандылық, ұтымдылық, практикалық ойлау, дамыған моторика, кеңістіктік қиял, техникалық қабілеттер"
             elif "Интеллектуальный тип" in max_type:
@@ -150,19 +171,25 @@ def holland_test(request, user_data_id):
 
         TestResult.objects.create(user_data_id=user_data_id, test_name="Holland Test", result=max_type)
         return render(request, "test_app/second_test/holland_results.html",
-                      {'result': max_type, 'text1': text1, 'text2': text2, 'user_data_id': user_data_id})
+                      {'result': max_type, 'text1': text1, 'text2': text2, 'user_data_id': user_data_id,
+                       'submit_text': submit_text
+                       })
     else:
         if(language == "KZ"):
-
             questions = HollandQuestion_kk.objects.all()
         else:
             questions = HollandQuestion.objects.all()
-        return render(request, "test_app/second_test/holland_test.html", {'questions': questions, 'user_data_id': user_data_id})
+        return render(request, "test_app/second_test/holland_test.html", {'questions': questions,
+                                                                          'user_data_id': user_data_id,
+                                                                          'submit_text': submit_text
+                                                                          })
 
 
 def preference_test_view(request, user_data_id):
     user_data = get_object_or_404(UserData, id=user_data_id)
     language = user_data.language
+    submit_text = "Бастау" if language == "KZ" else "Отправить"
+
     if request.method == 'POST':
         scores = {
             'Work with people': 0,
@@ -254,18 +281,24 @@ def preference_test_view(request, user_data_id):
         TestResult.objects.create(user_data_id=user_data_id, test_name="Preference Test", result=preferred_category)
 
         return render(request, 'test_app/third_test/preference_result.html',
-                      {'preferred_category': preferred_category, 'text': text,'user_data_id': user_data_id})
+                      {'preferred_category': preferred_category, 'text': text,'user_data_id': user_data_id,
+                       'submit_text': submit_text
+                       })
     else:
         if(language == "KZ"):
 
             questions = PreferenceQuestion_kk.objects.all()
         else:
             questions = PreferenceQuestion.objects.all()
-        return render(request, 'test_app/third_test/preference_test.html', {'questions': questions, 'user_data_id': user_data_id})
+        return render(request, 'test_app/third_test/preference_test.html', {'questions': questions,
+                                                                            'user_data_id': user_data_id,
+                                                                            'submit_text': submit_text
+                                                                            })
 def survey_view(request, user_data_id):
     user_data = get_object_or_404(UserData, id=user_data_id)
     user_language = user_data.language
-    print(user_language)
+    submit_text = "Бастау" if user_language == "KZ" else "Отправить"
+
 
     if request.method == 'POST':
         if(user_language == "KZ"):
@@ -431,14 +464,18 @@ def survey_view(request, user_data_id):
                 results[answer] += 1
             # Здесь можно сделать что-то с results, например, передать их в шаблон
             TestResult.objects.create(user_data_id=user_data_id, test_name="Survey", result=str(categories))
-            return render(request, "test_app/fourth_test/survey_result.html", {'categories': categories, 'text': text,'user_data_id': user_data_id})
+            return render(request, "test_app/fourth_test/survey_result.html", {'categories': categories,
+                                                                               'text': text,'user_data_id': user_data_id,
+                                                                               'submit_text': submit_text})
     else:
         if (user_language == "KZ"):
             print("kazakh")
             form = SurveyForm_kk(request.POST)
         else:
             form = SurveyForm(request.POST)
-        return render(request, "test_app/fourth_test/survey_test.html", {'form': form, 'user_data_id': user_data_id})
+        return render(request, "test_app/fourth_test/survey_test.html", {'form': form,
+                                                                         'user_data_id': user_data_id,
+                                                                         'submit_text': submit_text})
 
 
 from django.shortcuts import render
@@ -450,6 +487,7 @@ def career_anchor_test_view(request, user_data_id):
     # Fetch the user's data based on the ID
     user_data = get_object_or_404(UserData, id=user_data_id)
     language = user_data.language
+    submit_text = "Бастау" if language == "KZ" else "Отправить"
 
     # Initialize the correct form based on the user's language
     if language == "KZ":
@@ -535,13 +573,15 @@ def career_anchor_test_view(request, user_data_id):
                 'text1': text1,
                 'text2': text2,
                 'user_data_id': user_data_id,
+                'submit_text': submit_text
             })
     else:
         form = form_class()  # Initialize an empty form for GET request
 
     return render(request, 'test_app/career_anchor_test.html', {
         'form': form,
-        'user_data_id': user_data_id
+        'user_data_id': user_data_id,
+        'submit_text': submit_text
     })
 
 
