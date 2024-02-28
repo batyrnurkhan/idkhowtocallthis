@@ -92,6 +92,9 @@
             h1 {
                 font-size: 20px; /* Smaller font size for smaller screens */
             }
+            .whatsapp-logo {
+                background-color: #075e54;
+            }
             p {
                 padding: 10px;
                 max-width: 100%; /* Full width on smaller screens */
@@ -110,5 +113,9 @@
     </div>
     <p>{{ text2 }} <strong>{{ result }}</strong></p>
 <a href="{% url 'home' user_data_id %}" class="home-button">{{submit_text}}</a>
+
+<a class="home-button" style="background-color:#075e54; width:80px; height:25px; " href="https://wa.me/phone_num?text=HelloA%20world">
+         <p style="margin: 5px 0px 0px; text-align: center; color:white;">Whatsapp</p>
+    </a> <!--%20 пробел -->
 </body>
 </html>

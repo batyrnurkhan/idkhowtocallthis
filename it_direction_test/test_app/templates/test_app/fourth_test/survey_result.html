@@ -63,7 +63,7 @@
             display: inline-block; /* Allows block-level behaviors like padding */
             margin-top: 20px; /* Additional spacing from the list */
         }
-        a:hover {
+        .home-button:hover {
             text-decoration: underline; /* Restores underline on hover for clarity */
             background-color: #f0f0f0; /* Light background on hover */
         }
@@ -80,6 +80,16 @@
             height: 100%;
             border-radius: 50%; /* Make the image circular */
         }
+        .whatsapp-logo {
+            width: 60px;
+            height: 30px;
+            background-color: #075e54;
+        }
+        .whatsapp-logo:hover {
+            text-decoration: underline;
+            background-color: #0056b3
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 10px;
@@ -106,5 +116,9 @@
         {% endfor %}
     </ul>
     <a href="{% url 'home' user_data_id %}" class="home-button">{{ submit_text }}</a>
+
+    <a class="home-button" style="background-color:#075e54; width:80px; height:25px; " href="https://wa.me/phone_num?text=HelloA%20world">
+         <p style="margin: 5px 0px 0px; text-align: center; color:white;">Whatsapp</p>
+    </a> <!--%20 пробел -->
 </body>
 </html>

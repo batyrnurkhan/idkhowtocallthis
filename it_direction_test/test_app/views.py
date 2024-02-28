@@ -3,6 +3,13 @@ from .models import Question, HollandQuestion, PreferenceQuestion, CareerAnchorQ
 from .forms import *
 
 
+def test(request):
+    phone_num = '+77476283763'
+    text = "Hello world"
+    link = 'https://wa.me/' + phone_num + '?text=' + text.replace(" ", "%20")
+    return render(request, 'test_app/test.html', {'link': link})
+
+
 def index(request, user_data_id):
     user_data = get_object_or_404(UserData, id=user_data_id)
     # Retrieve submit_text from session or set based on user_data.language
@@ -170,6 +177,7 @@ def holland_test(request, user_data_id):
             text2 = "Результат вашего теста HOLLAND"
 
         TestResult.objects.create(user_data_id=user_data_id, test_name="Holland Test", result=max_type)
+
         return render(request, "test_app/second_test/holland_results.html",
                       {'result': max_type, 'text1': text1, 'text2': text2, 'user_data_id': user_data_id,
                        'submit_text': submit_text
@@ -568,6 +576,7 @@ def career_anchor_test_view(request, user_data_id):
 
 
             TestResult.objects.create(user_data_id=user_data_id, test_name="Career Anchor Test", result=max_orientation)
+
             return render(request, 'test_app/career_anchor_results.html', {
                 'max_orientation': max_orientation,
                 'text1': text1,

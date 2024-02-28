@@ -27,7 +27,7 @@
             color: white;
             margin: 0 0 20px;
         }
-        p {
+        .text2 {
             background-color: #ffffff;
             color: #2b2d42;
             padding: 20px;
@@ -71,6 +71,9 @@
             height: 100%;
             border-radius: 50%; /* Make the image circular */
         }
+        .whatsapp-logo {
+            background-color: #075e54;
+        }
         /* Adaptive styles */
         @media (max-width: 768px) {
             p, .home-button {
@@ -85,7 +88,11 @@
         <img src="https://iitu.edu.kz/media/images/logo_ce8bCzm.original.png" alt="Logo" style="width:100%;">
     </div>
     <h1>{{ text1 }}</h1>
-    <p> {{ text2 }} <strong>{{ max_orientation }}</strong></p>
+    <p class="text2"> {{ text2 }} <strong>{{ max_orientation }}</strong></p>
     <a href="{% url 'home' user_data_id %}" class="home-button">{{submit_text}}</a>
+
+    <a class="home-button" style="background-color:#075e54; width:80px; height:25px; " href="https://wa.me/phone_num?text=HelloA%20world">
+         <p style="margin: 5px 0px 0px; text-align: center; color:white;">Whatsapp</p>
+    </a> <!--%20 пробел -->
 </body>
 </html>

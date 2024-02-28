@@ -80,6 +80,9 @@
         font-size: 18px !important; /* Smaller font size for title */
         padding: 15px !important; /* Less padding for a compact look */
     }
+    .whatsapp-logo {
+            background-color: #075e54;
+    }
     .home-button {
         padding: 8px 15px !important; /* Smaller padding for the button */
         font-size: 14px !important; /* Smaller font size for button text */
@@ -95,7 +98,15 @@
     <h1>
         {{ answer }} {{ result }}
         <a href="{% url 'home' user_data_id %}" class="home-button" >{{ submit_text }}</a>
+
+        <a href="https://wa.me/phone_num?text=HelloA%20world"> <!--%20 пробел -->
+            <img src="https://images.app.goo.gl/oY6yHbstSHVHigAq7" alt="Whatsapp">
+        </a>
     </h1>
+
+   <a class="home-button" style="background-color:#075e54; width:80px; height:25px; " href="https://wa.me/phone_num?text=HelloA%20world">
+         <p style="margin: 5px 0px 0px; text-align: center; color:white;">Whatsapp</p>
+    </a> <!--%20 пробел -->
 </div>
 </body>
 </html>
