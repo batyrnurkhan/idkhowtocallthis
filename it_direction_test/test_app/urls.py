@@ -8,4 +8,5 @@ urlpatterns = [
     path('map-test/<int:user_data_id>/', survey_view, name='survey'),
     path('career-anchor-test/<int:user_data_id>/', career_anchor_test_view, name='career_anchor_test'),
     path('', collect_user_data_view, name='collect_user_data_view'),
+    path('home/<int:user_data_id>/', index,name = "home")
 ]
