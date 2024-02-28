@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Form</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0; /* Ensure there's no extra margin around the body */
+        }
+        form {
+            max-width: 600px;
+            margin: 20px auto; /* Ensure there's some space around the form */
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* Removed max-height and overflow properties to allow natural expansion */
+        }
+        div {
+            margin-bottom: 20px;
+        }
+        p {
+            color: #333;
+            font-size: 18px;
+        }
+        label {
+            margin-left: 5px;
+            font-size: 16px;
+            display: block; /* Ensures label text is properly aligned */
+        }
+        input[type="radio"] {
+            margin-top: 5px;
+            margin-right: 10px;
+        }
+        input[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<form method="post">
+    {% csrf_token %}
+    {% for question in questions %}
+        <div>
+            <p><strong>{{ forloop.counter }}. {{ question.text }}</strong></p>
+            <input type="radio" id="question_{{forloop.counter}}_a" name="question_{{forloop.counter}}" value="3a">
+            <label for="question_{{forloop.counter}}_a">{{ question.option_a }} (3)</label>
+            <input type="radio" id="question_{{forloop.counter}}_b" name="question_{{forloop.counter}}" value="2a">
+            <label for="question_{{forloop.counter}}_b">{{ question.option_a }} (2)</label>
+            <!-- Include other options similarly, ensuring they are associated with correct labels -->
+        </div>
+    {% endfor %}
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

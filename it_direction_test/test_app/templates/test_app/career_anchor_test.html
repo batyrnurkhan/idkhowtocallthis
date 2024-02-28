@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Career Anchor Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            max-width: 700px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        div {
+            margin-bottom: 20px;
+        }
+        strong {
+            display: block;
+            margin-bottom: 10px;
+            color: #000;
+            font-size: 18px;
+        }
+        label {
+            display: block;
+            margin-left: 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: auto;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Career Anchor Test</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div>
+                <strong>{{ field.label }}</strong>
+                {% for choice in field %}
+                    <label>
+                        {{ choice.tag }}
+                        {{ choice.choice_label }}
+                    </label>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+
+
+
