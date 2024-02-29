@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}{% endblock %}</title>
+{% load static %} <!-- Load the static files -->
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background:
+            radial-gradient(circle, transparent 20%, #ba1f25 30%, #ba1f25 80%, transparent 80%, transparent),
+            radial-gradient(circle, transparent 20%, #a3171e 30%, #a3171e 80%, transparent 80%, transparent) 50px 50px,
+            linear-gradient(#ba1f251a 2px, transparent 2px) 0 -1px,
+            linear-gradient(90deg, #ba1f251a 2px, transparent 2px) -1px 0;
+        background-color: #ba1f25;
+        background-size: 100px 100px, 100px 100px, 25px 25px, 25px 25px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        color: white;
+        position: relative;
+    }
+    .logo {
+        width: 20%; /* Adjusted width for consistency */
+        height: auto;
+        z-index: 1000;
+    }
+    @media (max-width: 768px) {
+        .logo {
+            width: 40%;
+            position: fixed; /* Keeps the logo fixed at the top */
+            top: 10px; /* Adjust based on the header height or desired space */
+            left: 50%; /* Center the logo */
+            transform: translateX(-50%); /* Adjust for exact center alignment */
+            z-index: 1050; /* Ensure logo is above all other content */
+        }
+        body {
+            padding-top: 120px; /* Adjust based on the logo size to ensure content starts below the logo */
+        }
+    }
+
+    .whatsapp-button {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        background-color: #25d366;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 50%;
+        box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+        z-index: 1000; /* Ensure it's above other content */
+        text-align: center;
+        font-size: 30px; /* Adjust size as needed */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        width: 60px; /* Set the width for the button */
+        height: 60px;
+    }
+
+    .whatsapp-button:hover {
+        background-color: #20c05b; /* A slightly darker green */
+        text-decoration: none; /* No underline on hover */
+    }
+.whatsapp-button img {
+        width: 100%; /* SVG will fill the container */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    /* Responsive adjustments if needed */
+    @media (max-width: 600px) {
+        .whatsapp-button {
+            right: 10px;
+            bottom: 10px;
+            font-size: 24px; /* Smaller size on mobile */
+        }
+    }
+
+</style>
+</head>
+<body>
+<div class="logo">
+    <img src="{% static 'test_app/images/logo.png' %}" alt="Logo" style="width:100%;">
+</div>
+<a href="https://wa.me/phone_num?text=Hello%20world" class="whatsapp-button">
+    <img src="{% static 'test_app/images/whatsapp-icon.svg' %}" alt="WhatsApp" />
+</a>
+
+{% block content %}
+{% endblock %}
+</body>
+</html>

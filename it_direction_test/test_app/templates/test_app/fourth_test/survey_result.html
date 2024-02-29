@@ -1,110 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Результаты опроса</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background:
-                radial-gradient(circle, transparent 20%, #ba1f25 30%, #ba1f25 80%, transparent 80%, transparent),
-                radial-gradient(circle, transparent 20%, #a3171e 30%, #a3171e 80%, transparent 80%, transparent) 50px 50px,
-                linear-gradient(#ba1f251a 2px, transparent 2px) 0 -1px,
-                linear-gradient(90deg, #ba1f251a 2px, transparent 2px) -1px 0;
-            background-color: #ba1f25;
-            background-size: 100px 100px, 100px 100px, 25px 25px, 25px 25px;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: white;
+{% extends 'test_app/base.html' %}
+{% load static %}
+{% block title %}Результаты опроса{% endblock %}
+
+{% block content %}
+<style>
+    h2 {
+        background-color: transparent;
+        color: white; /* Ensures title is visible against the dynamic background */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        text-align: center;
+        max-width: 600px;
+        margin-top: 20px; /* Adjust margin for spacing from the logo */
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+        width: 100%;
+        max-width: 600px; /* Ensures consistency in element widths */
+        text-align: center; /* Center align the text for better aesthetics */
+    }
+    li {
+        background-color: #ffffff;
+        color: #333; /* Ensures text within is readable */
+        margin: 8px 0;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .home-button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        margin-top: 10px; /* Space above the button */
+        border: none;
+        border-radius: 5px;
+        text-decoration: none; /* Remove underline from the link */
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+        display: inline-block; /* Adjust display for positioning */
+        margin: 20px auto; /* Center the button */
+    }
+    .home-button:hover {
+        background-color: #0056b3;
+    }
+    @media (max-width: 768px) {
+        ul, .home-button {
+            width: 90%;
+            max-width: none;
         }
-        .home-button {
-            display: inline-block;
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            margin-top: 10px; /* Space above the button */
-            border: none;
-            border-radius: 5px;
-            text-decoration: none; /* Remove underline from the link */
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
+        .home-button, li {
+            font-size: 14px;
+            padding: 8px 15px;
         }
-        .home-button:hover {
-            background-color: #0056b3;
-        }
-        h2 {
-            color: white; /* Ensures title is visible against the dynamic background */
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-            width: 100%;
-            max-width: 600px; /* Ensures consistency in element widths */
-        }
-        li {
-            background-color: #ffffff;
-            color: #333; /* Ensures text within is readable */
-            margin: 8px 0;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        a {
-            color: #007bff; /* Provides a familiar, clickable color */
-            text-decoration: none; /* Optional: removes underline */
-            padding: 10px 20px; /* Gives some padding around the text */
-            background-color: #ffffff; /* Background color for visibility */
-            border-radius: 5px; /* Rounds the corners */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Adds a subtle shadow */
-            display: inline-block; /* Allows block-level behaviors like padding */
-            margin-top: 20px; /* Additional spacing from the list */
-        }
-        a:hover {
-            text-decoration: underline; /* Restores underline on hover for clarity */
-            background-color: #f0f0f0; /* Light background on hover */
-        }
-        /* Fixed Logo */
-        .logo {
-            display: block;
-            width: 150px;
-            height: 100px;
-            border-radius: 50%;
-            margin: 0 auto;
-        }
-        .logo img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%; /* Make the image circular */
-        }
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            ul, .home-button {
-                width: 90%;
-                max-width: none;
-            }
-            .home-button, li, a {
-                font-size: 14px;
-                padding: 8px 15px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="logo">
-        <img src="https://iitu.edu.kz/media/images/logo_ce8bCzm.original.png" alt="Logo" style="width:100%;">
-    </div>
+    }
+</style>
+
+<div>
     <h2>{{ text }}</h2>
     <ul>
         {% for profession, level in categories.items %}
             <li>{{ profession }}: {{ level }}</li>
         {% endfor %}
     </ul>
+</div>
     <a href="{% url 'home' user_data_id %}" class="home-button">{{ submit_text }}</a>
-</body>
-</html>
+
+{% endblock %}
