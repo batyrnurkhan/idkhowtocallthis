@@ -105,21 +105,19 @@
 
 <div>
     <form method="post">
-        {% csrf_token %}
-        {% for question in questions %}
-            <div class="question">
-                <p>{{ forloop.counter }}. {{ question.text }}</p>
-                <label for="question_{{ question.id }}_a">
-                    <input type="radio" id="question_{{ question.id }}_a" name="{{ question.id }}" value="a">
-                    {{ question.choice_a }}
-                </label>
-                <label for="question_{{ question.id }}_b">
-                    <input type="radio" id="question_{{ question.id }}_b" name="{{ question.id }}" value="b">
-                    {{ question.choice_b }}
-                </label>
-            </div>
-        {% endfor %}
-        <button type="submit">{{ submit_text }}</button>
-    </form>
+    {% csrf_token %}
+    {% for question in questions %}
+        <div class="question">
+            <p>{{ forloop.counter }}. {{ question.text }}</p>
+            <label>
+    <input type="radio" name="response_{{ question.id }}" value="a"> {{ question.choice_a }}
+</label>
+<label>
+    <input type="radio" name="response_{{ question.id }}" value="b"> {{ question.choice_b }}
+</label>
+        </div>
+    {% endfor %}
+    <button type="submit">{{ submit_text }}</button>
+</form>
 </div>
 {% endblock %}

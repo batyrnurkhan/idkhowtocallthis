@@ -129,68 +129,62 @@ def test_view(request, user_data_id):
         })
 
 
-def holland_test(request, user_data_id):
+def calculate_holland_type(responses):
+    type_counts = {'Р': 0, 'И': 0, 'С': 0, 'К': 0, 'П': 0, 'А': 0}
+
+    answer_key = {
+        '1а': 'Р', '2а': 'Р', '3а': 'Р', '4а': 'Р', '5а': 'Р', '16а': 'Р', '17а': 'Р', '18а': 'Р', '19а': 'Р',
+        '21а': 'Р', '31а': 'Р', '32а': 'Р', '33а': 'Р', '34а': 'Р',
+        '1б': 'И', '6а': 'И', '7а': 'И', '8а': 'И', '9а': 'И', '16б': 'И', '20а': 'И', '22а': 'И', '23а': 'И',
+        '24а': 'И', '31б': 'И', '35а': 'И', '36а': 'И', '37а': 'И',
+        '2б': 'С', '6б': 'С', '10а': 'С', '11а': 'С', '12а': 'С', '17б': 'С', '29б': 'С', '25а': 'С', '26а': 'С',
+        '27а': 'С', '36б': 'С', '38а': 'С', '39а': 'С', '41б': 'С',
+        '3б': 'К', '7б': 'К', '10б': 'К', '13а': 'К', '14а': 'К', '18б': 'К', '22б': 'К', '25б': 'К', '28а': 'К',
+        '29а': 'К', '32б': 'К', '38б': 'К', '40а': 'К', '42а': 'К',
+        '4б': 'П', '8б': 'П', '11б': 'П', '13б': 'П', '15а': 'П', '23б': 'П', '28б': 'П', '30а': 'П', '33б': 'П',
+        '35б': 'П', '37б': 'П', '39б': 'П', '40б': 'П',
+        '5б': 'А', '9б': 'А', '12б': 'А', '14б': 'А', '15б': 'А', '19б': 'А', '21б': 'А', '24б': 'А', '27б': 'А',
+        '29б': 'А', '30б': 'А', '34б': 'А', '41а': 'А', '42б': 'А'
+    }
+
+    for question, answer in responses.items():
+        key = f"{question}{answer}"  # Формируем ключ из номера вопроса и ответа
+        if key in answer_key:
+            type_key = answer_key[key]
+            type_counts[type_key] += 1
+
+    # Определение доминирующего типа личности
+    dominant_type = max(type_counts, key=type_counts.get)
+    return dominant_type, type_counts
+
+
+def holland_test_view(request, user_data_id):
     user_data = get_object_or_404(UserData, id=user_data_id)
-    language = user_data.language
-    submit_text = "Бастау" if language == "KZ" else "Отправить"
+    questions = HollandQuestion.objects.all()
 
-    if request.method == 'POST':
-        responses = request.POST.dict()
-        type_keys = {
-            'Реалистический тип: Активность, агрессивность, деловитость, настойчивость, рациональность, практическое мышление, развитые двигательные навыки, пространственное воображение, технические способности': ['1а', '2а', '3а', '4а', '5а', '16а', '17а', '18а', '19а', '21а', '31а', '32а', '33а', '34а'],
-            'Интеллектуальный тип: Аналитический ум, независимость и оригинальность суждений, гармоничное развитие языковых и математических способностей, критичность, любознательность, склонность к фантазии, интенсивная внутренняя жизнь, низкая физическая активность': ['1б', '6а', '7а', '8а', '9а', '16б', '20а', '22а', '23а', '24а', '31б', '35а', '36а', '37а'],
-            'Социальный тип: Умение общаться, гуманность, способность к сопереживанию, активность, зависимость от окружающих и общественного мнения, приспособление, решение проблем с опорой на эмоции и чувства, преобладание языковых способностей': ['2б', '6б', '10а', '11а', '12а', '17б', '29б', '25а', '26а', '27а', '36б', '38а', '39а', '41б'],
-            'Конвенциональный тип: Способности к переработке числовой информации, стереотипный подход к проблемам, консервативный характер, подчиняемость, зависимость, следование обычаям, конформность, исполнительность, преобладание математических способностей': ['3б', '7б', '10б', '13а', '14а', '18б', '22б', '25б', '28а', '29а', '32б', '38б', '40а', '42а'],
-            'Предприимчивый тип: Энергия, импульсивность, энтузиазм, предприимчивость, агрессивность, готовность к риску, оптимизм, уверенность в себе, преобладание языковых способностей, развитые организаторские способности': ['4б', '8б', '11б', '13б', '15а', '23б', '28б', '30а', '33б', '35б', '37б', '39б', '40б'],
-            'Артистический тип: Воображение и интуиция, эмоционально сложный взгляд на жизнь, независимость, гибкость и оригинальность мышления, развитые двигательные способности и восприятие': ['5б', '9б', '12б', '14б', '15б', '19б', '21б', '24а', '27б', '29б', '30б', '34б', '41а', '42б']
-        }
-        type_counts = {type_key: 0 for type_key in type_keys}
+    if request.method == "POST":
+        # Extract responses from POST data
+        responses = {key.replace("response_", ""): value for key, value in request.POST.items() if
+                     key.startswith("response_")}
+        dominant_type, type_counts = calculate_holland_type(responses)
 
-        for question_id, choice_selected in responses.items():
-            if choice_selected == 'a':
-                choice_selected = 'а'
-            elif choice_selected == 'b':
-                choice_selected = 'б'
-            for type_key, keys in type_keys.items():
-                if question_id in keys and choice_selected == 'а':
-                    type_counts[type_key] += 1
-                elif question_id in keys and choice_selected == 'б':
-                    type_counts[type_key] -= 1
-        max_type = max(type_counts, key=type_counts.get)
-        if language == "KZ":
-            text1 = "Сіздің Түріңіз"
-            text2 = "Сіздің Тестіңіздің нәтижесі:"
-            if "Реалистический тип" in max_type:
-                max_type = "Реалистік түрі: Белсенділік, агрессивтілік, іскерлік, табандылық, ұтымдылық, практикалық ойлау, дамыған моторика, кеңістіктік қиял, техникалық қабілеттер"
-            elif "Интеллектуальный тип" in max_type:
-                max_type = "Интеллектуалдық түр: Аналитикалық ақыл, шешімдердің тәуелсіздігі мен өзіндік ерекшелігі, тілдік және математикалық қабілеттердің үйлесімді дамуы, сыншылдық, қызығушылық, қиялға бейімділік, қарқынды ішкі өмір, төмен физикалық белсенділік"
-            elif "Социальный тип" in max_type:
-                max_type = "Әлеуметтік түр: Қарым-қатынас жасау қабілеті, адамгершілік, эмпатия қабілеті, белсенділік, басқаларға және қоғамдық пікірге тәуелділік, бейімделу, эмоциялар мен сезімдерге сүйене отырып мәселелерді шешу, тілдік қабілеттердің басым болуы"
-            elif "Конвенциональный тип" in max_type:
-                max_type = "Дәстүрлі түр: Сандық ақпаратты өңдеу қабілеті, проблемаларға стереотиптік көзқарас, консервативті сипат, бағыныштылық, тәуелділік, әдет-ғұрыптарды ұстану, сәйкестік, орындаушылық, математикалық қабілеттердің басым болуы"
-            elif "Предприимчивый тип" in max_type:
-                max_type = "Кәсіпкерлік түр: Энергия, импульсивтілік, ынта, кәсіпкерлік, агрессивтілік, тәуекелге дайын болу, оптимизм, өзіне деген сенімділік, тілдік қабілеттердің басым болуы, дамыған ұйымдастырушылық қабілеттер"
-            elif "Артистический тип" in max_type:
-                max_type = "Өнер түрі: Қиял мен интуиция, өмірге эмоционалды күрделі көзқарас, Тәуелсіздік, ойлаудың икемділігі мен өзіндік ерекшелігі, дамыған моторикасы мен қабылдауы"
-        else:
-            text1 = "Ваш HOLLAND Тип"
-            text2 = "Результат вашего теста HOLLAND"
+        # Now you can either render the results directly or redirect to another view
+        # For direct rendering (simpler for showing the concept):
+        return render(request, 'test_app/second_test/holland_results.html', {
+            'result': dominant_type,
+            'type_counts': type_counts,
+            'text2': 'Your dominant Holland code is',  # Customize your message
+            'submit_text': "Return Home",  # Customize as needed
+            'user_data_id': user_data_id,  # Pass this if needed for the home URL
+        })
 
-        TestResult.objects.create(user_data_id=user_data_id, test_name="Holland Test", result=max_type)
-
-        return render(request, "test_app/second_test/holland_results.html",
-                      {'result': max_type, 'text1': text1, 'text2': text2, 'user_data_id': user_data_id,
-                       'submit_text': submit_text
-                       })
-    else:
-        if(language == "KZ"):
-            questions = HollandQuestion_kk.objects.all()
-        else:
-            questions = HollandQuestion.objects.all()
-        return render(request, "test_app/second_test/holland_test.html", {'questions': questions,
-                                                                          'user_data_id': user_data_id,
-                                                                          'submit_text': submit_text
-                                                                          })
+    # This is the original code for GET requests to show the form
+    submit_text = "Отправить" if user_data.language != "KZ" else "Бастау"
+    return render(request, 'test_app/second_test/holland_test.html', {
+        'questions': questions,
+        'user_data_id': user_data_id,
+        'submit_text': submit_text,
+    })
 
 
 def preference_test_view(request, user_data_id):

@@ -54,7 +54,10 @@
 
 <div>
     <p>{{ text2 }}<br/> <strong>{{ result }}</strong></p>
-    <!-- The WhatsApp link/button will be included from base.html -->
+    <!-- Если вы хотите отобразить подсчет по каждому типу -->
+    {% for type, count in type_counts.items %}
+        <p>{{ type }}: {{ count }}</p>
+    {% endfor %}
 </div>
     <a href="{% url 'home' user_data_id %}" class="home-button">{{ submit_text }}</a>
 
