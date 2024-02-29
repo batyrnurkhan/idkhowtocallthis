@@ -92,11 +92,11 @@
             <div class="question">
                 <div>{{ forloop.counter }}. {{ question.text }}</div>
                 <label for="question_{{ question.id }}_a">
-                    <input type="radio" id="question_{{ question.id }}_a" name="question_{{ question.id }}" value="Human-Nature" required>
+                    <input type="radio" id="question_{{ question.id }}_a" name="question_{{ question.id }}" value="a" required>
                     {{ question.choice_a }}
                 </label>
                 <label for="question_{{ question.id }}_b">
-                    <input type="radio" id="question_{{ question.id }}_b" name="question_{{ question.id }}" value="Human-Technique">
+                    <input type="radio" id="question_{{ question.id }}_b" name="question_{{ question.id }}" value="b">
                     {{ question.choice_b }}
                 </label>
             </div>

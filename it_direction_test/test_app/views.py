@@ -49,34 +49,56 @@ def test_view(request, user_data_id):
     submit_text = "Бастау" if language == "KZ" else "Отправить"
 
     if request.method == 'POST':
+        print(request.POST)
         # Your existing logic for processing POST requests remains unchanged
+        # Dictionary to hold the counts for each category
         profession_groups_count = {
             'Human-Nature': 0,
             'Human-Technique': 0,
             'Human-Human': 0,
             'Human-Sign Systems': 0,
-            'Human-Artistic Image': 0,
+            'Human-Artistic Image': 0
         }
-        profession_groups_count_ru = {
-            "Человек-природа": 0,
-            "Человек-техника": 0,
-            "Человек-Человекочеловек": 0,
-            "Человек-знаковые системы": 0,
-            "Человек-художественный образ": 0,
-        }
-        profession_groups_count_kk = {
-            "Адам Табиғаты": 0,
-            "Адам Техникасы": 0,
-            "Адам-Адам": 0,
-            "Адам Белгілері Жүйелері": 0,
-            "Адам-Көркем Образ": 0,
-        }
-        for key, value in request.POST.items():
-            if key.startswith('question'):
-                profession_groups_count[value] += 1
-        result = max(profession_groups_count, key=profession_groups_count.get)
 
+        # Counter to keep track of the index
+        i = 0
+
+        # Iterate through the items in the POST data
+        for key, value in request.POST.items():
+            i += 1  # Increment the index for each item
+
+            # Check the value and index, then increment the appropriate category count
+            if value == "a":
+                if i in [1, 6, 10, 11, 16, 20]:  # 'a' indices for 'Human-Nature'
+                    profession_groups_count['Human-Nature'] += 1
+                elif i in [4, 9, 14, 19]:  # 'a' indices for 'Human-Technique'
+                    profession_groups_count['Human-Technique'] += 1
+                elif i in [2, 8, 12, 18]:  # 'a' indices for 'Human-Human'
+                    profession_groups_count['Human-Human'] += 1
+                elif i in [5, 15]:  # 'a' indices for 'Human-Sign Systems'
+                    profession_groups_count['Human-Sign Systems'] += 1
+                elif i in [3, 7, 13, 17]:  # 'a' indices for 'Human-Artistic Image'
+                    profession_groups_count['Human-Artistic Image'] += 1
+            elif value == "b":
+                if i in [3, 13]:  # 'b' indices for 'Human-Nature'
+                    profession_groups_count['Human-Nature'] += 1
+                elif i in [1, 7, 11, 17]:  # 'b' indices for 'Human-Technique'
+                    profession_groups_count['Human-Technique'] += 1
+                elif i in [4, 6, 14, 16]:  # 'b' indices for 'Human-Human'
+                    profession_groups_count['Human-Human'] += 1
+                elif i in [2, 9, 10, 12, 19, 20]:  # 'b' indices for 'Human-Sign Systems'
+                    profession_groups_count['Human-Sign Systems'] += 1
+                elif i in [5, 8, 15, 18]:  # 'b' indices for 'Human-Artistic Image'
+                    profession_groups_count['Human-Artistic Image'] += 1
+
+
+        max_category = max(profession_groups_count, key=profession_groups_count.get)
+        max_count = profession_groups_count[max_category]
+
+        print(profession_groups_count)
+        print(f"The category with the maximum count is {max_category} with {max_count} responses.")
         answer = "Предлагаемая вами профессиональная группа - это:"
+        result = max_category
 
         if language == "KZ":
             submit = "Бастау"
