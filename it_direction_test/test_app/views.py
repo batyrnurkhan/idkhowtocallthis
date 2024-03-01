@@ -170,7 +170,7 @@ def calculate_holland_type(responses):
     }
 
     for question, answer in responses.items():
-        key = f"{question}{answer}"  # Формируем ключ из номера вопроса и ответа
+        key = f"{question}{answer}"
         if key in answer_key:
             type_key = answer_key[key]
             type_counts[type_key] += 1
@@ -190,8 +190,7 @@ def holland_test_view(request, user_data_id):
                      key.startswith("response_")}
         dominant_type, type_counts = calculate_holland_type(responses)
 
-        # Now you can either render the results directly or redirect to another view
-        # For direct rendering (simpler for showing the concept):
+
         return render(request, 'test_app/second_test/holland_results.html', {
             'result': dominant_type,
             'type_counts': type_counts,
