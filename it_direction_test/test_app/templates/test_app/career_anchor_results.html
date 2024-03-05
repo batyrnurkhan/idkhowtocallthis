@@ -55,5 +55,7 @@
     <!-- The WhatsApp link/button will be included from base.html -->
 </div>
     <a href="{% url 'home' user_data_id %}" class="home-button">{{ submit_text }}</a>
-
+<a href="https://wa.me/phone_num?text=Hello%20world" class="whatsapp-button">
+    <img src="{% static 'test_app/images/whatsapp-icon.svg' %}" alt="WhatsApp" />
+</a>
 {% endblock %}

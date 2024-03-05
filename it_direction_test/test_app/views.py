@@ -49,7 +49,6 @@ def test_view(request, user_data_id):
     submit_text = "Бастау" if language == "KZ" else "Отправить"
 
     if request.method == 'POST':
-        print(request.POST)
         # Your existing logic for processing POST requests remains unchanged
         # Dictionary to hold the counts for each category
         profession_groups_count = {
@@ -95,8 +94,6 @@ def test_view(request, user_data_id):
         max_category = max(profession_groups_count, key=profession_groups_count.get)
         max_count = profession_groups_count[max_category]
 
-        print(profession_groups_count)
-        print(f"The category with the maximum count is {max_category} with {max_count} responses.")
         answer = "Предлагаемая вами профессиональная группа - это:"
         result = max_category
 
@@ -128,7 +125,7 @@ def test_view(request, user_data_id):
             elif result == 'Human-Artistic Image':
                 result = "Человек-художественный образ:  Эта группа представляет собой различные виды художественно-творческого труда, тип литературы, музыки, театра, образное искусство."
 
-        print(result)
+        TestResult.objects.create(user_data_id=user_data_id, test_name="First test", result=result)
 
         # Select the appropriate template based on the user's language preference
         user_data = get_object_or_404(UserData, id=user_data_id)
@@ -169,13 +166,29 @@ def calculate_holland_type(responses):
         '29б': 'А', '30б': 'А', '34б': 'А', '41а': 'А', '42б': 'А'
     }
 
-    for question, answer in responses.items():
-        key = f"{question}{answer}"
-        if key in answer_key:
-            type_key = answer_key[key]
+    question_id_to_key_mapping = {
+        '169': '1', '170': '2', '171': '3', '172': '4а', '173': '5',
+        '174': '16', '175': '17', '176': '18', '177': '19', '178': '21',
+        '179': '31', '180': '32', '181': '33', '182': '34',
+        '183': '1', '184': '6', '185': '7', '186': '8', '187': '9',
+        '188': '16', '189': '20', '190': '22', '191': '23', '192': '24',
+        '193': '31', '194': '35', '195': '36', '196': '37',
+        '197': '2', '198': '6', '199': '10', '200': '11',
+        '201': '12', '202': '17', '203': '29', '204': '25',
+        '205': '26', '206': '27', '207': '36', '208': '38',
+        '209': '39', '210': '41',
+        # Continue mapping for other types as needed
+    }
+
+    for question_id, answer in responses.items():
+        # Apply the mapping
+        question_base = question_id_to_key_mapping.get(str(question_id), '')
+        question_key = f"{question_base}а" if answer == 'a' else f"{question_base}б"
+
+        if question_key in answer_key:
+            type_key = answer_key[question_key]
             type_counts[type_key] += 1
 
-    # Определение доминирующего типа личности
     dominant_type = max(type_counts, key=type_counts.get)
     return dominant_type, type_counts
 
@@ -185,7 +198,6 @@ def holland_test_view(request, user_data_id):
     questions = HollandQuestion.objects.all()
 
     if request.method == "POST":
-        # Extract responses from POST data
         responses = {key.replace("response_", ""): value for key, value in request.POST.items() if
                      key.startswith("response_")}
         dominant_type, type_counts = calculate_holland_type(responses)
@@ -325,7 +337,6 @@ def survey_view(request, user_data_id):
 
     if request.method == 'POST':
         if(user_language == "KZ"):
-            print("kazakh")
             form = SurveyForm_kk(request.POST)
         else:
             form = SurveyForm(request.POST)
@@ -492,7 +503,6 @@ def survey_view(request, user_data_id):
                                                                                'submit_text': submit_text})
     else:
         if (user_language == "KZ"):
-            print("kazakh")
             form = SurveyForm_kk(request.POST)
         else:
             form = SurveyForm(request.POST)

@@ -45,4 +45,8 @@
     </h1>
     <a href="{% url 'home' user_data_id %}" class="home-button">{{ submit_text }}</a>
 </div>
+
+<a href="https://wa.me/phone_num?text=Hello%20world" class="whatsapp-button">
+    <img src="{% static 'test_app/images/whatsapp-icon.svg' %}" alt="WhatsApp" />
+</a>
 {% endblock %}
