@@ -13,7 +13,7 @@ def test(request):
 def index(request, user_data_id):
     user_data = get_object_or_404(UserData, id=user_data_id)
     # Retrieve submit_text from session or set based on user_data.language
-    submit_text = request.session.pop('submit_text', 'Отправить')  # Pop to clear after use
+    submit_text = request.session.pop('submit_text', 'ПОЛУЧИТЬ РЕЗУЛЬТАТ')  # Pop to clear after use
 
     if user_data.language == 'KZ':
         template_name = 'test_app/home_kz.html'
@@ -36,7 +36,7 @@ def collect_user_data_view(request):
             if user_data.language == 'KZ':
                 request.session['submit_text'] = 'Жіберу'  # Kazakh
             else:
-                request.session['submit_text'] = 'Отправить'  # Default to Russian
+                request.session['submit_text'] = 'ПОЛУЧИТЬ РЕЗУЛЬТАТ'  # Default to Russian
             return redirect('home', user_data_id=user_data.id)
     else:
         form = UserDataForm()
@@ -46,7 +46,7 @@ def collect_user_data_view(request):
 def test_view(request, user_data_id):
     user_data = get_object_or_404(UserData, id=user_data_id)
     language = user_data.language  # Retrieve the user's language preference from the UserData model
-    submit_text = "Бастау" if language == "KZ" else "Отправить"
+    submit_text = "Бастау" if language == "KZ" else "ПОЛУЧИТЬ РЕЗУЛЬТАТ"
 
     if request.method == 'POST':
         # Your existing logic for processing POST requests remains unchanged
@@ -212,7 +212,7 @@ def holland_test_view(request, user_data_id):
         })
 
     # This is the original code for GET requests to show the form
-    submit_text = "Отправить" if user_data.language != "KZ" else "Бастау"
+    submit_text = "ПОЛУЧИТЬ РЕЗУЛЬТАТ" if user_data.language != "KZ" else "Бастау"
     return render(request, 'test_app/second_test/holland_test.html', {
         'questions': questions,
         'user_data_id': user_data_id,
@@ -223,7 +223,7 @@ def holland_test_view(request, user_data_id):
 def preference_test_view(request, user_data_id):
     user_data = get_object_or_404(UserData, id=user_data_id)
     language = user_data.language
-    submit_text = "Бастау" if language == "KZ" else "Отправить"
+    submit_text = "Бастау" if language == "KZ" else "ПОЛУЧИТЬ РЕЗУЛЬТАТ"
 
     if request.method == 'POST':
         scores = {
@@ -332,7 +332,7 @@ def preference_test_view(request, user_data_id):
 def survey_view(request, user_data_id):
     user_data = get_object_or_404(UserData, id=user_data_id)
     user_language = user_data.language
-    submit_text = "Бастау" if user_language == "KZ" else "Отправить"
+    submit_text = "Бастау" if user_language == "KZ" else "ПОЛУЧИТЬ РЕЗУЛЬТАТ"
 
 
     if request.method == 'POST':
@@ -520,7 +520,7 @@ def career_anchor_test_view(request, user_data_id):
     # Fetch the user's data based on the ID
     user_data = get_object_or_404(UserData, id=user_data_id)
     language = user_data.language
-    submit_text = "Бастау" if language == "KZ" else "Отправить"
+    submit_text = "Бастау" if language == "KZ" else "ПОЛУЧИТЬ РЕЗУЛЬТАТ"
 
     # Initialize the correct form based on the user's language
     if language == "KZ":
