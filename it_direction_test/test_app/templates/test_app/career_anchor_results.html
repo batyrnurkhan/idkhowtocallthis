@@ -1,61 +1,89 @@
-{% extends 'test_app/base.html' %}
 {% load static %}
-{% block title %}Career Anchor Results{% endblock %}
 
 {% block content %}
 <style>
-    h1 {
-        color: white;
-        margin: 0 0 20px;
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #fff;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
     }
-    .text2 {
-        background-color: #ffffff;
-        color: #2b2d42;
+    .page-container {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 40px;
         padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .logo-container {
+        flex-shrink: 0;
+    }
+    .logo {
+        max-width: 120px;
         margin-top: 20px;
-        font-size: 18px;
-        width: 90%; /* Responsive width */
-        max-width: 600px; /* Max width to maintain readability */
-        text-align: center;
     }
-    strong {
-        color: #ef233c;
-        font-weight: bold;
+    .content-container {
+        max-width: 600px;
     }
-    .home-button {
-        background-color: #007bff;
+    .content-container h1 {
+        font-size: 2em;
+        margin: 0;
+    }
+    .content-container h1 .result {
+        color: red;
+    }
+    .content-container p {
+        color: #666;
+        font-size: 1em;
+        margin: 20px 0;
+    }
+    .button {
+        display: inline-block;
+        background-color: #e01e37;
         color: white;
-        padding: 10px 20px;
-        margin-top: 20px;
-        border: none;
-        border-radius: 5px;
         text-decoration: none;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s;
-        display: inline-block; /* Adjust display for positioning */
-        margin: 20px auto; /* Center the button */
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        margin: 10px 0;
+        font-size: 1em;
     }
-    .home-button:hover {
-        background-color: #0056b3;
+    .button:hover {
+        background-color: #c01c33;
     }
     @media (max-width: 768px) {
-        .text2, .home-button {
-            padding: 15px;
-            font-size: 14px; /* Slightly smaller font size for smaller screens */
+        .page-container {
+            flex-direction: column;
+            align-items: center;
+        }
+        .content-container h1 {
+            font-size: 1.5em;
+        }
+        .content-container p {
+            font-size: 0.9em;
+        }
+        .button {
+            padding: 8px 15px;
+            font-size: 0.9em;
         }
     }
 </style>
 
-<div>
-    <h1>{{ text1 }}</h1>
-    <p class="text2"> {{ text2 }} <strong>{{ max_orientation }}</strong></p>
-    <!-- The WhatsApp link/button will be included from base.html -->
+<div class="page-container">
+    <div class="logo-container">
+        <img src="{% static 'test_app/images/logo2.svg' %}" alt="GASYR Foundation School Logo" class="logo">
+    </div>
+    <div class="content-container">
+        <h1>{{ text1 }} <span class="result">{{ text2 }}</span></h1>
+        <p>{{ max_orientation }}</p>
+<a href="https://wa.me/phone_num?text=Hello%20world" class="button">Подробнее про результат</a>
+        <a href="{% url 'home' user_data_id %}" class="button">Пройти еще тесты</a>
+    </div>
 </div>
-    <a href="{% url 'home' user_data_id %}" class="home-button">{{ submit_text }}</a>
-<a href="https://wa.me/phone_num?text=Hello%20world" class="whatsapp-button">
-    <img src="{% static 'test_app/images/whatsapp-icon.svg' %}" alt="WhatsApp" />
-</a>
 {% endblock %}
+

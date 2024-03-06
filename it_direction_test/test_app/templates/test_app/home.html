@@ -1,57 +1,137 @@
-
-{% extends 'test_app/base.html' %}
-
-{% block title %}
-All Tests Overview
-{% endblock %}
+{%load static%}
 
 {% block content %}
 <style>
-        .test-window {
-            background-color: #ffffff;
-            color: #333;
-            margin: 10px;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: calc(100% - 80px);
-            max-width: 600px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-        .test-window:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-        }
-        a {
-            color: #007bff;
-            text-decoration: none;
-            font-size: 18px;
-            transition: color 0.3s ease;
-        }
-        a:hover {
-            color: #0056b3;
-        }
-        h2 {
-            margin-bottom: 15px;
-        }
-    </style>
-<h2>Все тесты</h2>
+        .base {
+    width: 1170px;
+    margin: 50px auto;
+    display: flex;
+    font-family: Arial;
+}
 
-<div class="test-window">
-    <a href="{% url 'survey' user_data_id %}">Тест на индивидуальную особенность</a>
+.banner {
+    display: inline;
+    background: rgba(186, 32, 37, 1);
+    padding: 200px 390px 50px 15px;
+    border-radius: 5px;
+}
+
+.banner h2 {
+    display: inline;
+    padding-right: 100px;
+    width: 377px;
+    color: rgba(255, 255, 255, 1);
+}
+
+.banner_span {
+}
+
+.banner_span button {
+    display: block;
+    background: rgba(255, 255, 255, 1);
+    color: rgba(186, 32, 37, 1);
+    padding: 15px 30px;
+    border: 1px solid rgba(216, 216, 216, 1);
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 50px;
+}
+.h2_div{
+    width: 377px;
+}
+.card{
+    margin-left: 15px;
+    box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.04);
+    display: flex;
+}
+.card_span{
+    margin: 15px ;
+    padding-top: 25px;
+}
+.card_text{
+    margin-top: 215px;
+}
+.card_text h2{
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 28.4px;
+}
+
+.card_text button{
+    padding: 20px 50px;
+    background: rgba(186, 32, 37, 1);
+    border: 1px solid rgba(216, 216, 216, 1);
+    border-radius: 5px;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19.6px;
+}
+.card_line{
+    margin-top: 50px;
+}
+    </style>
+<div class="base">
+    <div class="row">
+        <img src="{% static 'test_app/images/logo2.svg' %}" height="143px" class="col-1">
+        <span class="banner col-7">
+            <span class="banner_span">
+                <div class="h2_div">
+                    <h2>ТЕСТ НА ПРОФЕССИОНАЛЬНУЮ ОРИЕНТАЦИЮ</h2>
+                </div>
+                <a href="{% url 'test_view' user_data_id %}">
+                    <button>ПРОЙТИ ТЕСТИРОВАНИЕ</button>
+                </a>
+            </span>
+        </span>
+        <div class="card col-3">
+            <span class="card_span">
+                <img src="{% static 'test_app/img/account-circle-line%201.svg' %}">
+                <div class="card_text">
+                    <h2>Тест на индивидуальную особенность</h2>
+                    <a href="{% url 'survey' user_data_id %}">
+                        <button>пройти тест</button>
+                    </a>
+                </div>
+            </span>
+        </div>
+        <div class="card_line row">
+            <div class="card col-3">
+                <span class="card_span">
+                    <img src="{% static 'test_app/img/map-2-line%201.svg' %}">
+                    <div class="card_text">
+                        <h2>Тест на карту интересов</h2>
+                        <a href="{% url 'preference_test' user_data_id %}">
+                            <button>пройти тест</button>
+                        </a>
+                    </div>
+                </span>
+            </div>
+            <div class="card col-5">
+                <span class="card_span">
+                    <img src="{% static 'test_app/img/star-line%201.svg' %}">
+                    <div class="card_text" style="margin-top: 244px">
+                        <h2>Тест на диагностику ценностных ориентаций в карьере</h2>
+                        <a href="{% url 'career_anchor_test' user_data_id %}">
+                            <button>пройти тест</button>
+                        </a>
+                    </div>
+                </span>
+            </div>
+            <div class="card col-3">
+                <span class="card_span">
+                    <img src="{% static 'test_app/img/Vector.svg' %}">
+                    <div class="card_text">
+                        <h2>Тест на профессиональные предпочтения</h2>
+                        <a href="{% url 'holland_test' user_data_id %}">
+                            <button>пройти тест</button>
+                        </a>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="test-window">
-    <a href="{% url 'holland_test' user_data_id %}">Тест на профессиональные предпочтения</a>
-</div>
-<div class="test-window">
-    <a href="{% url 'preference_test' user_data_id %}">Тест на карту интересов</a>
-</div>
-<div class="test-window">
-    <a href="{% url 'career_anchor_test' user_data_id %}">Тест на диагностику ценностных ориентаций в карьере</a>
-</div>
-<div class="test-window">
-    <a href="{% url 'test_view' user_data_id %}">Тест на профессиональную ориентацию</a>
-</div>
+
 {% endblock %}
 

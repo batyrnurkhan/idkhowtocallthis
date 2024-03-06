@@ -1,73 +1,93 @@
-{% extends 'test_app/base.html' %}
 {% load static %}
-{% block title %}Результаты опроса{% endblock %}
 
 {% block content %}
 <style>
-    h2 {
-        background-color: transparent;
-        color: white; /* Ensures title is visible against the dynamic background */
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        text-align: center;
-        max-width: 600px;
-        margin-top: 20px; /* Adjust margin for spacing from the logo */
-    }
-    ul {
-        list-style-type: none;
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #fff;
+        color: #333;
+        margin: 0;
         padding: 0;
-        width: 100%;
-        max-width: 600px; /* Ensures consistency in element widths */
-        text-align: center; /* Center align the text for better aesthetics */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
     }
-    li {
-        background-color: #ffffff;
-        color: #333; /* Ensures text within is readable */
-        margin: 8px 0;
-        padding: 10px;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    .page-container {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 40px;
+        padding: 20px;
     }
-    .home-button {
-        background-color: #007bff;
+    .logo-container {
+        flex-shrink: 0;
+    }
+    .logo {
+        max-width: 120px;
+        margin-top: 20px;
+    }
+    .content-container {
+        max-width: 600px;
+    }
+    .content-container h1 {
+        font-size: 2em;
+        margin: 0;
+    }
+    .content-container h1 .result {
+        color: red;
+        font-size: 20px;
+    }
+    .content-container p {
+        color: #666;
+        font-size: 1em;
+        margin: 20px 0;
+    }
+    .button {
+        display: inline-block;
+        background-color: #e01e37;
         color: white;
+        text-decoration: none;
         padding: 10px 20px;
-        margin-top: 10px; /* Space above the button */
-        border: none;
         border-radius: 5px;
-        text-decoration: none; /* Remove underline from the link */
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s;
-        display: inline-block; /* Adjust display for positioning */
-        margin: 20px auto; /* Center the button */
+        transition: background-color 0.3s ease;
+        margin: 10px 0;
+        font-size: 1em;
     }
-    .home-button:hover {
-        background-color: #0056b3;
+    .button:hover {
+        background-color: #c01c33;
     }
     @media (max-width: 768px) {
-        ul, .home-button {
-            width: 90%;
-            max-width: none;
+        .page-container {
+            flex-direction: column;
+            align-items: center;
         }
-        .home-button, li {
-            font-size: 14px;
+        .content-container h1 {
+            font-size: 1.5em;
+        }
+        .content-container p {
+            font-size: 0.9em;
+        }
+        .button {
             padding: 8px 15px;
+            font-size: 0.9em;
         }
     }
 </style>
 
-<div>
+<div class="page-container">
+    <div class="logo-container">
+        <img src="{% static 'test_app/images/logo2.svg' %}" alt="GASYR Foundation School Logo" class="logo">
+    </div>
+<div class="content-container">
     <h2>{{ text }}</h2>
     <ul>
         {% for profession, level in categories.items %}
-            <li>{{ profession }}: {{ level }}</li>
+        <li><h1><span class="result">{{ profession }}</span></h1><span class="level">{{ level }}</span></li>
         {% endfor %}
     </ul>
+         <a href="https://wa.me/phone_num?text=Hello%20world" class="button">Подробнее про результат</a>
+        <a href="{% url 'home' user_data_id %}" class="button">Пройти еще тесты</a>
+    </div>
 </div>
-    <a href="{% url 'home' user_data_id %}" class="home-button">{{ submit_text }}</a>
-<a href="https://wa.me/phone_num?text=Hello%20world" class="whatsapp-button">
-    <img src="{% static 'test_app/images/whatsapp-icon.svg' %}" alt="WhatsApp" />
-</a>
 {% endblock %}
