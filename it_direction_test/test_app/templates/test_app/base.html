@@ -8,12 +8,7 @@
 <style>
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background:
-            radial-gradient(circle, transparent 20%, #ba1f25 30%, #ba1f25 80%, transparent 80%, transparent),
-            radial-gradient(circle, transparent 20%, #a3171e 30%, #a3171e 80%, transparent 80%, transparent) 50px 50px,
-            linear-gradient(#ba1f251a 2px, transparent 2px) 0 -1px,
-            linear-gradient(90deg, #ba1f251a 2px, transparent 2px) -1px 0;
-        background-color: #ba1f25;
+        background-color: #fff;
         background-size: 100px 100px, 100px 100px, 25px 25px, 25px 25px;
         padding: 20px;
         display: flex;
@@ -85,7 +80,7 @@
 <body>
 {% csrf_token %}
 <div class="logo">
-    <img src="{% static 'test_app/images/logo.png' %}" alt="Logo" style="width:100%;">
+    <img src="{% static 'test_app/images/logo2.svg' %}" alt="Logo" style="width:100%;">
 </div>
 
 

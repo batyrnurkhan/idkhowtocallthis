@@ -206,6 +206,7 @@ def calculate_holland_type(responses):
 def holland_test_view(request, user_data_id):
     user_data = get_object_or_404(UserData, id=user_data_id)
     questions = HollandQuestion.objects.all()
+    language = user_data.language
 
     if request.method == "POST":
         responses = {key.replace("response_", ""): value for key, value in request.POST.items() if
@@ -233,6 +234,10 @@ def holland_test_view(request, user_data_id):
 
     # This is the original code for GET requests to show the form
     submit_text = "ПОЛУЧИТЬ РЕЗУЛЬТАТ" if user_data.language != "KZ" else "Бастау"
+    if (language == "KZ"):
+        questions = HollandQuestion.objects.all()
+    else:
+        questions = HollandQuestion_kk.objects.all()
     return render(request, 'test_app/second_test/holland_test.html', {
         'questions': questions,
         'user_data_id': user_data_id,
