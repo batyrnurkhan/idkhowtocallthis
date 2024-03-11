@@ -13,7 +13,7 @@ def test(request):
 def index(request, user_data_id):
     user_data = get_object_or_404(UserData, id=user_data_id)
     # Retrieve submit_text from session or set based on user_data.language
-    submit_text = request.session.pop('submit_text', 'Отправить')  # Pop to clear after use
+    submit_text = request.session.pop('submit_text', 'ПОЛУЧИТЬ РЕЗУЛЬТАТ')  # Pop to clear after use
 
     if user_data.language == 'KZ':
         template_name = 'test_app/home_kz.html'
@@ -36,20 +36,19 @@ def collect_user_data_view(request):
             if user_data.language == 'KZ':
                 request.session['submit_text'] = 'Жіберу'  # Kazakh
             else:
-                request.session['submit_text'] = 'Отправить'  # Default to Russian
+                request.session['submit_text'] = 'ПОЛУЧИТЬ РЕЗУЛЬТАТ'  # Default to Russian
             return redirect('home', user_data_id=user_data.id)
     else:
         form = UserDataForm()
-    return render(request, 'test_app/userform.html', {'form': form})
+    return render(request, 'test_app/form.html', {'form': form})
 
 
 def test_view(request, user_data_id):
     user_data = get_object_or_404(UserData, id=user_data_id)
     language = user_data.language  # Retrieve the user's language preference from the UserData model
-    submit_text = "Бастау" if language == "KZ" else "Отправить"
+    submit_text = "Бастау" if language == "KZ" else "ПОЛУЧИТЬ РЕЗУЛЬТАТ"
 
     if request.method == 'POST':
-        print(request.POST)
         # Your existing logic for processing POST requests remains unchanged
         # Dictionary to hold the counts for each category
         profession_groups_count = {
@@ -95,45 +94,53 @@ def test_view(request, user_data_id):
         max_category = max(profession_groups_count, key=profession_groups_count.get)
         max_count = profession_groups_count[max_category]
 
-        print(profession_groups_count)
-        print(f"The category with the maximum count is {max_category} with {max_count} responses.")
         answer = "Предлагаемая вами профессиональная группа - это:"
         result = max_category
-
+        result2 = ""
         if language == "KZ":
             submit = "Бастау"
             answer = "Сіздің ұсынылған мамандық тобыңыз:"
             if result == 'Human-Nature':
-                result = "Адам Табиғаты: Мұнда адам жансыз және тірі табиғаттың әртүрлі құбылыстарымен айналысатын профессорлар кіреді, мысалы, биолог, географ, геолог, математик, физик, химик және жаратылыстану ғылымдары санатына жататын басқа мамандықтар."
-
+                result = "Мұнда адам жансыз және тірі табиғаттың әртүрлі құбылыстарымен айналысатын профессорлар кіреді, мысалы, биолог, географ, геолог, математик, физик, химик және жаратылыстану ғылымдары санатына жататын басқа мамандықтар.",
+                result2 = "Адам Табиғаты"
             elif result == 'Human-Technique':
+                result2 = "Адам Техникасы:"
                 result = "Адам Техникасы: Бұл топқа адам техникамен, оны қолданумен немесе дизайнмен айналысатын әр түрлі жұмыс түрлері кіреді, мысалы, инженер, оператор, машинист, механизатор, дәнекерлеуші және т. б. профессор."
             elif result == 'Human-Human':
-                result = "Адам-Адам: Мұнда адамдардың өзара әрекеттесуін көздейтін мамандықтың барлық түрлері ұсынылған, мысалы, саясат, дін, педагогика, психология, медицина, сауда, құқық."
+                result2 = "Адам-Адам"
+                result = "Мұнда адамдардың өзара әрекеттесуін көздейтін мамандықтың барлық түрлері ұсынылған, мысалы, саясат, дін, педагогика, психология, медицина, сауда, құқық."
             elif result == 'Human-Sign Systems':
-                result = "Адам Белгілері Жүйелері: Бұл топқа құру, оқыту және пайдалануға қатысты мамандықтар кіредіәр түрлі белгілі жүйелер, лингвистика түрлері, математикалық бағдарламалау тілдері, зерттеу нәтижелерін графикалық бейнелеу мүмкіндіктері және т. б."
+                result2 = "Адам Белгілері Жүйелері:"
+                result = "Бұл топқа құру, оқыту және пайдалануға қатысты мамандықтар кіредіәр түрлі белгілі жүйелер, лингвистика түрлері, математикалық бағдарламалау тілдері, зерттеу нәтижелерін графикалық бейнелеу мүмкіндіктері және т. б."
             elif result == 'Human-Artistic Image':
+                result2 = "Адам-Көркем Образ:"
                 result = "Адам-Көркем Образ: Бұл топ-көркем және шығармашылық жұмыстың әртүрлі түрлері, әдебиет, музыка, театр, бейнелеу өнері."
 
         elif language == "RU":
             submit = "отправить"
             if result == 'Human-Nature':
-                result = "Человек-природа: Здесь входят профессора, в которых человек владеет делом с разными явлениями неживой и живой природы, например биолог, географ, геолог, математик, физик, химик и другие профессии, относящиеся к разряду естественных наук."
+                result2 ="Человек-природа:"
+                result = "Здесь входят профессора, в которых человек владеет делом с разными явлениями неживой и живой природы, например биолог, географ, геолог, математик, физик, химик и другие профессии, относящиеся к разряду естественных наук."
             elif result == 'Human-Technique':
+                result2 = "Человек-техника:"
                 result = "Человек-техника"
             elif result == 'Human-Human: В эту группу входят различные виды трудовой деятельности, в которых человек владеет делом с техникой, ее использованием или конструкцией, например, профессор инженера, оператора, машиниста, механизатора, сварщика и т. п.':
-                result = "Человек-человек: Здесь представлены все виды профессии, предполагающие взаимодействие людей, например политика, религ, педагогика, психология, медицина, торговля, право. "
+                result2 = "Человек-человек:"
+                result = "Здесь представлены все виды профессии, предполагающие взаимодействие людей, например политика, религ, педагогика, психология, медицина, торговля, право. "
             elif result == 'Human-Sign Systems':
-                result = "Человек-знаковые системы В эту группу включены профессии, касающиеся создания, обучения и использования различных известных систем, видов лингвистики, языков математического программирования, возможностей графического представления результатов изучения и т. п."
+                result2 = "Человек-знаковые:"
+                result = "В эту группу включены профессии, касающиеся создания, обучения и использования различных известных систем, видов лингвистики, языков математического программирования, возможностей графического представления результатов изучения и т. п."
             elif result == 'Human-Artistic Image':
+                result2 = "Человек-художественный образ:",
                 result = "Человек-художественный образ:  Эта группа представляет собой различные виды художественно-творческого труда, тип литературы, музыки, театра, образное искусство."
 
-        print(result)
+        TestResult.objects.create(user_data_id=user_data_id, test_name="First test", result=result)
 
         # Select the appropriate template based on the user's language preference
         user_data = get_object_or_404(UserData, id=user_data_id)
         return render(request, "test_app/first_test/results.html", {
             'result': result,
+            'result2': result2,
             'answer': answer,
             'user_data_id': user_data_id,
             'submit_text': submit_text
@@ -169,13 +176,29 @@ def calculate_holland_type(responses):
         '29б': 'А', '30б': 'А', '34б': 'А', '41а': 'А', '42б': 'А'
     }
 
-    for question, answer in responses.items():
-        key = f"{question}{answer}"
-        if key in answer_key:
-            type_key = answer_key[key]
+    question_id_to_key_mapping = {
+        '169': '1', '170': '2', '171': '3', '172': '4а', '173': '5',
+        '174': '16', '175': '17', '176': '18', '177': '19', '178': '21',
+        '179': '31', '180': '32', '181': '33', '182': '34',
+        '183': '1', '184': '6', '185': '7', '186': '8', '187': '9',
+        '188': '16', '189': '20', '190': '22', '191': '23', '192': '24',
+        '193': '31', '194': '35', '195': '36', '196': '37',
+        '197': '2', '198': '6', '199': '10', '200': '11',
+        '201': '12', '202': '17', '203': '29', '204': '25',
+        '205': '26', '206': '27', '207': '36', '208': '38',
+        '209': '39', '210': '41',
+        # Continue mapping for other types as needed
+    }
+
+    for question_id, answer in responses.items():
+        # Apply the mapping
+        question_base = question_id_to_key_mapping.get(str(question_id), '')
+        question_key = f"{question_base}а" if answer == 'a' else f"{question_base}б"
+
+        if question_key in answer_key:
+            type_key = answer_key[question_key]
             type_counts[type_key] += 1
 
-    # Определение доминирующего типа личности
     dominant_type = max(type_counts, key=type_counts.get)
     return dominant_type, type_counts
 
@@ -183,35 +206,48 @@ def calculate_holland_type(responses):
 def holland_test_view(request, user_data_id):
     user_data = get_object_or_404(UserData, id=user_data_id)
     questions = HollandQuestion.objects.all()
+    language = user_data.language
 
     if request.method == "POST":
-        # Extract responses from POST data
         responses = {key.replace("response_", ""): value for key, value in request.POST.items() if
                      key.startswith("response_")}
         dominant_type, type_counts = calculate_holland_type(responses)
 
+        # Personality descriptions based on the dominant type
+        personality_descriptions = {
+            'Р': 'Активность, агрессивность, деловитость, настойчивость, рациональность, практическое мышление, развитые двигательные навыки, пространственное воображение, технические способности',
+            'И': 'Аналитический ум, независимость и оригинальность суждений, гармоничное развитие языковых и математических способностей, критичность, любознательность, склонность к фантазии, интенсивная внутренняя жизнь, низкая физическая активность',
+            'С': 'Умение общаться, гуманность, способность к сопереживанию, активность, зависимость от окружающих и общественного мнения, приспособление, решение проблем с опорой на эмоции и чувства, преобладание языковых способностей',
+            'К': 'Способности к переработке числовой информации, стереотипный подход к проблемам, консервативный характер, подчиняемость, зависимость, следование обычаям, конформность, исполнительность, преобладание математических способностей',
+            'П': 'Энергия, импульсивность, энтузиазм, предприимчивость, агрессивность, готовность к риску, оптимизм, уверенность в себе, преобладание языковых способностей, развитые организаторские способности',
+            'А': 'Воображение и интуиция, эмоционально сложный взгляд на жизнь, независимость, гибкость и оригинальность мышления, развитые двигательные способности и восприятие'
+        }
 
         return render(request, 'test_app/second_test/holland_results.html', {
             'result': dominant_type,
             'type_counts': type_counts,
-            'text2': 'Your dominant Holland code is',  # Customize your message
-            'submit_text': "Return Home",  # Customize as needed
-            'user_data_id': user_data_id,  # Pass this if needed for the home URL
+            'personality_description': personality_descriptions[dominant_type],
+            'text2': 'Ваш Доминантный код Холланда - ',
+            'submit_text': "Return Home",
+            'user_data_id': user_data_id,
         })
 
     # This is the original code for GET requests to show the form
-    submit_text = "Отправить" if user_data.language != "KZ" else "Бастау"
+    submit_text = "ПОЛУЧИТЬ РЕЗУЛЬТАТ" if user_data.language != "KZ" else "Бастау"
+    if (language == "KZ"):
+        questions = HollandQuestion.objects.all()
+    else:
+        questions = HollandQuestion_kk.objects.all()
     return render(request, 'test_app/second_test/holland_test.html', {
         'questions': questions,
         'user_data_id': user_data_id,
         'submit_text': submit_text,
     })
 
-
 def preference_test_view(request, user_data_id):
     user_data = get_object_or_404(UserData, id=user_data_id)
     language = user_data.language
-    submit_text = "Бастау" if language == "KZ" else "Отправить"
+    submit_text = "Бастау" if language == "KZ" else "ПОЛУЧИТЬ РЕЗУЛЬТАТ"
 
     if request.method == 'POST':
         scores = {
@@ -320,12 +356,11 @@ def preference_test_view(request, user_data_id):
 def survey_view(request, user_data_id):
     user_data = get_object_or_404(UserData, id=user_data_id)
     user_language = user_data.language
-    submit_text = "Бастау" if user_language == "KZ" else "Отправить"
+    submit_text = "Бастау" if user_language == "KZ" else "ПОЛУЧИТЬ РЕЗУЛЬТАТ"
 
 
     if request.method == 'POST':
         if(user_language == "KZ"):
-            print("kazakh")
             form = SurveyForm_kk(request.POST)
         else:
             form = SurveyForm(request.POST)
@@ -492,7 +527,6 @@ def survey_view(request, user_data_id):
                                                                                'submit_text': submit_text})
     else:
         if (user_language == "KZ"):
-            print("kazakh")
             form = SurveyForm_kk(request.POST)
         else:
             form = SurveyForm(request.POST)
@@ -510,7 +544,7 @@ def career_anchor_test_view(request, user_data_id):
     # Fetch the user's data based on the ID
     user_data = get_object_or_404(UserData, id=user_data_id)
     language = user_data.language
-    submit_text = "Бастау" if language == "KZ" else "Отправить"
+    submit_text = "Бастау" if language == "KZ" else "ПОЛУЧИТЬ РЕЗУЛЬТАТ"
 
     # Initialize the correct form based on the user's language
     if language == "KZ":

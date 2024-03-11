@@ -26,11 +26,12 @@ SECRET_KEY = 'django-insecure-t^onsg_0z@l1r2dmnz1!p%kflt)y=$gjsx_*531st6%26!i(gv
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://698a-62-32-92-157.ngrok-free.app']
 
-# Application definition
+CSRF_TRUSTED_ORIGINS = ['https://4dc8-62-32-92-157.ngrok-free.app']
+
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
