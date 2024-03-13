@@ -81,29 +81,40 @@
 </style>
 
 <div class="form-container">
-  <div class="form-header">
-    <h1>GASYR Foundation School</h1>
-    <div class="language-selection">
-      <div class="language-option active">Русский</div>
-      <div class="language-option">Қазақ тілі</div>
+    <!-- Form Header with Language Selection -->
+    <div class="form-header">
+        <h1>GASYR Foundation School</h1>
+        <div class="language-selection">
+            <label class="language-option">
+                <input type="radio" name="language" value="RU" checked> Русский
+            </label>
+            <label class="language-option">
+                <input type="radio" name="language" value="KZ"> Қазақ тілі
+            </label>
+        </div>
     </div>
-  </div>
-  <form method="post">
-    {% csrf_token %}
-    <div class="form-group">
-      <label for="id_first_name">Имя и Фамилия</label>
-      <input type="text" name="first_name" id="id_first_name" required>
-    </div>
-    <div class="form-group">
-      <label for="id_phone_number">Номер телефона</label>
-      <input type="tel" name="phone_number" id="id_phone_number" required>
-    </div>
-    <div class="form-group">
-      <label for="id_email">Электронная почта</label>
-      <input type="email" name="email" id="id_email" required>
-    </div>
-    <button type="submit">Начать тестирование</button>
-  </form>
+
+    <!-- Form Fields -->
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_first_name">Имя</label>
+            <input type="text" name="first_name" id="id_first_name" required>
+        </div>
+        <div class="form-group">
+            <label for="id_last_name">Фамилия</label>
+            <input type="text" name="last_name" id="id_last_name" required>
+        </div>
+        <div class="form-group">
+            <label for="id_phone_number">Номер телефона</label>
+            <input type="tel" name="phone_number" id="id_phone_number" required>
+        </div>
+        <div class="form-group">
+            <label for="id_email">Электронная почта</label>
+            <input type="email" name="email" id="id_email" required>
+        </div>
+        <button type="submit">Начать тестирование</button>
+    </form>
 </div>
 
 {% endblock %}

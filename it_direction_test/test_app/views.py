@@ -29,6 +29,7 @@ def index(request, user_data_id):
 
 def collect_user_data_view(request):
     if request.method == 'POST':
+        print(request.POST)
         form = UserDataForm(request.POST)
         if form.is_valid():
             user_data = form.save()
@@ -38,6 +39,8 @@ def collect_user_data_view(request):
             else:
                 request.session['submit_text'] = 'ПОЛУЧИТЬ РЕЗУЛЬТАТ'  # Default to Russian
             return redirect('home', user_data_id=user_data.id)
+        else:
+            print(form.errors)
     else:
         form = UserDataForm()
     return render(request, 'test_app/userform.html', {'form': form})
