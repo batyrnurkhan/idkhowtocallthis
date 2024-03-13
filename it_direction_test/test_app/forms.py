@@ -1,4 +1,5 @@
 from django import forms
+from django.shortcuts import render, redirect
 
 from .models import *
 
@@ -63,3 +64,4 @@ class UserDataForm(forms.ModelForm):
     class Meta:
         model = UserData
         fields = ['first_name', 'last_name', 'email', 'phone_number', 'language']
+
