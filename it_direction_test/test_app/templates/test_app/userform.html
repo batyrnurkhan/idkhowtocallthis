@@ -8,112 +8,93 @@
 
 <style>
     body, input, button, select, label {
-    font-family: 'Qanelas', Arial, sans-serif;
-}
+        font-family: 'Qanelas', Arial, sans-serif;
+    }
 
     body {
-    font-family: 'Qanelas', sans-serif;
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
-  .form-container {
-    background: white;
-    padding: 30px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-    border-radius: 5px;
-    max-width: 450px;
-    border: 1px solid #ddd;
-    position: relative;
-  }
-  .form-header {
-    text-align: left;
-    margin-bottom: 30px;
-  }
-  .form-header h1 {
-    font-size: 22px;
-    margin: 0;
-  }
-.form-header .language-selection {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-.language-selection {
-  display: flex;
-  justify-content: start;
-  gap: 10px;
-}
+        background: #F8F8F8;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .form-container {
+        width: 35%;
+        background: white;
+        padding: 30px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+        border-radius: 5px;
+        max-width: 580px;
+        min-width: 300px;
+        border: 1px solid #ddd;
+        position: relative;
+    }
+    .form-header {
+        text-align: left;
+        margin-bottom: 30px;
+    }
+    .form-header h1 {
+        font-size: 22px;
+        margin: 0;
+    }
+    .language-selection {
+        display: flex;
+        justify-content: start;
+        gap: 10px;
+    }
 
-.language-option {
-  padding: 10px 20px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-align: center;
-}
+    .language-option {
+        height: 30px;
+        width: 45%;
+        padding: 10px 10px;
+        margin: 0;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+    }
 
-.language-option input[type="radio"] {
-  display: none;
-}
+    .language-option:hover, .language-option.active {
+        background-color: #d9534f;
+        color: white;
+        border-color: #d9534f;
+    }
 
-.language-option span {
-  display: block;
-}
+    .language-option input[type="radio"] {
+        display: none;
+    }
 
-/* Unchecked state */
-.language-option:not(.active) {
-  background-color: #fff; /* White background */
-  color: #000; /* Black text */
-  border: 1px solid #ccc; /* Grey border */
-}
-
-/* Checked state - when the radio button is selected, style the adjacent span */
-.language-option input[type="radio"]:checked + span {
-  background-color: #d9534f; /* Red background */
-  color: white; /* White text */
-  border-color: #d9534f; /* Red border */
-}
-
-/* Hover state for unselected language option */
-.language-option:not(.active):hover {
-  border-color: #d9534f; /* Red border on hover */
-}
-  .form-group {
-    margin-bottom: 25px; /* Increased spacing between fields */
-  }
-  label {
-    display: block;
-    margin-bottom: 5px;
-    color: #333; /* Slightly darker text color */
-    font-weight: bold; /* Labels appear to be bold */
-  }
-  input[type=text], input[type=tel], input[type=email], select, button {
-    width: 100%;
-    padding: 15px; /* Increased padding for larger input fields */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; /* Ensures padding doesn't affect overall width */
-  }
-  button {
-    background: #d9534f; /* Red background for the button */
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px; /* Space above the button */
-    border-radius: 4px; /* Slight round corners */
-  }
-  button:hover {
-    background: #c9302c; /* Slightly darker red on hover */
-  }
-
-
+    .form-group {
+        margin-bottom: 25px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+        font-weight: bold;
+    }
+    input[type=text], input[type=tel], input[type=email], select, button {
+        width: 100%;
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    button {
+        background: #d9534f;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+        border-radius: 4px;
+    }
+    button:hover {
+        background: #c9302c;
+    }
 </style>
 
 <div class="form-container">
@@ -122,35 +103,36 @@
         <div class="form-header">
             <h1>GASYR Foundation School</h1>
             <div class="language-selection">
-  <label class="language-option">
-    <input type="radio" name="language" value="RU" id="language_ru" hidden checked>
-    <span>Русский</span>
-  </label>
-  <label class="language-option">
-    <input type="radio" name="language" value="KZ" id="language_kz" hidden>
-    <span>Қазақ тілі</span>
-  </label>
-</div>
+                <label class="language-option">
+                    <input type="radio" name="language" value="RU" id="language_ru" hidden checked>
+                    <span>🇷🇺 Русский</span>
+                </label>
+                <label class="language-option">
+                    <input type="radio" name="language" value="KZ" id="language_kz" hidden>
+                    <span>🇰🇿 Қазақ тілі</span>
+                </label>
+            </div>
         </div>
         <div class="form-group">
             <label for="id_first_name">Имя</label>
-            <input type="text" name="first_name" id="id_first_name" required>
+            <input type="text" placeholder="Гасыр" name="first_name" id="id_first_name" required>
         </div>
         <div class="form-group">
             <label for="id_last_name">Фамилия</label>
-            <input type="text" name="last_name" id="id_last_name" required>
+            <input type="text" placeholder="Якубович" name="last_name" id="id_last_name" required>
         </div>
         <div class="form-group">
             <label for="id_phone_number">Номер телефона</label>
-            <input type="tel" name="phone_number" id="id_phone_number" required>
-    </div>
-    <div class="form-group">
-      <label for="id_email">Электронная почта</label>
-      <input type="email" name="email" id="id_email" required>
-    </div>
-    <button type="submit">Начать тестирование</button>
-  </form>
+            <input type="tel" placeholder="+7 ( ___ ) ____ - __ - __" name="phone_number" id="id_phone_number" required>
+        </div>
+        <div class="form-group">
+            <label for="id_email">Электронная почта</label>
+            <input type="email" placeholder="gasyr@gmail.com" name="email" id="id_email" required>
+        </div>
+        <button type="submit">Начать тестирование</button>
+    </form>
 </div>
+
 <script>
 document.querySelectorAll('.language-option').forEach(option => {
   option.addEventListener('click', () => {
@@ -158,6 +140,6 @@ document.querySelectorAll('.language-option').forEach(option => {
     option.classList.add('active');
   });
 });
-
 </script>
+
 {% endblock %}
