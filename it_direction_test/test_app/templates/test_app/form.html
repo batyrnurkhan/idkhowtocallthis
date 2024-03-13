@@ -1,187 +1,33 @@
-/* button */
+okay i will send u model, forms, and views what should be in form container
+class UserData(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=15)
+    language = models.CharField(max_length=2, choices=(('RU', 'Russian'), ('KZ', 'Kazakh')))
 
-/* Auto layout */
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 28px 85px;
-gap: 10px;
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
-position: absolute;
-width: 456px;
-height: 81px;
-left: calc(50% - 456px/2);
-top: calc(50% - 81px/2 + 306.5px);
+class UserDataForm(forms.ModelForm):
+    class Meta:
+        model = UserData
+        fields = ['first_name', 'last_name', 'email', 'phone_number', 'language']
 
-background: #BA2025;
-border-radius: 5px;
-
-
-/* Начать тестирование */
-
-width: 286px;
-height: 25px;
-
-font-family: 'Averta CY';
-font-style: normal;
-font-weight: 600;
-font-size: 18px;
-line-height: 140%;
-/* or 25px */
-display: flex;
-align-items: center;
-text-align: center;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-
-color: #FFFFFF;
-
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 0;
-
-
-/* language */
-
-position: absolute;
-width: 466px;
-height: 102px;
-left: 727px;
-top: 305px;
-
-
-
-/* Выберите язык / Тілді тандаңыз */
-
-position: absolute;
-left: 37.86%;
-right: 47.81%;
-top: 28.24%;
-bottom: 69.44%;
-
-font-family: 'Averta CY';
-font-style: normal;
-font-weight: 400;
-font-size: 18px;
-line-height: 140%;
-/* or 25px */
-
-color: #222222;
-
-
-
-/* russian */
-
-position: absolute;
-width: 228px;
-height: 67px;
-left: 727px;
-top: 340px;
-
-
-
-/* Rectangle 3 */
-
-box-sizing: border-box;
-
-position: absolute;
-width: 228px;
-height: 67px;
-left: 727px;
-top: 340px;
-
-background: #BA2025;
-border: 1px solid #D8D8D8;
-border-radius: 5px;
-
-
-/* 🇷🇺 Русский */
-
-position: absolute;
-width: 93px;
-height: 25px;
-left: 795px;
-top: 361px;
-
-font-family: 'Averta CY';
-font-style: normal;
-font-weight: 400;
-font-size: 18px;
-line-height: 140%;
-/* or 25px */
-text-align: center;
-
-color: #FFFFFF;
-
-
-
-/* qazaq */
-
-position: absolute;
-width: 228px;
-height: 67px;
-left: 965px;
-top: 340px;
-
-
-
-/* Rectangle 4 */
-
-box-sizing: border-box;
-
-position: absolute;
-width: 228px;
-height: 67px;
-left: 965px;
-top: 340px;
-
-border: 1px solid #D8D8D8;
-border-radius: 5px;
-
-
-/* 🇰🇿 Қазақ тілі */
-
-position: absolute;
-width: 108px;
-height: 25px;
-left: 1025px;
-top: 361px;
-
-font-family: 'Averta CY';
-font-style: normal;
-font-weight: 400;
-font-size: 18px;
-line-height: 140%;
-/* or 25px */
-text-align: center;
-
-color: #000000;
-
-/* name */
-
-position: absolute;
-width: 466px;
-height: 103px;
-left: 727px;
-top: 427px;
-
-/* phone */
-
-position: absolute;
-width: 466px;
-height: 103px;
-left: 727px;
-top: 550px;
-
-/* mail */
-
-position: absolute;
-width: 466px;
-height: 103px;
-left: 727px;
-top: 673px;
-
-
+def collect_user_data_view(request):
+    if request.method == 'POST':
+        print(request.POST)
+        form = UserDataForm(request.POST)
+        if form.is_valid():
+            user_data = form.save()
+            # Determine the submit text based on the user's language selection
+            if user_data.language == 'KZ':
+                request.session['submit_text'] = 'Жіберу'  # Kazakh
+            else:
+                request.session['submit_text'] = 'ПОЛУЧИТЬ РЕЗУЛЬТАТ'  # Default to Russian
+            return redirect('home', user_data_id=user_data.id)
+        else:
+            print(form.errors)
+    else:
+        form = UserDataForm()
+    return render(request, 'test_app/userform.html', {'form': form})
