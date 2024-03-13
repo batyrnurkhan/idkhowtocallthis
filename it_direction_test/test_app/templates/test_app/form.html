@@ -1,0 +1,79 @@
+{% extends 'test_app/base.html' %}
+
+
+{% block title %}Form Styling Example{% endblock %}
+
+{% block content %}
+<style>
+    form {
+        width: 70%;
+        max-width: 600px;
+        margin: auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        color: #333;
+    }
+    div {
+        margin-bottom: 20px;
+    }
+    p {
+        color: #333;
+        font-size: 18px;
+    }
+    label {
+        margin-left: 5px;
+        font-size: 16px;
+        display: block;
+        color: #333;
+    }
+    input, select, textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        resize: vertical;
+    }
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+</style>
+<form method="post">
+    {% csrf_token %}
+    <div>
+        <p><label for="id_first_name">Имя/Аты</label><br>
+        <input type="text" name="first_name" id="id_first_name" required></p>
+
+        <p><label for="id_last_name">Фамилия/Тегi</label><br>
+        <input type="text" name="last_name" id="id_last_name" required></p>
+
+        <p><label for="id_email">Почта</label><br>
+        <input type="email" name="email" id="id_email" required></p>
+
+        <p><label for="id_phone_number">Номер</label><br>
+        <input type="text" name="phone_number" id="id_phone_number" required></p>
+
+        <p><label for="id_language">Язык/Тiл</label><br>
+        <select name="language" id="id_language" required>
+            <option value="RU">Russian</option>
+            <option value="KZ">Kazakh</option>
+        </select></p>
+
+        <button type="submit">Начать/Бастау</button>
+    </div>
+</form>
+{% endblock %}

@@ -1,48 +1,88 @@
-{% extends 'test_app/base.html' %}
 {% load static %}
-{% block title %}Test Results{% endblock %}
 
 {% block content %}
 <style>
-    h1 {
-        background-color: #ffffff;
-        color: #333; /* For better visibility against the background */
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        text-align: center;
-        max-width: 600px;
-        margin-top: 20px; /* Adjust margin for spacing from the logo */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #fff;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
     }
-    a, .home-button {
+    .page-container {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 40px;
+        padding: 20px;
+    }
+    .logo-container {
+        flex-shrink: 0;
+    }
+    .logo {
+        max-width: 120px;
+        margin-top: 20px;
+    }
+    .content-container {
+        max-width: 600px;
+    }
+    .content-container h1 {
+        font-size: 2em;
+        margin: 0;
+    }
+    .content-container h1 .result {
+        color: red;
+    }
+    .content-container p {
+        color: #666;
+        font-size: 1em;
+        margin: 20px 0;
+    }
+    .button {
         display: inline-block;
-        background-color: #007bff;
+        background-color: #e01e37;
         color: white;
         text-decoration: none;
         padding: 10px 20px;
         border-radius: 5px;
-        transition: background-color 0.3s;
-        margin-top: 20px; /* Added margin for spacing */
+        transition: background-color 0.3s ease;
+        margin: 10px 0;
+        font-size: 1em;
     }
-    a:hover, .home-button:hover {
-        background-color: #0056b3;
+    .button:hover {
+        background-color: #c01c33;
     }
     @media (max-width: 768px) {
-        h1 {
-            font-size: 18px; /* Smaller font size for title */
-            padding: 15px; /* Less padding for a compact look */
+        .page-container {
+            flex-direction: column;
+            align-items: center;
         }
-        .home-button {
-            padding: 8px 15px; /* Smaller padding for the button */
-            font-size: 14px; /* Smaller font size for button text */
+        .content-container h1 {
+            font-size: 1.5em;
+        }
+        .content-container p {
+            font-size: 0.9em;
+        }
+        .button {
+            padding: 8px 15px;
+            font-size: 0.9em;
         }
     }
 </style>
 
-<div style="text-align: center;">
-    <h1>
-        {{ answer }} {{ result }}
-    </h1>
-    <a href="{% url 'home' user_data_id %}" class="home-button">{{ submit_text }}</a>
+<div class="page-container">
+    <div class="logo-container">
+        <img src="{% static 'test_app/images/logo2.svg' %}" alt="GASYR Foundation School Logo" class="logo">
+    </div>
+    <div class="content-container">
+        <h1>{{ answer }} <span class="result">{{ result2 }}</span></h1>
+        <p>{{ result }}</p>
+<a href="https://wa.me/phone_num?text=Hello%20world" class="button">Подробнее про результат</a>
+        <a href="{% url 'home' user_data_id %}" class="button">Пройти еще тесты</a>
+    </div>
 </div>
 {% endblock %}

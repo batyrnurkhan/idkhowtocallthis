@@ -13,14 +13,14 @@
         width: auto;
         margin: 20px auto;
         color: #000;
-        font-size: 16px;
     }
     .question {
         margin-bottom: 25px;
         text-align: left;
-        background-color: #f8f8f8;
+        /*background-color: #f8f8f8;*/
         padding: 10px;
         border-radius: 4px;
+        font-size: 22px;
     }
     .question > div:first-of-type {
         margin-bottom: 10px;
@@ -32,11 +32,13 @@
         align-items: center;
         margin: 5px 0;
         cursor: pointer;
-        padding: 10px;
+        padding: 25px 18px;
         background-color: #fff;
-        border: 2px solid #ddd;
-        border-radius: 0; /* Square borders for choices */
+        border: 1px solid #D8D8D8;
+        border-radius: 5px; /* Square borders for choices */
         transition: background-color 0.3s;
+        font-size: 18px;
+        font-weight: 400;
     }
     .question input[type="radio"] {
         appearance: none;
@@ -45,39 +47,39 @@
         width: 20px;
         height: 20px;
         margin-right: 10px;
-        border: 2px solid red;
-        border-radius: 0; /* Square appearance */
+        border: 1px solid #D8D8D8;
+        border-radius: 10px; /* Square appearance */
         position: relative;
         outline: none;
         vertical-align: middle; /* Aligns the radio button vertically with the text */
         cursor: pointer;
     }
-    .question input[type="radio"]:checked {
-        background-color: red;
-        border-color: red;
-    }
+    /*.question input[type="radio"]:checked {*/
+    /*    background-color: red;*/
+    /*    border-color: red;*/
+    /*}*/
     /* Removing the inner white square for a fully blue square */
     .question input[type="radio"]:checked::after {
         content: '';
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: red;
-        border-radius: 0; /* Keep square shape */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70%;
+        height: 70%;
+        background-color: #BA2025;
+        border-radius: 10px; /* Keep square shape */
     }
     input[type="submit"] {
-        background-color: red;
+        background-color: #BA2025;
         color: white;
-        padding: 15px 20px;
+        padding: 28px 85px;
         border: none;
-        border-radius: 4px;
+        border-radius: 5px;
         cursor: pointer;
         font-size: 18px;
         display: block;
         width: 100%;
-        margin-top: 20px;
     }
     input[type="submit"]:hover {
         background-color: #0056b3;
@@ -108,7 +110,9 @@
                 {% endif %}
             </div>
         {% endfor %}
-        <button type="submit">{{ submit_text }}</button>
+        <div class="question">
+            <input type="submit" value="{{ submit_text }}" />
+        </div>
     </form>
 </div>
 {% endblock %}

@@ -1,79 +1,109 @@
 {% extends 'test_app/base.html' %}
 
-
-{% block title %}Form Styling Example{% endblock %}
+{% block title %}GASYR Foundation School Form{% endblock %}
 
 {% block content %}
+{% load static %}
+
 <style>
-    form {
-        width: 70%;
-        max-width: 600px;
-        margin: auto;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        color: #333;
-    }
-    div {
-        margin-bottom: 20px;
-    }
-    p {
-        color: #333;
-        font-size: 18px;
-    }
-    label {
-        margin-left: 5px;
-        font-size: 16px;
-        display: block;
-        color: #333;
-    }
-    input, select, textarea {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        margin-top: 6px;
-        margin-bottom: 16px;
-        resize: vertical;
-    }
-    button {
-        background-color: #4CAF50;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 18px;
-    }
-    button:hover {
-        background-color: #45a049;
-    }
+  body {
+    font-family: 'Arial', sans-serif;
+    background: #fff; /* Background color appears to be white */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .form-container {
+    background: white;
+    padding: 30px; /* Padding is increased to give more space inside the form */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16); /* The shadow is more prominent in the screenshot */
+    border-radius: 5px; /* Border radius is subtle */
+    width: 100%;
+    max-width: 450px; /* Adjusted for a slightly wider form */
+    border: 1px solid #ddd; /* There appears to be a border in the screenshot */
+  }
+  .form-header {
+    text-align: left; /* Align the header to the left */
+    margin-bottom: 30px; /* More space between header and form fields */
+  }
+  .form-header h1 {
+    font-size: 22px;
+    margin: 0;
+  }
+  .form-header .language-selection {
+    display: flex;
+    justify-content: space-between; /* Distribute language options evenly */
+    margin-top: 10px;
+  }
+  .language-option {
+    padding: 10px 20px; /* Similar padding to the screenshot */
+    border: 1px solid #ccc; /* Subtle border */
+    border-radius: 4px; /* Slight round corners */
+    cursor: pointer;
+    background-color: #f4f4f4; /* Off-white background */
+  }
+  .language-option.active {
+    background-color: #d9534f; /* Red background for the active language */
+    color: white; /* White text for the active language */
+    border-color: #d9534f; /* Matching border color */
+  }
+  .form-group {
+    margin-bottom: 25px; /* Increased spacing between fields */
+  }
+  label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333; /* Slightly darker text color */
+    font-weight: bold; /* Labels appear to be bold */
+  }
+  input[type=text], input[type=tel], input[type=email], select, button {
+    width: 100%;
+    padding: 15px; /* Increased padding for larger input fields */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensures padding doesn't affect overall width */
+  }
+  button {
+    background: #d9534f; /* Red background for the button */
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px; /* Space above the button */
+    border-radius: 4px; /* Slight round corners */
+  }
+  button:hover {
+    background: #c9302c; /* Slightly darker red on hover */
+  }
 </style>
-<form method="post">
-    {% csrf_token %}
-    <div>
-        <p><label for="id_first_name">Имя/Аты</label><br>
-        <input type="text" name="first_name" id="id_first_name" required></p>
 
-        <p><label for="id_last_name">Фамилия/Тегi</label><br>
-        <input type="text" name="last_name" id="id_last_name" required></p>
-
-        <p><label for="id_email">Почта</label><br>
-        <input type="email" name="email" id="id_email" required></p>
-
-        <p><label for="id_phone_number">Номер</label><br>
-        <input type="text" name="phone_number" id="id_phone_number" required></p>
-
-        <p><label for="id_language">Язык/Тiл</label><br>
-        <select name="language" id="id_language" required>
-            <option value="RU">Russian</option>
-            <option value="KZ">Kazakh</option>
-        </select></p>
-
-        <button type="submit">Начать/Бастау</button>
+<div class="form-container">
+  <div class="form-header">
+    <h1>GASYR Foundation School</h1>
+    <div class="language-selection">
+      <div class="language-option active">Русский</div>
+      <div class="language-option">Қазақ тілі</div>
     </div>
-</form>
+  </div>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="id_first_name">Имя и Фамилия</label>
+      <input type="text" name="first_name" id="id_first_name" required>
+    </div>
+    <div class="form-group">
+      <label for="id_phone_number">Номер телефона</label>
+      <input type="tel" name="phone_number" id="id_phone_number" required>
+    </div>
+    <div class="form-group">
+      <label for="id_email">Электронная почта</label>
+      <input type="email" name="email" id="id_email" required>
+    </div>
+    <button type="submit">Начать тестирование</button>
+  </form>
+</div>
+
 {% endblock %}
