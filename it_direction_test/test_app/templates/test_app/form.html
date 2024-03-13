@@ -1,79 +1,187 @@
-{% extends 'test_app/base.html' %}
+/* button */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 28px 85px;
+gap: 10px;
+
+position: absolute;
+width: 456px;
+height: 81px;
+left: calc(50% - 456px/2);
+top: calc(50% - 81px/2 + 306.5px);
+
+background: #BA2025;
+border-radius: 5px;
 
 
-{% block title %}Form Styling Example{% endblock %}
+/* Начать тестирование */
 
-{% block content %}
-<style>
-    form {
-        width: 70%;
-        max-width: 600px;
-        margin: auto;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        color: #333;
-    }
-    div {
-        margin-bottom: 20px;
-    }
-    p {
-        color: #333;
-        font-size: 18px;
-    }
-    label {
-        margin-left: 5px;
-        font-size: 16px;
-        display: block;
-        color: #333;
-    }
-    input, select, textarea {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        margin-top: 6px;
-        margin-bottom: 16px;
-        resize: vertical;
-    }
-    button {
-        background-color: #4CAF50;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 18px;
-    }
-    button:hover {
-        background-color: #45a049;
-    }
-</style>
-<form method="post">
-    {% csrf_token %}
-    <div>
-        <p><label for="id_first_name">Имя/Аты</label><br>
-        <input type="text" name="first_name" id="id_first_name" required></p>
+width: 286px;
+height: 25px;
 
-        <p><label for="id_last_name">Фамилия/Тегi</label><br>
-        <input type="text" name="last_name" id="id_last_name" required></p>
+font-family: 'Averta CY';
+font-style: normal;
+font-weight: 600;
+font-size: 18px;
+line-height: 140%;
+/* or 25px */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.2em;
+text-transform: uppercase;
 
-        <p><label for="id_email">Почта</label><br>
-        <input type="email" name="email" id="id_email" required></p>
+color: #FFFFFF;
 
-        <p><label for="id_phone_number">Номер</label><br>
-        <input type="text" name="phone_number" id="id_phone_number" required></p>
 
-        <p><label for="id_language">Язык/Тiл</label><br>
-        <select name="language" id="id_language" required>
-            <option value="RU">Russian</option>
-            <option value="KZ">Kazakh</option>
-        </select></p>
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
 
-        <button type="submit">Начать/Бастау</button>
-    </div>
-</form>
-{% endblock %}
+
+/* language */
+
+position: absolute;
+width: 466px;
+height: 102px;
+left: 727px;
+top: 305px;
+
+
+
+/* Выберите язык / Тілді тандаңыз */
+
+position: absolute;
+left: 37.86%;
+right: 47.81%;
+top: 28.24%;
+bottom: 69.44%;
+
+font-family: 'Averta CY';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 140%;
+/* or 25px */
+
+color: #222222;
+
+
+
+/* russian */
+
+position: absolute;
+width: 228px;
+height: 67px;
+left: 727px;
+top: 340px;
+
+
+
+/* Rectangle 3 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 228px;
+height: 67px;
+left: 727px;
+top: 340px;
+
+background: #BA2025;
+border: 1px solid #D8D8D8;
+border-radius: 5px;
+
+
+/* 🇷🇺 Русский */
+
+position: absolute;
+width: 93px;
+height: 25px;
+left: 795px;
+top: 361px;
+
+font-family: 'Averta CY';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 140%;
+/* or 25px */
+text-align: center;
+
+color: #FFFFFF;
+
+
+
+/* qazaq */
+
+position: absolute;
+width: 228px;
+height: 67px;
+left: 965px;
+top: 340px;
+
+
+
+/* Rectangle 4 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 228px;
+height: 67px;
+left: 965px;
+top: 340px;
+
+border: 1px solid #D8D8D8;
+border-radius: 5px;
+
+
+/* 🇰🇿 Қазақ тілі */
+
+position: absolute;
+width: 108px;
+height: 25px;
+left: 1025px;
+top: 361px;
+
+font-family: 'Averta CY';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 140%;
+/* or 25px */
+text-align: center;
+
+color: #000000;
+
+/* name */
+
+position: absolute;
+width: 466px;
+height: 103px;
+left: 727px;
+top: 427px;
+
+/* phone */
+
+position: absolute;
+width: 466px;
+height: 103px;
+left: 727px;
+top: 550px;
+
+/* mail */
+
+position: absolute;
+width: 466px;
+height: 103px;
+left: 727px;
+top: 673px;
+
+
