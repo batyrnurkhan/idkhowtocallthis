@@ -2,76 +2,87 @@
 
 {% block content %}
 <style>
-    body {
-        font-family: 'Arial', sans-serif;
-        background-color: #fff;
-        color: #333;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-    }
-    .page-container {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        gap: 40px;
-        padding: 20px;
-    }
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fff;
+    color: #333;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Aligns items to start of the cross axis, i.e., top of the page */
+    padding-top: 50px; /* Adds some padding at the top of the page */
+
+}
+
+.page-container {
+    width: 80%; /* You can adjust the width percentage as needed */
+    max-width: 1200px; /* Increase max-width for larger screens */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 80px; /* Increased gap between logo and content */
+    padding: 30px;
+}
     .logo-container {
         flex-shrink: 0;
+        width: 200px;
     }
     .logo {
-        max-width: 120px;
-        margin-top: 20px;
-    }
-    .content-container {
-        max-width: 600px;
-    }
+    width: 80%; /* Makes the logo fill the container */
+    height: auto; /* Keeps the aspect ratio of the logo */
+}
+.content-container {
+    flex-grow: 1; /* Allows the container to grow and fill the space */
+}
     .content-container h1 {
-        font-size: 2em;
-        margin: 0;
+        font-size: 2em; /* Increased font size for h1 */
+        margin: 0 0 20px 0; /* Adjusted margin */
     }
     .content-container h1 .result {
-        color: red;
-    }
+    display: inline-block;
+    font-size: 3em; /* Sets the size to an exact value */
+    color: #e01e37;
+}
     .content-container p {
         color: #666;
-        font-size: 1em;
-        margin: 20px 0;
+        font-size: 1.6em; /* Increased font size for paragraph */
+        margin: 30px 0; /* Increased margin */
+        font-weight: bold;
     }
     .button {
         display: inline-block;
         background-color: #e01e37;
         color: white;
         text-decoration: none;
-        padding: 10px 20px;
-        border-radius: 5px;
         transition: background-color 0.3s ease;
-        margin: 10px 0;
-        font-size: 1em;
+        padding: 20px 40px; /* Increased padding for a bigger button */
+        font-size: 1.5em; /* Increased font size */
+        border-radius: 10px; /* Larger border-radius for a rounder button */
+        margin: 30px 0;
     }
     .button:hover {
         background-color: #c01c33;
     }
     @media (max-width: 768px) {
-        .page-container {
-            flex-direction: column;
-            align-items: center;
-        }
-        .content-container h1 {
-            font-size: 1.5em;
-        }
-        .content-container p {
-            font-size: 0.9em;
-        }
-        .button {
-            padding: 8px 15px;
-            font-size: 0.9em;
-        }
+    body {
+        padding-top: 50px; /* Adjust padding-top for mobile */
     }
+    .page-container {
+        width: 95%; /* More width for mobile view */
+        flex-direction: column;
+        align-items: center;
+    }
+    .content-container h1 {
+        font-size: 3em; /* Adjust font size for mobile */
+    }
+    .content-container p {
+        font-size: 1.3em; /* Adjust font size for mobile */
+    }
+    .button {
+        padding: 15px 35px; /* Adjust padding for mobile */
+        font-size: 1.3em; /* Adjust font size for mobile */
+    }
+}
 </style>
 
 <div class="page-container">
@@ -81,7 +92,7 @@
     <div class="content-container">
         <h1>{{ answer }} <span class="result">{{ result2 }}</span></h1>
         <p>{{ result }}</p>
-<a href="https://wa.me/phone_num?text=Hello%20world" class="button">Подробнее про результат</a>
+        <a href="https://wa.me/phone_num?text=Hello%20world" class="button">Подробнее про результат</a>
         <a href="{% url 'home' user_data_id %}" class="button">Пройти еще тесты</a>
     </div>
 </div>

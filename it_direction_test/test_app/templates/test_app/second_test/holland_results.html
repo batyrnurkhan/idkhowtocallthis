@@ -17,42 +17,41 @@
         display: flex;
         flex-direction: row;
         align-items: flex-start;
-        gap: 40px;
-        padding: 20px;
+        gap: 60px; /* Increased gap */
+        padding: 30px; /* Increased padding */
     }
     .logo-container {
         flex-shrink: 0;
     }
     .logo {
-        max-width: 120px;
-        margin-top: 20px;
+        max-width: 180px; /* Increased logo size */
+        margin-top: 30px;
     }
     .content-container {
-        max-width: 600px;
+        max-width: 800px; /* Increased max width */
     }
     .content-container h1 {
-        font-size: 2em;
-        margin: 0;
+        font-size: 3em; /* Increased font size for h1 */
+        margin: 0 0 20px 0; /* Adjusted margin */
     }
     .content-container h1 .result {
         color: red;
-        font-size: 20px;
     }
     .content-container p {
         color: #666;
-        font-size: 1em;
-        margin: 20px 0;
+        font-size: 1.2em; /* Increased font size for paragraph */
+        margin: 30px 0; /* Increased margin */
     }
     .button {
         display: inline-block;
         background-color: #e01e37;
         color: white;
         text-decoration: none;
-        padding: 10px 20px;
-        border-radius: 5px;
+        padding: 15px 30px; /* Increased padding */
+        border-radius: 8px; /* Slightly larger border-radius */
         transition: background-color 0.3s ease;
-        margin: 10px 0;
-        font-size: 1em;
+        margin: 20px 0; /* Increased margin */
+        font-size: 1.2em; /* Increased font size */
     }
     .button:hover {
         background-color: #c01c33;
@@ -63,17 +62,18 @@
             align-items: center;
         }
         .content-container h1 {
-            font-size: 1.5em;
+            font-size: 2.5em; /* Adjusted font size for responsiveness */
         }
         .content-container p {
-            font-size: 0.9em;
+            font-size: 1.1em; /* Adjusted font size for responsiveness */
         }
         .button {
-            padding: 8px 15px;
-            font-size: 0.9em;
+            padding: 12px 25px; /* Adjusted padding for responsiveness */
+            font-size: 1.1em; /* Adjusted font size for responsiveness */
         }
     }
 </style>
+
 <div class="page-container">
     <img src="{% static 'test_app/images/logo2.svg' %}" alt="GASYR Foundation School Logo" class="logo">
     <div class="content-container">

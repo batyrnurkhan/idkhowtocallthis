@@ -2,29 +2,7 @@
 
 {% block content %}
 <style>
-@font-face {
-    font-family: 'Averta Demo PE';
-    src: url('{& static 'test_app/font/AvertaDemoPE-Regular.eot'}');
-    src: local('Averta Demo PE Regular'), local('AvertaDemoPE-Regular'),
-        url('static/test_app/font/AvertaDemoPE-Regular.eot?#iefix') format('embedded-opentype'),
-        url('static/test_app/font/AvertaDemoPE-Regular.woff2') format('woff2'),
-        url('static/test_app/font/AvertaDemoPE-Regular.woff') format('woff'),
-        url('static/test_app/font/AvertaDemoPE-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
 
-@font-face {
-    font-family: 'Averta Demo PE';
-    src: url('static/test_app/font/AvertaDemoPE-ExtraboldItalic.eot');
-    src: local('Averta Demo PE Extrabold Italic'), local('AvertaDemoPE-ExtraboldItalic'),
-        url('static/test_app/font/AvertaDemoPE-ExtraboldItalic.eot?#iefix') format('embedded-opentype'),
-        url('static/test_app/font/AvertaDemoPE-ExtraboldItalic.woff2') format('woff2'),
-        url('static/test_app/font/AvertaDemoPE-ExtraboldItalic.woff') format('woff'),
-        url('static/test_app/font/AvertaDemoPE-ExtraboldItalic.ttf') format('truetype');
-    font-weight: 800;
-    font-style: italic;
-}
 
 body {
     font-family: 'Averta Demo PE', Arial, sans-serif;
@@ -40,7 +18,6 @@ body {
 .content {
     width: 100%;
     max-width: 1200px;
-    margin: auto;
     padding: 16px;
 }
 .top-row {
@@ -48,7 +25,8 @@ body {
     align-items: center;
     width: 100%;
     max-width: 1200px;
-    margin: auto;
+    margin-bottom: 25px;
+    margin-top: 70px;
 }
 .logo-container {
     flex: 1;
@@ -68,29 +46,59 @@ body {
     text-align: right;
 }
 .banner {
-    position: relative; /* This is needed to position the pseudo-element correctly */
+    position: relative;
     background-color: #BA2025;
     color: white;
     padding: 50px;
     border-radius: 8px;
-    height: 400px;
+    height: 409px;
+    width: 678px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: flex-end; /* Aligns the content to the bottom */
+    margin-right: 20px;
+    font-size: 32px;
+    text-align: left; /* Ensures text starts from the left */
 }
-
 .banner::after {
     content: '';
     position: absolute;
     top: 0;
     right: 0;
-    background-image: url('{% static 'test_app/images/purple.png' %}'); /* Replace with your image path */
+    background-image: url('{% static 'test_app/images/purple.png' %}');
     background-repeat: no-repeat;
-    background-size: cover; /* Or any other value depending on your design */
-    width: 100%; /* Adjust if needed */
-    height: 100%; /* Adjust if needed */
-    opacity: 0.6; /* Adjust for desired transparency */
-    pointer-events: none; /* This prevents the pseudo-element from blocking your button interactions */
+    background-size: 50%;
+    background-position: top right;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.test-card2 {
+    background: #FFFFFF;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 40px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 429px;
+    width: 285px;
+    text-align: left;
+}
+
+.test-card2-image-container {
+    align-self: flex-start;
+    width: 100%;
+    text-align: left;
+    margin-bottom: auto;
+}
+
+.test-card2:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
 .test-card {
@@ -98,7 +106,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     padding: 30px;
-    text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
     display: flex;
     flex-direction: column;
@@ -110,45 +117,22 @@ body {
 }
 
 .test-card img {
-    align-self: flex-start; /* Aligns the image to the top-left */
-    width: auto; /* Adjust the width as needed */
-    height: auto; /* Adjust the height as needed */
-    margin-right: auto; /* Ensures the image stays to the left */
+    align-self: flex-start;
+    width: auto;
+    height: auto;
+    margin-right: auto;
 }
 
-.test-card2 {
-    background: #FFFFFF;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    padding: 30px;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* This spreads out the children */
-    height: 400px;
-}
-
-.test-card2-image-container {
-    align-self: flex-start; /* Aligns the container to the top */
-    width: 100%; /* Ensures the container spans the full width */
-    text-align: left; /* Aligns the image to the left */
-    margin-bottom: auto; /* Pushes everything else to the bottom */
-}
-
-.test-card2:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-}
 .button {
     display: inline-block;
     background: #BA2025;
     color: white;
     padding: 0.75rem 1.5rem;
-    border-radius: 4px;
+    border-radius: 10px;
     text-transform: uppercase;
     text-decoration: none;
     font-weight: bold;
+    font-size: 24px;
 }
 .button:hover {
     background-color: #a51d22;
@@ -162,7 +146,7 @@ body {
     text-transform: uppercase;
     text-decoration: none;
     font-weight: bold;
-    border: 2px solid #BA2025; /* Optional border */
+    border: 2px solid #BA2025;
 }
 
 .button2:hover {
@@ -181,9 +165,7 @@ body {
     gap: 20px;
 }
 
-/* Responsive adjustments */
 @media (max-width: 1200px) {
-    /* Adjust grid to have 2 columns instead of 3 */
     .grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -197,43 +179,38 @@ body {
     }
 
     .logo-container, .text-containers, .banner, .test-card, .test-card2 {
-        width: 100%; /* Full width */
-        max-width: none; /* Overrides any max-width */
+        width: 100%;
+        max-width: none;
     }
 
     .banner, .test-card, .test-card2 {
-        padding: 30px; /* Adjust padding for smaller screens */
-        height: auto; /* Height auto for smaller screens */
+        padding: 30px;
+        height: auto;
     }
 
-    /* Adjust grid to have 1 column on small screens */
     .grid {
         grid-template-columns: 1fr;
     }
 
-    /* Additional adjustments for smaller screens */
     .test-card img, .test-card2-image-container {
-        align-self: center; /* Center images on smaller screens */
+        align-self: center;
         margin-right: 0; /* Remove any right margin */
     }
 
-    /* Adjust button size for smaller screens if necessary */
     .button, .button2 {
-        padding: 0.5rem 1rem; /* Smaller padding */
-        font-size: 14px; /* Smaller font size */
+        padding: 0.5rem 1rem;
+        font-size: 14px;
     }
 }
 
-/* If you have very large screens, you can add this */
 @media (min-width: 1440px) {
     .content, .top-row {
         width: 90%;
-        max-width: 1400px; /* Or any other max-width that suits your design */
+        max-width: 1400px;
     }
 
-    /* For very large screens, you might want to increase the size of text and other elements */
     .banner h1, .test-card h2, .test-card2-text-container h2 {
-        font-size: 36px; /* Larger font size for larger screens */
+        font-size: 36px;
     }
 }
 

@@ -26,23 +26,28 @@ def index(request, user_data_id):
     })
 
 
-
 def collect_user_data_view(request):
+    print("Request method:", request.method)  # Debug: Check the request method
     if request.method == 'POST':
-        print(request.POST)
+        print("POST data:", request.POST)  # Debug: Print all POST data received
         form = UserDataForm(request.POST)
         if form.is_valid():
             user_data = form.save()
+            print("Form is valid, language selected:", user_data.language)  # Debug: Print selected language
+
             # Determine the submit text based on the user's language selection
             if user_data.language == 'KZ':
                 request.session['submit_text'] = 'Жіберу'  # Kazakh
             else:
                 request.session['submit_text'] = 'ПОЛУЧИТЬ РЕЗУЛЬТАТ'  # Default to Russian
+
+            print("Submit text set to:", request.session['submit_text'])  # Debug: Print submit text
             return redirect('home', user_data_id=user_data.id)
         else:
-            print(form.errors)
+            print("Form errors:", form.errors)  # Debug: Print form validation errors
     else:
         form = UserDataForm()
+
     return render(request, 'test_app/userform.html', {'form': form})
 
 
@@ -102,12 +107,12 @@ def test_view(request, user_data_id):
         result2 = ""
         if language == "KZ":
             submit = "Бастау"
-            answer = "Сіздің ұсынылған мамандық тобыңыз:"
+            answer = "Сіздің ұсынылған мамандық тобыңыз"
             if result == 'Human-Nature':
                 result = "Мұнда адам жансыз және тірі табиғаттың әртүрлі құбылыстарымен айналысатын профессорлар кіреді, мысалы, биолог, географ, геолог, математик, физик, химик және жаратылыстану ғылымдары санатына жататын басқа мамандықтар.",
                 result2 = "Адам Табиғаты"
             elif result == 'Human-Technique':
-                result2 = "Адам Техникасы:"
+                result2 = "Адам Техникасы"
                 result = "Адам Техникасы: Бұл топқа адам техникамен, оны қолданумен немесе дизайнмен айналысатын әр түрлі жұмыс түрлері кіреді, мысалы, инженер, оператор, машинист, механизатор, дәнекерлеуші және т. б. профессор."
             elif result == 'Human-Human':
                 result2 = "Адам-Адам"
@@ -116,22 +121,22 @@ def test_view(request, user_data_id):
                 result2 = "Адам Белгілері Жүйелері:"
                 result = "Бұл топқа құру, оқыту және пайдалануға қатысты мамандықтар кіредіәр түрлі белгілі жүйелер, лингвистика түрлері, математикалық бағдарламалау тілдері, зерттеу нәтижелерін графикалық бейнелеу мүмкіндіктері және т. б."
             elif result == 'Human-Artistic Image':
-                result2 = "Адам-Көркем Образ:"
+                result2 = "Адам-Көркем Образ"
                 result = "Адам-Көркем Образ: Бұл топ-көркем және шығармашылық жұмыстың әртүрлі түрлері, әдебиет, музыка, театр, бейнелеу өнері."
 
         elif language == "RU":
             submit = "отправить"
             if result == 'Human-Nature':
-                result2 ="Человек-природа:"
+                result2 ="Человек-природа"
                 result = "Здесь входят профессора, в которых человек владеет делом с разными явлениями неживой и живой природы, например биолог, географ, геолог, математик, физик, химик и другие профессии, относящиеся к разряду естественных наук."
             elif result == 'Human-Technique':
-                result2 = "Человек-техника:"
+                result2 = "Человек-техника"
                 result = "Человек-техника"
             elif result == 'Human-Human: В эту группу входят различные виды трудовой деятельности, в которых человек владеет делом с техникой, ее использованием или конструкцией, например, профессор инженера, оператора, машиниста, механизатора, сварщика и т. п.':
-                result2 = "Человек-человек:"
+                result2 = "Человек-человек"
                 result = "Здесь представлены все виды профессии, предполагающие взаимодействие людей, например политика, религ, педагогика, психология, медицина, торговля, право. "
             elif result == 'Human-Sign Systems':
-                result2 = "Человек-знаковые:"
+                result2 = "Человек-знаковые"
                 result = "В эту группу включены профессии, касающиеся создания, обучения и использования различных известных систем, видов лингвистики, языков математического программирования, возможностей графического представления результатов изучения и т. п."
             elif result == 'Human-Artistic Image':
                 result2 = "Человек-художественный образ:",
