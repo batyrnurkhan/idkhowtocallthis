@@ -28,19 +28,17 @@ def index(request, user_data_id):
 
 def collect_user_data_view(request):
     if request.method == 'POST':
+        print("POST data:", request.POST)  # Debug: Print all POST data received
         form = UserDataForm(request.POST)
         if form.is_valid():
             user_data = form.save()
-            print("Form is valid, language selected:", user_data.language)  # Debug: Print selected language
-
             # Determine the submit text based on the user's language selection
             if user_data.language == 'KZ':
                 request.session['submit_text'] = 'Жіберу'  # Kazakh
             else:
                 request.session['submit_text'] = 'ПОЛУЧИТЬ РЕЗУЛЬТАТ'  # Default to Russian
-
             return redirect('home', user_data_id=user_data.id)
-        else:
+
     else:
         form = UserDataForm()
 
