@@ -27,9 +27,7 @@ def index(request, user_data_id):
 
 
 def collect_user_data_view(request):
-    print("Request method:", request.method)  # Debug: Check the request method
     if request.method == 'POST':
-        print("POST data:", request.POST)  # Debug: Print all POST data received
         form = UserDataForm(request.POST)
         if form.is_valid():
             user_data = form.save()
@@ -41,10 +39,8 @@ def collect_user_data_view(request):
             else:
                 request.session['submit_text'] = 'ПОЛУЧИТЬ РЕЗУЛЬТАТ'  # Default to Russian
 
-            print("Submit text set to:", request.session['submit_text'])  # Debug: Print submit text
             return redirect('home', user_data_id=user_data.id)
         else:
-            print("Form errors:", form.errors)  # Debug: Print form validation errors
     else:
         form = UserDataForm()
 
