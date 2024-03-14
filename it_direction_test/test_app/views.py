@@ -28,7 +28,6 @@ def index(request, user_data_id):
 
 def collect_user_data_view(request):
     if request.method == 'POST':
-        print("POST data:", request.POST)  # Debug: Print all POST data received
         form = UserDataForm(request.POST)
         if form.is_valid():
             user_data = form.save()
