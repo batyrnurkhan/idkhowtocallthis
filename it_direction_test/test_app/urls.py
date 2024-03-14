@@ -10,3 +10,7 @@ urlpatterns = [
     path('', collect_user_data_view, name='collect_user_data_view'),
     path('home/<int:user_data_id>/', index,name = "home")
 ]
+
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+urlpatterns += staticfiles_urlpatterns()
