@@ -61,15 +61,18 @@ body {
     flex-direction: column;
     justify-content: flex-end; /* Aligns the content to the bottom */
     margin-right: 20px;
-    font-size: 32px;
     text-align: left; /* Ensures text starts from the left */
+    overflow: hidden;
+    z-index: 1;
 }
+
+
 .banner::after {
     content: '';
     position: absolute;
     top: 0;
     right: 0;
-    background-image: url('{% static 'test_app/images/purple.png' %}');
+    background-image: url('{% static 'test_app/images/purple2.png' %}');
     background-repeat: no-repeat;
     background-size: 50%;
     background-position: top right;
@@ -77,6 +80,8 @@ body {
     height: 100%;
     opacity: 0.6;
     pointer-events: none;
+    transform: scale(3) translate(38%, -14%) rotate(-0.45turn);
+    z-index: -1;
 }
 
 .test-card2 {
@@ -131,12 +136,15 @@ body {
     display: inline-block;
     background: #BA2025;
     color: white;
-    padding: 0.75rem 1.5rem;
+    padding: 24px 1.5rem;
     border-radius: 10px;
     text-transform: uppercase;
     text-decoration: none;
-    font-weight: bold;
-    font-size: 24px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 25px;
+    letter-spacing: 0.2em;
+    text-align: center;
 }
 .button:hover {
     background-color: #a51d22;
@@ -145,12 +153,16 @@ body {
 .button2 {
     background: white;
     color: #BA2025;
-    padding: 0.75rem 1.5rem;
+    padding: 24px 1.5rem;
     border-radius: 4px;
     text-transform: uppercase;
     text-decoration: none;
-    font-weight: bold;
     border: 2px solid #BA2025;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 25px;
+    letter-spacing: 0.2em;
+    text-align: center;
 }
 
 .button2:hover {
@@ -181,8 +193,9 @@ body {
         max-width: 1400px;
     }
 
-    .banner h1, .test-card h2, .test-card2-text-container h2 {
+    .banner .title, .test-card h2, .test-card2-text-container h2 {
         font-size: 36px;
+        overflow-wrap: break-word;
     }
 }
 
@@ -206,21 +219,29 @@ body {
     .banner {
         width: 90%; /* Set width to a percentage of the screen */
         margin: 0 auto 30px; /* Center banner and add bottom margin */
-        height: auto; /* Make height responsive */
+        /*height: auto; !* Make height responsive *!*/
         padding: 20px; /* Adjust padding */
-        position: static; /* Reset position */
+        /*position: static; !* Reset position *!*/
+        justify-content: flex-start;
+        height: 504px;
+    }
+
+    .banner h1 {
+        font-size: 22px;
     }
 
     .banner::after {
         background-size: contain; /* Make the background image fully contained within the element */
         opacity: 1; /* Adjust opacity if necessary */
+        transform: scale(3) translate(3%, 32%);
     }
 
     .test-card, .test-card2 {
-        width: 90%; /* Set width to a percentage of the screen */
+        /*width: 90%; !* Set width to a percentage of the screen *!*/
+        width: -webkit-fill-available;
         margin: 0 auto 30px; /* Center cards and add bottom margin */
         height: auto; /* Make height responsive */
-        align-items: center; /* Align items for flex children */
+        /*align-items: center; !* Align items for flex children *!*/
     }
 
     .test-card2:hover, .test-card:hover {
@@ -229,7 +250,7 @@ body {
 
     .button, .button2 {
         width: auto; /* Allow buttons to be width of content */
-        margin: 10px auto; /* Center buttons */
+        /*margin: 10px auto; !* Center buttons *!*/
     }
 
     /* Ensure that all grid items stack on top of each other */
@@ -268,7 +289,7 @@ body {
     <div class="content">
         <div class="grid">
             <div class="test-card">
-                <img src="{% static 'test_app/img/map-2line1.svg' %}" alt="Interest Map Test">
+                <img src="{% static 'test_app/img/map2line1.svg' %}" alt="Interest Map Test">
                 <h2>Қызығушылық картасы тесті</h2>
                 <a href="{% url 'preference_test' user_data_id %}" class="button">тест тапсыру</a>
             </div>
