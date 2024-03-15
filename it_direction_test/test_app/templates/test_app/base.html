@@ -6,7 +6,15 @@
 <title>{% block title %}{% endblock %}</title>
 {% load static %}
 <style>
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('{% static "test_app/font/AvertaCyrillicBold.otf" %}') format('opentype');
+}
 
+@font-face {
+    font-family: 'MyCustomFont2';
+    src: url('{% static "test_app/font/AvertaCyrillicRegular.otf" %}') format('opentype');
+}
 </style>
 </head>
 <body>

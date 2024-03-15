@@ -5,6 +5,8 @@
 {% block content %}
 <style>
     form {
+            font-family: 'MyCustomFont2';
+
     background: white;
         padding: 30px;
         border-radius: 8px;
@@ -96,23 +98,65 @@
             font-size: 16px; /* Adjusting button padding and font size for consistency */
         }
     }
+
+    .flex-container {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start; /* Align items to the start to reduce space */
+    }
+
+    .logo-container {
+        display: flex;
+        align-items: center; /* Center the logo vertically */
+        justify-content: center; /* Center the logo horizontally */
+        margin-right: 20px; /* Adjust this as needed to reduce space */
+    }
+
+    .form-container {
+        margin-left: 300px;
+        display: flex;
+        align-items: center; /* Center the form vertically */
+        justify-content: center; /* Center the form horizontally */
+    }
+
+    @media (max-width: 768px) {
+        .flex-container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-container {
+        display: none;
+    }
+
+    .form-container{
+        margin-left: 0;
+    }
+    }
 </style>
 
-<div>
-    <form method="post">
-        {% csrf_token %}
-        {% for field in form %}
+
+<div class="flex-container">
+    <div class="logo-container">
+        <img src="{% static 'test_app/images/logo2.svg' %}" alt="GASYR Foundation School Logo" class="logo" style="width: 190px; height: 190px;">
+    </div>
+    <div class="form-container">
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="question">
+                    <p><strong>{{ field.label }}</strong></p>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <p class="help">{{ field.help_text }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
             <div class="question">
-                <p><strong>{{ field.label }}</strong></p>
-                {{ field }}
-                {% if field.help_text %}
-                    <p class="help">{{ field.help_text }}</p>
-                {% endif %}
+                <input type="submit" value="{{ submit_text }}" />
             </div>
-        {% endfor %}
-        <div class="question">
-            <input type="submit" value="{{ submit_text }}" />
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
+
 {% endblock %}

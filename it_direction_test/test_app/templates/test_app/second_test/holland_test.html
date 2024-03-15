@@ -1,127 +1,166 @@
 {% extends 'test_app/base.html' %}
+
 {% load static %}
-{% block title %}Holland Test{% endblock %}
 
 {% block content %}
-<style>
-    form {
+
+    <style>
+@font-face {
+    font-family: 'MyCustomFont2';
+    src: url('{% static "test_app/font/AvertaCyrillicRegular.otf" %}') format('opentype');
+}
+
+.flex-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+.form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 300px;
+}
+
+form {
+    font-family: 'MyCustomFont2';
     background: white;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        max-width: 600px;
-        width: auto;
-        margin: 20px auto;
-        color: #000;
-    }
-    .question {
-        margin-bottom: 25px;
-        text-align: left;
-        /*background-color: #f8f8f8;*/
-        padding: 10px;
-        border-radius: 4px;
-        font-size: 22px;
-    }
-    .question > div:first-of-type {
-        margin-bottom: 10px;
-        color: #555;
-        font-weight: bold;
-    }
-    .question label {
-        display: flex;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 20px;
+    color: #000;
+}
+
+.question {
+    margin-bottom: 25px;
+    text-align: left;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 22px;
+}
+
+.question > div:first-of-type {
+    margin-bottom: 10px;
+    color: #555;
+    font-weight: bold;
+}
+
+.question label {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+    cursor: pointer;
+    padding: 25px 18px;
+    background-color: #fff;
+    border: 1px solid #D8D8D8;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.question input[type="radio"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 1px solid #D8D8D8;
+    border-radius: 10px;
+    position: relative;
+    outline: none;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.question input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 70%;
+    background-color: #BA2025;
+    border-radius: 10px;
+}
+
+input[type="submit"] {
+    background-color: #BA2025;
+    color: white;
+    padding: 28px 85px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .flex-container {
+        flex-direction: column;
         align-items: center;
-        margin: 5px 0;
-        cursor: pointer;
-        padding: 25px 18px;
-        background-color: #fff;
-        border: 1px solid #D8D8D8;
-        border-radius: 5px; /* Square borders for choices */
-        transition: background-color 0.3s;
-        font-size: 18px;
-        font-weight: 400;
     }
-    .question input[type="radio"] {
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none; /* Firefox */
-        width: 20px;
-        height: 20px;
-        margin-right: 10px;
-        border: 1px solid #D8D8D8;
-        border-radius: 10px; /* Square appearance */
-        position: relative;
-        outline: none;
-        vertical-align: middle; /* Aligns the radio button vertically with the text */
-        cursor: pointer;
+
+    .logo-container {
+        display: none;
     }
-    /*.question input[type="radio"]:checked {*/
-    /*    background-color: red;*/
-    /*    border-color: red;*/
-    /*}*/
-    /* Removing the inner white square for a fully blue square */
-    .question input[type="radio"]:checked::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 70%;
-        height: 70%;
-        background-color: #BA2025;
-        border-radius: 10px; /* Keep square shape */
+
+    .form-container{
+        margin-left: 0;
     }
-    input[type="submit"] {
-        background-color: #BA2025;
-        color: white;
-        padding: 28px 85px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 18px;
-        display: block;
-        width: 100%;
+}
+
+@media (max-width: 480px) {
+    .question p {
+        font-size: 14px;
     }
-    input[type="submit"]:hover {
-        background-color: #0056b3;
+    button {
+        font-size: 14px;
     }
-    @media (max-width: 768px) {
-        .question p {
-            font-size: 16px; /* Adjusted font size for smaller screens */
-        }
-        button {
-            font-size: 16px;
-        }
+    form {
+        padding: 15px;
     }
-    @media (max-width: 480px) {
-        .question p {
-            font-size: 14px;
-        }
-        button {
-            font-size: 14px;
-        }
-        form {
-            padding: 15px;
-        }
-    }
+}
 </style>
 
-<div>
-    <form method="post">
-    {% csrf_token %}
-    {% for question in questions %}
-        <div class="question">
-            <p><strong>{{ forloop.counter }}. {{ question.text }}</strong></p>
-            <label>
-                <input type="radio" name="response_{{ question.id }}" value="a"> {{ question.choice_a }}
-            </label>
-            <label>
-                <input type="radio" name="response_{{ question.id }}" value="b"> {{ question.choice_b }}
-            </label>
-        </div>
-    {% endfor %}
-        <div class="question">
-            <input type="submit" value="{{ submit_text }}">
-        </div>
-</form>
+
+<div class="flex-container">
+    <div class="logo-container">
+        <img src="{% static 'test_app/images/logo2.svg' %}" alt="GASYR Foundation School Logo" class="logo" style="width: 190px; height: 190px;">
+    </div>
+    <div class="form-container">
+        <form method="post">
+            {% csrf_token %}
+            {% for question in questions %}
+            <div class="question">
+                <p><strong>{{ forloop.counter }}. {{ question.text }}</strong></p>
+                <label>
+                    <input type="radio" name="response_{{ question.id }}" value="a"> {{ question.choice_a }}
+                </label>
+                <label>
+                    <input type="radio" name="response_{{ question.id }}" value="b"> {{ question.choice_b }}
+                </label>
+            </div>
+            {% endfor %}
+            <div class="question">
+                <input type="submit" value="{{ submit_text }}">
+            </div>
+        </form>
+    </div>
 </div>
+
+
 {% endblock %}

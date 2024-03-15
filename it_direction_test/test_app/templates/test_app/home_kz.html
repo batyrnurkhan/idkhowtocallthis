@@ -8,14 +8,19 @@
 <style>
 
 
+@font-face {
+    font-family: 'MyCustomFont2';
+    src: url('{% static "test_app/font/AvertaCyrillicBold.otf" %}') format('opentype');
+}
+
 body {
-    font-family: 'Averta Demo PE', Arial, sans-serif;
+    font-family: 'MyCustomFont', sans-serif;
 }
 .base {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: Arial;
+    font-family: 'MyCustomFont';
     background: white;
     min-height: 100vh;
 }
