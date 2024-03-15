@@ -1,3 +1,5 @@
+{% extends 'test_app/base.html' %}
+
 {% load static %}
 
 {% block content %}
@@ -63,27 +65,36 @@ body {
     .button:hover {
         background-color: #c01c33;
     }
-    @media (max-width: 768px) {
+@media (max-width: 768px) {
     body {
-        padding-top: 50px; /* Adjust padding-top for mobile */
+        padding-top: 20px;
     }
     .page-container {
-        width: 95%; /* More width for mobile view */
+        width: 95%;
         flex-direction: column;
         align-items: center;
     }
+    .logo-container {
+        display: none; /* Hide the logo on mobile screens */
+    }
+    .content-container {
+        text-align: center; /* Centers inline-block elements like buttons */
+    }
     .content-container h1 {
-        font-size: 3em; /* Adjust font size for mobile */
+        font-size: 2em;
     }
     .content-container p {
-        font-size: 1.3em; /* Adjust font size for mobile */
+        font-size: 1.3em;
     }
     .button {
-        padding: 15px 35px; /* Adjust padding for mobile */
-        font-size: 1.3em; /* Adjust font size for mobile */
+        width: 200px;
+        height: 50px;
+        padding: 15px 35px;
+        font-size: 1.3em;
     }
 }
 </style>
+{% csrf_token %}
 
 <div class="page-container">
     <div class="logo-container">

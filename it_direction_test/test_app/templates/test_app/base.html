@@ -4,47 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{% block title %}{% endblock %}</title>
-{% load static %} <!-- Load the static files -->
+{% load static %}
 <style>
-    body {
-        font-family: 'Averta Demo PE', Arial, sans-serif;
-        background-color: #fff;
-        background-size: 100px 100px, 100px 100px, 25px 25px, 25px 25px;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 0;
-        color: white;
-        position: relative;
-    }
-    .logo {
-        width: 20%; /* Adjusted width for consistency */
-        height: auto;
-        z-index: 1000;
-    }
-    @media (max-width: 768px) {
-        .logo {
-            width: 40%;
-            position: fixed; /* Keeps the logo fixed at the top */
-            top: 10px; /* Adjust based on the header height or desired space */
-            left: 50%; /* Center the logo */
-            transform: translateX(-50%); /* Adjust for exact center alignment */
-            z-index: 1050; /* Ensure logo is above all other content */
-        }
-        body {
-            padding-top: 120px; /* Adjust based on the logo size to ensure content starts below the logo */
-        }
-    }
 
 </style>
 </head>
 <body>
 {% csrf_token %}
-<div class="logo">
-    <img src="{% static 'test_app/images/logo2.svg' %}" alt="Logo" style="width:100%;">
-</div>
-
 
 {% block content %}
 {% endblock %}

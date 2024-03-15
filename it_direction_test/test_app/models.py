@@ -3,7 +3,7 @@ class UserData(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
-    phone_number = models.CharField(max_length=15)
+    phone_number = models.CharField(max_length=100)
     language = models.CharField(max_length=2, choices=(('RU', 'Russian'), ('KZ', 'Kazakh')))
 
     def __str__(self):

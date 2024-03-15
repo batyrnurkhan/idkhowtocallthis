@@ -1,79 +1,99 @@
+{% extends 'test_app/base.html' %}
+
 {% load static %}
 
 {% block content %}
 <style>
-    body {
-        font-family: 'Arial', sans-serif;
-        background-color: #fff;
-        color: #333;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-    }
-    .page-container {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        gap: 60px; /* Increased gap */
-        padding: 30px; /* Increased padding */
-    }
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fff;
+    color: #333;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Aligns items to start of the cross axis, i.e., top of the page */
+    padding-top: 50px; /* Adds some padding at the top of the page */
+
+}
+
+.page-container {
+    width: 80%; /* You can adjust the width percentage as needed */
+    max-width: 1200px; /* Increase max-width for larger screens */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 80px; /* Increased gap between logo and content */
+    padding: 30px;
+}
     .logo-container {
         flex-shrink: 0;
+        width: 200px;
     }
     .logo {
-        max-width: 180px; /* Increased logo size */
-        margin-top: 30px;
-    }
-    .content-container {
-        max-width: 800px; /* Increased max width */
-    }
+    width: 80%; /* Makes the logo fill the container */
+    height: auto; /* Keeps the aspect ratio of the logo */
+}
+.content-container {
+    flex-grow: 1; /* Allows the container to grow and fill the space */
+}
     .content-container h1 {
-        font-size: 3em; /* Increased font size for h1 */
+        font-size: 2em; /* Increased font size for h1 */
         margin: 0 0 20px 0; /* Adjusted margin */
     }
     .content-container h1 .result {
-        color: red;
-    }
+    display: inline-block;
+    font-size: 3em; /* Sets the size to an exact value */
+    color: #e01e37;
+}
     .content-container p {
         color: #666;
-        font-size: 1.2em; /* Increased font size for paragraph */
+        font-size: 1.6em; /* Increased font size for paragraph */
         margin: 30px 0; /* Increased margin */
+        font-weight: bold;
     }
     .button {
         display: inline-block;
         background-color: #e01e37;
         color: white;
         text-decoration: none;
-        padding: 15px 30px; /* Increased padding */
-        border-radius: 8px; /* Slightly larger border-radius */
         transition: background-color 0.3s ease;
-        margin: 20px 0; /* Increased margin */
-        font-size: 1.2em; /* Increased font size */
+        padding: 20px 40px; /* Increased padding for a bigger button */
+        font-size: 1.5em; /* Increased font size */
+        border-radius: 10px; /* Larger border-radius for a rounder button */
+        margin: 30px 0;
     }
     .button:hover {
         background-color: #c01c33;
     }
-    @media (max-width: 768px) {
-        .page-container {
-            flex-direction: column;
-            align-items: center;
-        }
-        .content-container h1 {
-            font-size: 2.5em; /* Adjusted font size for responsiveness */
-        }
-        .content-container p {
-            font-size: 1.1em; /* Adjusted font size for responsiveness */
-        }
-        .button {
-            padding: 12px 25px; /* Adjusted padding for responsiveness */
-            font-size: 1.1em; /* Adjusted font size for responsiveness */
-        }
+@media (max-width: 768px) {
+    body {
+        padding-top: 20px;
     }
+    .page-container {
+        width: 95%;
+        flex-direction: column;
+        align-items: center;
+    }
+    .logo-container {
+        display: none; /* Hide the logo on mobile screens */
+    }
+    .content-container {
+        text-align: center; /* Centers inline-block elements like buttons */
+    }
+    .content-container h1 {
+        font-size: 2em;
+    }
+    .content-container p {
+        font-size: 1.3em;
+    }
+    .button {
+        width: 200px;
+        height: 50px;
+        padding: 15px 35px;
+        font-size: 1.3em;
+    }
+}
 </style>
-
 <div class="page-container">
     <div class="logo-container">
         <img src="{% static 'test_app/images/logo2.svg' %}" alt="GASYR Foundation School Logo" class="logo">
