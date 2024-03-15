@@ -11,18 +11,18 @@ body {
     margin: 0;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Aligns items to start of the cross axis, i.e., top of the page */
-    padding-top: 50px; /* Adds some padding at the top of the page */
+    align-items: flex-start;
+    padding-top: 50px;
 
 }
 
 .page-container {
-    width: 80%; /* You can adjust the width percentage as needed */
-    max-width: 1200px; /* Increase max-width for larger screens */
+    width: 80%;
+    max-width: 1200px;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    gap: 80px; /* Increased gap between logo and content */
+    gap: 80px;
     padding: 30px;
 }
     .logo-container {
@@ -30,41 +30,50 @@ body {
         width: 200px;
     }
     .logo {
-    width: 80%; /* Makes the logo fill the container */
-    height: auto; /* Keeps the aspect ratio of the logo */
+    width: 80%;
+    height: auto;
 }
 .content-container {
-    flex-grow: 1; /* Allows the container to grow and fill the space */
+    flex-grow: 1;
 }
     .content-container h1 {
-        font-size: 2em; /* Increased font size for h1 */
-        margin: 0 0 20px 0; /* Adjusted margin */
+        font-size: 2em;
+        margin: 0 0 20px 0;
     }
     .content-container h1 .result {
     display: inline-block;
-    font-size: 3em; /* Sets the size to an exact value */
+    font-size: 3em;
     color: #e01e37;
 }
     .content-container p {
         color: #666;
-        font-size: 1.6em; /* Increased font size for paragraph */
-        margin: 30px 0; /* Increased margin */
+        font-size: 1.6em;
+        margin: 30px 0;
         font-weight: bold;
     }
-    .button {
-        display: inline-block;
-        background-color: #e01e37;
-        color: white;
-        text-decoration: none;
-        transition: background-color 0.3s ease;
-        padding: 20px 40px; /* Increased padding for a bigger button */
-        font-size: 1.5em; /* Increased font size */
-        border-radius: 10px; /* Larger border-radius for a rounder button */
-        margin: 30px 0;
-    }
-    .button:hover {
-        background-color: #c01c33;
-    }
+    .button, .button:visited { /* This will apply the style to both the normal and visited state */
+    display: inline-block;
+    background-color: #e01e37; /* Red color */
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px;
+    font-size: 1em;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    font-weight: bold;
+}
+    .button:hover, .button:active {
+    background-color: #c01c33; /* Darker red on hover and click */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.button:active {
+    transform: translateY(2px); /* Gives the effect of the button being pressed down */
+}
 @media (max-width: 768px) {
     body {
         padding-top: 20px;
@@ -104,7 +113,7 @@ body {
         <h1>{{ answer }} <span class="result">{{ result2 }}</span></h1>
         <p>{{ result }}</p>
         <a href="https://wa.me/phone_num?text=Hello%20world" class="button">Подробнее про результат</a>
-        <a href="{% url 'home' user_data_id %}" class="button">Пройти еще тесты</a>
+    <a href="{% url 'home' user_data_id %}" class="button">Пройти еще тесты</a>
     </div>
 </div>
 {% endblock %}
