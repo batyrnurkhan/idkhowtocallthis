@@ -122,8 +122,7 @@
         <form method="post">
             {% csrf_token %}
             <div class="form-header">
-                                <label for="id_first_name">Выберите язык / Тілді тандаңыз</label>
-
+                <label for="id_first_name1">Выберите язык / Тілді тандаңыз</label>
                 <div class="language-selection">
                     <label class="language-option active">
                         <input type="radio" name="language" value="RU" id="language_ru" hidden checked>
@@ -193,6 +192,47 @@ document.getElementById('id_phone_number').addEventListener('input', function (e
     option.addEventListener('click', () => {
       document.querySelectorAll('.language-option').forEach(opt => opt.classList.remove('active'));
       option.classList.add('active');
+    });
+  });
+
+
+
+  const translations = {
+    'RU': {
+      'selectLanguage': 'Выберите язык',
+      'firstName': 'Имя',
+      'lastName': 'Фамилия',
+      'phoneNumber': 'Номер телефона',
+      'email': 'Электронная почта',
+      'startTest': 'Начать тестирование',
+    },
+    'KZ': {
+      'selectLanguage': 'Тілді тандаңыз',
+      'firstName': 'Аты',
+      'lastName': 'Тегі',
+      'phoneNumber': 'Ұялы телефон',
+      'email': 'Электрондық почта',
+      'startTest': 'Бастау',
+    }
+  };
+
+  // Функция для обновления текста на странице
+  function updateText(language) {
+    document.querySelector('label[for="id_first_name"]').textContent = translations[language]['selectLanguage'];
+    document.querySelector('label[for="id_first_name"]').textContent = translations[language]['firstName'];
+    document.querySelector('label[for="id_last_name"]').textContent = translations[language]['lastName'];
+    document.querySelector('label[for="id_phone_number"]').textContent = translations[language]['phoneNumber'];
+    document.querySelector('label[for="id_email"]').textContent = translations[language]['email'];
+    document.querySelector('button[type="submit"]').textContent = translations[language]['startTest'];
+  }
+
+  // Обработчики событий для выбора языка
+  document.querySelectorAll('.language-option').forEach(option => {
+    option.addEventListener('click', function() {
+      const selectedLanguage = this.querySelector('input[type="radio"]').value;
+      document.querySelectorAll('.language-option').forEach(opt => opt.classList.remove('active'));
+      this.classList.add('active');
+      updateText(selectedLanguage); // Обновляем текст на странице
     });
   });
 </script>
