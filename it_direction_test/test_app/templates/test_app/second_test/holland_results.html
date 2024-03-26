@@ -4,106 +4,123 @@
 
 {% block content %}
 <style>
-body {
-                    font-family: 'MyCustomFont2';
-    background: white;
-    color: #333;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Aligns items to start of the cross axis, i.e., top of the page */
-    padding-top: 50px; /* Adds some padding at the top of the page */
+    body {
+        font-family: 'MyCustomFont2';
+        background: white;
+        color: #333;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start; /* Aligns items to start of the cross axis, i.e., top of the page */
+        padding-top: 50px; /* Adds some padding at the top of the page */
+    }
 
-}
+    .page-container {
+        width: 80%; /* You can adjust the width percentage as needed */
+        max-width: 1200px; /* Increase max-width for larger screens */
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 80px; /* Increased gap between logo and content */
+        padding: 30px;
+    }
 
-.page-container {
-    width: 80%; /* You can adjust the width percentage as needed */
-    max-width: 1200px; /* Increase max-width for larger screens */
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 80px; /* Increased gap between logo and content */
-    padding: 30px;
-}
     .logo-container {
         flex-shrink: 0;
         width: 200px;
     }
+
     .logo {
-    width: 80%; /* Makes the logo fill the container */
-    height: auto; /* Keeps the aspect ratio of the logo */
-}
-.content-container {
-    flex-grow: 1; /* Allows the container to grow and fill the space */
-}
+        width: 80%; /* Makes the logo fill the container */
+        height: auto; /* Keeps the aspect ratio of the logo */
+    }
+
+    .content-container {
+        flex-grow: 1; /* Allows the container to grow and fill the space */
+    }
+
     .content-container h1 {
         font-size: 2em; /* Increased font size for h1 */
         margin: 0 0 20px 0; /* Adjusted margin */
     }
-    .content-container h1 .result {
-                            font-family: 'MyCustomFont';
 
-    display: inline-block;
-    font-size: 0.9em; /* Sets the size to an exact value */
-    color: #e01e37;
-}
+    .content-container h1 .result {
+        font-family: 'MyCustomFont';
+        display: inline-block;
+        font-size: 0.9em; /* Sets the size to an exact value */
+        color: #e01e37;
+    }
+
     .content-container p {
         color: #666;
         font-size: 1.6em; /* Increased font size for paragraph */
         margin: 30px 0; /* Increased margin */
         font-weight: bold;
     }
-        .button, .button:visited { /* This will apply the style to both the normal and visited state */
+
+    .button, .button:visited {
     display: inline-block;
-    background-color: #e01e37; /* Red color */
-    color: white;
+    background-color: white; /* Start with a white background */
+    color: #e01e37; /* Dark text for contrast */
     text-decoration: none;
     padding: 15px 30px;
     font-size: 1em;
-    border: none;
+    border: 2px solid #e01e37; /* Border to hint at the hover color */
     outline: none;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     font-weight: bold;
 }
-    .button:hover, .button:active {
-    background-color: #c01c33; /* Darker red on hover and click */
+
+.button:hover, .button:focus, .button:active {
+    background-color: #e01e37; /* Red background on hover, focus, or active */
+    color: white; /* White text for contrast */
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .button:active {
-    transform: translateY(2px); /* Gives the effect of the button being pressed down */
+    transform: translateY(2px); /* Effect of the button being pressed down */
 }
-@media (max-width: 768px) {
-    body {
-        padding-top: 20px;
+
+    @media (max-width: 768px) {
+        body {
+            padding-top: 20px;
+            margin-left: 15px;
+        }
+
+        .page-container {
+            width: 95%;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: none; /* Hide the logo on mobile screens */
+        }
+
+        .content-container {
+            text-align: center; /* Centers inline-block elements like buttons */
+        }
+
+        .content-container h1 {
+            font-size: 2em;
+        }
+
+        .content-container p {
+            font-size: 1.3em;
+        }
+
+        .button {
+            display: block; /* This will make sure the button takes up the full width it can */
+            margin: 15px auto; /* This centers the button horizontally */
+            width: 80%; /* Or any specific width you prefer */
+            max-width: 250px; /* Ensures button does not grow beyond this width */
+            padding: 15px;
+            font-size: 1.3em;
+        }
     }
-    .page-container {
-        width: 95%;
-        flex-direction: column;
-        align-items: center;
-    }
-    .logo-container {
-        display: none; /* Hide the logo on mobile screens */
-    }
-    .content-container {
-        text-align: center; /* Centers inline-block elements like buttons */
-    }
-    .content-container h1 {
-        font-size: 2em;
-    }
-    .content-container p {
-        font-size: 1.3em;
-    }
-    .button {
-        width: 200px;
-        height: 50px;
-        padding: 15px 35px;
-        font-size: 1.3em;
-    }
-}
 </style>
 <div class="page-container">
 <div class="logo-container">
@@ -115,6 +132,8 @@ body {
             <a href="https://wa.me/phone_num?text=Hello%20world" class="button">Подробнее про результат</a>
             <a href="{% url 'home' user_data_id %}" class="button">Пройти еще тесты</a>
         </div>
+            <a href="https://gasyr.com" class="button" style="display: flex; margin-top: 10px; width: 250px">Ознакомиться с GASYR FOUNDATION</a>
+
     </div>
 </div>
 {% endblock %}

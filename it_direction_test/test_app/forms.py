@@ -63,5 +63,5 @@ class CareerAnchorForm_kk(forms.Form):
 class UserDataForm(forms.ModelForm):
     class Meta:
         model = UserData
-        fields = ['first_name', 'last_name', 'email', 'phone_number', 'language']
-
+        fields = ['first_name', 'last_name', 'email', 'phone_number', 'language',
+                  'grade', 'parent_first_name', 'parent_last_name', 'parent_phone_number']

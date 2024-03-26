@@ -53,32 +53,35 @@ body {
         margin: 30px 0; /* Increased margin */
         font-weight: bold;
     }
-        .button, .button:visited { /* This will apply the style to both the normal and visited state */
+.button, .button:visited {
     display: inline-block;
-    background-color: #e01e37; /* Red color */
-    color: white;
+    background-color: white; /* Start with a white background */
+    color: #e01e37; /* Dark text for contrast */
     text-decoration: none;
     padding: 15px 30px;
     font-size: 1em;
-    border: none;
+    border: 2px solid #e01e37; /* Border to hint at the hover color */
     outline: none;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     font-weight: bold;
 }
-    .button:hover, .button:active {
-    background-color: #c01c33; /* Darker red on hover and click */
+
+.button:hover, .button:focus, .button:active {
+    background-color: #e01e37; /* Red background on hover, focus, or active */
+    color: white; /* White text for contrast */
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .button:active {
-    transform: translateY(2px); /* Gives the effect of the button being pressed down */
+    transform: translateY(2px); /* Effect of the button being pressed down */
 }
 @media (max-width: 768px) {
     body {
         padding-top: 20px;
+        margin-left: 15px;
     }
     .page-container {
         width: 95%;
@@ -98,9 +101,11 @@ body {
         font-size: 1.3em;
     }
     .button {
-        width: 200px;
-        height: 50px;
-        padding: 15px 35px;
+        display: block; /* This will make sure the button takes up the full width it can */
+        margin: 15px auto; /* This centers the button horizontally */
+        width: 80%; /* Or any specific width you prefer */
+        max-width: 250px; /* Ensures button does not grow beyond this width */
+        padding: 15px;
         font-size: 1.3em;
     }
 }
@@ -119,6 +124,8 @@ body {
     </ul>
          <a href="https://wa.me/phone_num?text=Hello%20world" class="button">Подробнее про результат</a>
         <a href="{% url 'home' user_data_id %}" class="button">Пройти еще тесты</a>
+        <a href="https://gasyr.com" class="button" style="display: flex; margin-top: 10px; width: 250px">Ознакомиться с GASYR FOUNDATION</a>
+
     </div>
 </div>
 {% endblock %}

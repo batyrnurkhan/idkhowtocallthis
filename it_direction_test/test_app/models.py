@@ -1,4 +1,5 @@
 from django.db import models
+
 class UserData(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -6,9 +7,17 @@ class UserData(models.Model):
     phone_number = models.CharField(max_length=100)
     language = models.CharField(max_length=2, choices=(('RU', 'Russian'), ('KZ', 'Kazakh')))
 
+    # New fields
+    GRADE_CHOICES = [(i, str(i)) for i in range(1, 13)]  # Generates pairs of grade numbers for choices
+    grade = models.IntegerField(choices=GRADE_CHOICES, null=True, blank=True, default=None)
+    parent_first_name = models.CharField(max_length=100, default='', blank=True)
+    parent_last_name = models.CharField(max_length=100, default='', blank=True)
+    parent_phone_number = models.CharField(max_length=100, default='', blank=True)
+
     class Meta:
         verbose_name = 'Данные клиента'
         verbose_name_plural = 'Данные клиентов'
+
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -108,6 +117,9 @@ class MapQuestion_kk(models.Model):
     class Meta:
         verbose_name = 'Төртінші тесттің сұрағы және жауабтары'
         verbose_name_plural = 'Төртінші тесттің сұрақтары және жауабтары'
+
+    def __str__(self):
+        return self.text
 
 class CareerAnchorQuestion(models.Model):
     text = models.CharField(max_length=1024)

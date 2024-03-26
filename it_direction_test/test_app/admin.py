@@ -1,50 +1,9 @@
 from django.contrib import admin
 from .models import *
-@admin.register(Question)
-class QuestionAdmin(admin.ModelAdmin):
-    list_display = ['text', 'choice_a', 'choice_b']
-
-@admin.register(Question_kk)
-class Question_kkAdmin(admin.ModelAdmin):
-    list_display = ['text', 'choice_a', 'choice_b']
-
-@admin.register(HollandQuestion)
-class HollandQuestionAdmin(admin.ModelAdmin):
-    list_display = ['text', 'choice_a', 'choice_b']
-
-@admin.register(HollandQuestion_kk)
-class HollandQuestion_kkAdmin(admin.ModelAdmin):
-    list_display = ['text', 'choice_a', 'choice_b']
-
-@admin.register(PreferenceQuestion)
-class PreferenceQuestionAdmin(admin.ModelAdmin):
-    list_display = ['text', 'option_a', 'option_b']
-
-@admin.register(PreferenceQuestion_kk)
-class PreferenceQuestion_kkAdmin(admin.ModelAdmin):
-    list_display = ['text', 'option_a', 'option_b']
-
-@admin.register(MapQuestion)
-class MapQuestionAdmin(admin.ModelAdmin):
-    list_display = ['text', 'language']
-@admin.register(MapQuestion_kk)
-class MapQuestionAdmin_kk(admin.ModelAdmin):
-    list_display = ['text']
-
-@admin.register(CareerAnchorQuestion)
-class CareerAnchorQuestionAdmin(admin.ModelAdmin):
-    list_display = ['text']
-
-@admin.register(CareerAnchorQuestion_kk)
-class CareerAnchorQuestion_kkAdmin(admin.ModelAdmin):
-    list_display = ['text']
-
-
-from django.contrib import admin
-from .models import UserData, TestResult
+from import_export.admin import ExportActionMixin
 
 @admin.register(UserData)
-class UserDataAdmin(admin.ModelAdmin):
+class UserDataAdmin(ExportActionMixin, admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'email', 'phone_number')
     search_fields = ('first_name', 'last_name', 'email')
 
@@ -54,6 +13,18 @@ class TestResultAdmin(admin.ModelAdmin):
     list_filter = ('test_name', 'created_at')
     search_fields = ('user_data__first_name', 'user_data__last_name', 'test_name')
 
-@admin.register(CareerAnchorResponse)
-class CareerAnchorResponseAdmin(admin.ModelAdmin):
-    list_display = ['question']
+admin.site.register(MapQuestion_kk)
+admin.site.register(MapQuestion)
+
+admin.site.register(Question)
+admin.site.register(Question_kk)
+
+admin.site.register(PreferenceQuestion)
+admin.site.register(PreferenceQuestion_kk)
+
+admin.site.register(HollandQuestion)
+admin.site.register(HollandQuestion_kk)
+
+admin.site.register(CareerAnchorQuestion)
+admin.site.register(CareerAnchorQuestion_kk)
+admin.site.register(CareerAnchorResponse)
