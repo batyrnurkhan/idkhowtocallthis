@@ -116,7 +116,7 @@ body {
     </div>
     <div class="content-container">
         <h1>{{ text }} <span class="result">{{ preferred_category }}</span></h1>
-<a href="https://wa.me/phone_num?text=Hello%20world" class="button">Подробнее про результат</a>
+        <a href="{{ whatsapp_link }}" class="button">Подробнее про результат</a>
         <a href="{% url 'home' user_data_id %}" class="button">Пройти еще тесты</a>
                 <a href="https://gasyr.com" class="button" style="display: flex; margin-top: 10px; width: 250px">Ознакомиться с GASYR FOUNDATION</a>
 

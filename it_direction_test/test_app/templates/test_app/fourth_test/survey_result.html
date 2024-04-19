@@ -122,8 +122,8 @@ body {
         <li><h1><span class="result">{{ profession }}</span></h1><span class="level">{{ level }}</span></li>
         {% endfor %}
     </ul>
-         <a href="https://wa.me/phone_num?text=Hello%20world" class="button">Подробнее про результат</a>
-        <a href="{% url 'home' user_data_id %}" class="button">Пройти еще тесты</a>
+<a href="{{ whatsapp_link }}" class="button">Подробнее про результат</a>
+        <a href="{% url 'home' user_data_id %}" class="button" style="font-size: 18px">Пройти еще тесты</a>
         <a href="https://gasyr.com" class="button" style="display: flex; margin-top: 10px; width: 250px">Ознакомиться с GASYR FOUNDATION</a>
 
     </div>

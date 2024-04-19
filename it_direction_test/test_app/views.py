@@ -1,8 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Question, HollandQuestion, PreferenceQuestion, CareerAnchorQuestion, UserData, TestResult
 from .forms import *
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
+from .models import UserData, TestResult, Question, Question_kk
+from urllib.parse import quote
 
 
+def create_whatsapp_link(domain, admin_change_path, message_text):
+    admin_url = f"{domain}{admin_change_path}"
+    whatsapp_message = f"{message_text} {admin_url}"
+    encoded_whatsapp_message = quote(whatsapp_message)
+    return f"https://wa.me/77000660868?text={encoded_whatsapp_message}"
 
 
 def test(request):
@@ -139,6 +148,17 @@ def test_view(request, user_data_id):
 
         TestResult.objects.create(user_data_id=user_data_id, test_name="First test", result=result)
 
+        new_result = TestResult.objects.create(user_data_id=user_data_id, test_name="First test", result=result)
+        result_id = new_result.id
+
+        # Generate the admin change path
+        domain = 'https://gasyrfoundation.com'
+        admin_change_path = reverse('admin:test_app_testresult_change', args=(result_id,))
+        message_text = "Привет, вот ссылка на результат / Сәлем, нәтижеге сілтеме:"
+
+        # Use the helper function to create the WhatsApp link
+        whatsapp_link = create_whatsapp_link(domain, admin_change_path, message_text)
+
         # Select the appropriate template based on the user's language preference
         user_data = get_object_or_404(UserData, id=user_data_id)
         return render(request, "test_app/first_test/results.html", {
@@ -146,7 +166,8 @@ def test_view(request, user_data_id):
             'result2': result2,
             'answer': answer,
             'user_data_id': user_data_id,
-            'submit_text': submit_text
+            'submit_text': submit_text,
+            'whatsapp_link': whatsapp_link,  # Include the WhatsApp link
         })
     else:
         # For GET requests, display the test questions filtered by language
@@ -224,13 +245,31 @@ def holland_test_view(request, user_data_id):
             'А': 'Воображение и интуиция, эмоционально сложный взгляд на жизнь, независимость, гибкость и оригинальность мышления, развитые двигательные способности и восприятие'
         }
 
+        new_result = TestResult.objects.create(user_data_id=user_data_id, test_name="Holland Test",
+                                               result=dominant_type)
+        result_id = new_result.id
+
+        # Construct the admin URL manually
+        domain = 'https://gasyrfoundation.com'
+        admin_path = reverse('admin:test_app_testresult_change', args=(result_id,))
+        admin_url = f"{domain}{admin_path}"
+
+        # Construct the WhatsApp URL
+        whatsapp_message = f"Привет, вот ссылка на результат / Сәлем, нәтижеге сілтеме: {admin_url}"
+        encoded_whatsapp_message = quote(whatsapp_message)
+        whatsapp_link = f"https://wa.me/77000660868?text={encoded_whatsapp_message}"
+
+        personality_description = personality_descriptions.get(dominant_type, 'Description not found.')
+
+        # Return the response with the WhatsApp link
         return render(request, 'test_app/second_test/holland_results.html', {
             'result': dominant_type,
             'type_counts': type_counts,
-            'personality_description': personality_descriptions[dominant_type],
+            'personality_description': personality_description,
             'text2': 'Ваш Доминантный код Холланда - ',
-            'submit_text': "Return Home",
             'user_data_id': user_data_id,
+            'whatsapp_link': whatsapp_link,  # Add this line
+            'submit_text': "Return home",
         })
 
     # This is the original code for GET requests to show the form
@@ -340,10 +379,30 @@ def preference_test_view(request, user_data_id):
 
         TestResult.objects.create(user_data_id=user_data_id, test_name="Preference Test", result=preferred_category)
 
-        return render(request, 'test_app/third_test/preference_result.html',
-                      {'preferred_category': preferred_category, 'text': text,'user_data_id': user_data_id,
-                       'submit_text': submit_text
-                       })
+        new_result = TestResult.objects.create(
+            user_data=user_data,
+            test_name="Preference Test",
+            result=preferred_category
+        )
+
+        # Get the absolute admin URL for the new TestResult instance
+        domain = 'https://gasyrfoundation.com'
+        admin_change_path = reverse('admin:test_app_testresult_change', args=(new_result.id,))
+        admin_url = f"{domain}{admin_change_path}"
+
+        # Construct the WhatsApp URL
+        whatsapp_message = f"Привет, вот ссылка на результат / Сәлем, нәтижеге сілтеме: {admin_url}"
+        encoded_whatsapp_message = quote(whatsapp_message)
+        whatsapp_link = f"https://wa.me/77000660868?text={encoded_whatsapp_message}"
+
+        # Render the template with the new context
+        return render(request, 'test_app/third_test/preference_result.html', {
+            'preferred_category': preferred_category,
+            'text': text,
+            'user_data_id': user_data_id,
+            'submit_text': submit_text,
+            'whatsapp_link': whatsapp_link  # Pass the WhatsApp link to the template
+        })
     else:
         if(language == "KZ"):
 
@@ -523,9 +582,26 @@ def survey_view(request, user_data_id):
                 results[answer] += 1
             # Здесь можно сделать что-то с results, например, передать их в шаблон
             TestResult.objects.create(user_data_id=user_data_id, test_name="Survey", result=str(categories))
-            return render(request, "test_app/fourth_test/survey_result.html", {'categories': categories,
-                                                                               'text': text,'user_data_id': user_data_id,
-                                                                               'submit_text': submit_text})
+
+            new_result = TestResult.objects.create(user_data_id=user_data_id, test_name="Survey",
+                                                   result=str(categories))
+            result_id = new_result.id
+
+            # Generate the admin change path
+            domain = 'https://gasyrfoundation.com'
+            admin_change_path = reverse('admin:test_app_testresult_change', args=(result_id,))
+            message_text = "Привет, вот ссылка на результат / Сәлем, нәтижеге сілтеме:"
+
+            # Use the helper function to create the WhatsApp link
+            whatsapp_link = create_whatsapp_link(domain, admin_change_path, message_text)
+
+            return render(request, "test_app/fourth_test/survey_result.html", {
+                'categories': categories,
+                'text': text,
+                'whatsapp_link': whatsapp_link,
+                'user_data_id': user_data_id,
+                'submit_text': submit_text
+            })
     else:
         if (user_language == "KZ"):
             form = SurveyForm_kk(request.POST)
@@ -627,12 +703,30 @@ def career_anchor_test_view(request, user_data_id):
 
             TestResult.objects.create(user_data_id=user_data_id, test_name="Career Anchor Test", result=max_orientation)
 
+            new_result = TestResult.objects.create(
+                user_data=user_data,
+                test_name="Career Anchor Test",
+                result=max_orientation
+            )
+
+            # Get the absolute admin URL for the new TestResult instance
+            domain = 'https://gasyrfoundation.com'
+            admin_change_path = reverse('admin:test_app_testresult_change', args=(new_result.id,))
+            admin_url = f"{domain}{admin_change_path}"
+
+            # Construct the WhatsApp URL
+            whatsapp_message = f"Привет, вот ссылка на результат / Сәлем, нәтижеге сілтеме: {admin_url}"
+            encoded_whatsapp_message = quote(whatsapp_message)
+            whatsapp_link = f"https://wa.me/77000660868?text={encoded_whatsapp_message}"
+
+            # Render the template with the new context
             return render(request, 'test_app/career_anchor_results.html', {
                 'max_orientation': max_orientation,
                 'text1': text1,
                 'text2': text2,
                 'user_data_id': user_data_id,
-                'submit_text': submit_text
+                'submit_text': submit_text,
+                'whatsapp_link': whatsapp_link  # Pass the WhatsApp link to the template
             })
     else:
         form = form_class()  # Initialize an empty form for GET request
@@ -644,3 +738,20 @@ def career_anchor_test_view(request, user_data_id):
     })
 
 
+from django.urls import reverse
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
+
+def send_admin_result_via_whatsapp(request, result_id):
+    # Ensure you have the correct result_id being passed to the view
+    result = get_object_or_404(TestResult, pk=result_id)
+
+    # Construct the admin URL for this specific result
+    admin_url = f"http://127.0.0.1:8000/admin/test_app/testresult/{result.id}/change/"
+
+    # Construct the WhatsApp URL
+    whatsapp_message = f"Привет, вот ссылка на результат / Сәлем, нәтижеге сілтеме: {admin_url}"
+    whatsapp_link = f"https://wa.me/77000660868?text={whatsapp_message}"
+
+    # You could also return this link to a template to show a clickable link/button
+    return HttpResponseRedirect(whatsapp_link)
