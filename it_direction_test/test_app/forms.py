@@ -67,15 +67,15 @@ class UserDataForm(forms.ModelForm):
                   'grade', 'parent_first_name', 'parent_last_name', 'parent_phone_number']
 class Oprosnik(forms.Form):
     question_1 = forms.CharField(
-        label='Какие профессии/специальности привлекательны для Вас?',
+        label='1)Какие профессии нравятся Вам? Что Вы любите делать больше всего?',
         widget=forms.Textarea
     )
     question_2 = forms.CharField(
-        label='Какие именно профессии соответствует Вашим интересам?',
+        label='2)А что Вы умеете делать очень хорошо?',
         widget=forms.Textarea
     )
     question_3 = forms.CharField(
-        label='Как Вы думаете, какие направления/специальности сейчас пользуются спросом на рынке труда?',
+        label='3)Как Вы думаете, какие сейчас специальности востребованы на рынке? Какая из профессии имеет большие перспективы в будущем для Вас?',
         widget=forms.Textarea
     )
 
@@ -91,15 +91,15 @@ class Oprosnik(forms.Form):
 
 class Oprosnik_kk(forms.Form):
     question_1 = forms.CharField(
-        label='Сізге қандай мамандықтар/мамандықтар тартымды?',
+        label='1)Сізге қандай мамандықтар ұнайды? Сіз не істегенді жақсы көресіз?',
         widget=forms.Textarea
     )
     question_2 = forms.CharField(
-        label='Сіздің қызығушылықтарыңызға қандай мамандықтар сәйкес келеді?',
+        label='2)Ал сіз өте жақсы не істей аласыз?',
         widget=forms.Textarea
     )
     question_3 = forms.CharField(
-        label='Қазір еңбек нарығында қандай бағыттар/мамандықтар сұранысқа ие деп ойлайсыз?',
+        label='3)Қазір нарықта қандай мамандықтар сұранысқа ие деп ойлайсыз? Болашақта сіз үшін қандай мамандықтың болашағы зор?',
         widget=forms.Textarea
     )
 
