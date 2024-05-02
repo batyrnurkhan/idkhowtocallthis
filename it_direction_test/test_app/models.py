@@ -103,8 +103,8 @@ class MapQuestion(models.Model):
     language = models.CharField(max_length=2, choices=(('RU', 'Russian'), ('KZ', 'Kazakh')), default=('RU', 'Russian'))
 
     class Meta:
-        verbose_name = 'Map Test | Вопрос и ответы'
-        verbose_name_plural = 'Map Test | Вопросы ответы'
+        verbose_name = 'Survey Test | Вопрос и ответы'
+        verbose_name_plural = 'Survey Test | Вопросы ответы'
 
     def __str__(self):
         return self.text
@@ -115,8 +115,8 @@ class MapQuestion_kk(models.Model):
     text = models.TextField()
 
     class Meta:
-        verbose_name = 'Map Test | сұрағы және жауабтары'
-        verbose_name_plural = 'Map Test | сұрақтары және жауабтары'
+        verbose_name = 'Survey Test | сұрағы және жауабтары'
+        verbose_name_plural = 'Survey Test | сұрақтары және жауабтары'
 
     def __str__(self):
         return self.text
