@@ -17,6 +17,7 @@ class TestResultAdmin(ExportActionMixin, admin.ModelAdmin):
     list_filter = ('test_name', 'created_at')
     search_fields = ('user_data__first_name', 'user_data__last_name', 'test_name')
 
+
 admin.site.register(MapQuestion_kk)
 admin.site.register(MapQuestion)
 
@@ -32,3 +33,4 @@ admin.site.register(HollandQuestion_kk)
 admin.site.register(CareerAnchorQuestion)
 admin.site.register(CareerAnchorQuestion_kk)
 admin.site.register(CareerAnchorResponse)
+
