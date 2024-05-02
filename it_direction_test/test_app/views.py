@@ -275,9 +275,10 @@ def holland_test_view(request, user_data_id):
     # This is the original code for GET requests to show the form
     submit_text = "ПОЛУЧИТЬ РЕЗУЛЬТАТ" if user_data.language != "KZ" else "Бастау"
     if (language == "KZ"):
-        questions = HollandQuestion.objects.all()
-    else:
         questions = HollandQuestion_kk.objects.all()
+    else:
+        questions = HollandQuestion.objects.all()
+
     return render(request, 'test_app/second_test/holland_test.html', {
         'questions': questions,
         'user_data_id': user_data_id,
@@ -413,203 +414,203 @@ def preference_test_view(request, user_data_id):
                                                                             'user_data_id': user_data_id,
                                                                             'submit_text': submit_text
                                                                             })
-def survey_view(request, user_data_id):
-    user_data = get_object_or_404(UserData, id=user_data_id)
-    user_language = user_data.language
-    submit_text = "Бастау" if user_language == "KZ" else "ПОЛУЧИТЬ РЕЗУЛЬТАТ"
-
-
-    if request.method == 'POST':
-        if(user_language == "KZ"):
-            form = SurveyForm_kk(request.POST)
-        else:
-            form = SurveyForm(request.POST)
-        if form.is_valid():
-            answers = form.cleaned_data
-            results = answers.values()
-
-            # Инициализация списка результатов для каждой категории
-            results_by_category = [0] * 29
-            levels_mapping_ru = {
-                -12: "высшая степень отрицания данного интереса",
-                -11: "высшая степень отрицания данного интереса",
-                -10: "высшая степень отрицания данного интереса",
-                -9: "высшая степень отрицания данного интереса",
-                -8: "высшая степень отрицания данного интереса",
-                -7: "выраженный интерес",
-                -6: "выраженный интерес",
-                -5: "выраженный интерес",
-                -4: "интерес выражен слабо",
-                -3: "интерес выражен слабо",
-                -2: "интерес выражен слабо",
-                -1: "интерес выражен слабо",
-                0: "интерес отрицается",
-                1: "интерес выражен слабо",
-                2: "интерес выражен слабо",
-                3: "интерес выражен слабо",
-                4: "интерес выражен слабо",
-                5: "выраженный интерес",
-                6: "выраженный интерес",
-                7: "выраженный интерес",
-                8: "ярко выраженный интерес",
-                9: "ярко выраженный интерес",
-                10: "ярко выраженный интерес",
-                11: "ярко выраженный интерес",
-                12: "ярко выраженный интерес",
-            }
-
-            levels_mapping_kk = {
-                -12: "осы қызығушылықтың ең жоғары дәрежесінің теріске шығарылуы",
-                -11: "осы қызығушылықтың ең жоғары дәрежесінің теріске шығарылуы",
-                -10: "осы қызығушылықтың ең жоғары дәрежесінің теріске шығарылуы",
-                -9: "осы қызығушылықтың ең жоғары дәрежесінің теріске шығарылуы",
-                -8: "осы қызығушылықтың ең жоғары дәрежесінің теріске шығарылуы",
-                -7: "білдірілген қызығушылық",
-                -6: "білдірілген қызығушылық",
-                -5: "білдірілген қызығушылық",
-                -4: "қызығушылық аз білдірілген",
-                -3: "қызығушылық аз білдірілген",
-                -2: "қызығушылық аз білдірілген",
-                -1: "қызығушылық аз білдірілген",
-                0: "қызығушылық теріске шығарылады",
-                1: "қызығушылық аз білдірілген",
-                2: "қызығушылық аз білдірілген",
-                3: "қызығушылық аз білдірілген",
-                4: "қызығушылық аз білдірілген",
-                5: "білдірілген қызығушылық",
-                6: "білдірілген қызығушылық",
-                7: "білдірілген қызығушылық",
-                8: "қатты білдірілген қызығушылық",
-                9: "қатты білдірілген қызығушылық",
-                10: "қатты білдірілген қызығушылық",
-                11: "қатты білдірілген қызығушылық",
-                12: "қатты білдірілген қызығушылық",
-            }
-            if(user_language == "KZ"):
-                levels_mapping = levels_mapping_kk
-            else:
-                levels_mapping = levels_mapping_ru
-
-            # Определение значений для каждой переменной в зависимости от ответов
-            for i, result in enumerate(results, start=1):
-                question_index = (i - 1) % 29  # Вычисляем индекс вопроса от 0 до 28 для каждого i
-                if result == '++':
-                    results_by_category[question_index] += 2
-                elif result == '+':
-                    results_by_category[question_index] += 1
-                elif result == '-':
-                    results_by_category[question_index] -= 1
-                elif result == '--':
-                    results_by_category[question_index] -= 2
-                else:
-                    pass  # Ничего не делаем, если ответ не указан
-
-            categories_ru = {
-                "Биология": levels_mapping.get(results_by_category[0], "Недопустимое значение"),
-                "География": levels_mapping.get(results_by_category[1], "Недопустимое значение"),
-                "Геология": levels_mapping.get(results_by_category[2], "Недопустимое значение"),
-                "Медицина": levels_mapping.get(results_by_category[3], "Недопустимое значение"),
-                "Легкая и пищевая промышленность": levels_mapping.get(results_by_category[4], "Недопустимое значение"),
-                "Физика": levels_mapping.get(results_by_category[5], "Недопустимое значение"),
-                "Химия": levels_mapping.get(results_by_category[6], "Недопустимое значение"),
-                "Техника": levels_mapping.get(results_by_category[7], "Недопустимое значение"),
-                "Электро- и радиотехника": levels_mapping.get(results_by_category[8], "Недопустимое значение"),
-                "Металлообработка": levels_mapping.get(results_by_category[9], "Недопустимое значение"),
-                "Деревообработка": levels_mapping.get(results_by_category[10], "Недопустимое значение"),
-                "Строительство": levels_mapping.get(results_by_category[11], "Недопустимое значение"),
-                "Транспорт": levels_mapping.get(results_by_category[12], "Недопустимое значение"),
-                "Авиация, морское дело": levels_mapping.get(results_by_category[13], "Недопустимое значение"),
-                "Военные специальности": levels_mapping.get(results_by_category[14], "Недопустимое значение"),
-                "История": levels_mapping.get(results_by_category[15], "Недопустимое значение"),
-                "Литература": levels_mapping.get(results_by_category[16], "Недопустимое значение"),
-                "Журналистика": levels_mapping.get(results_by_category[17], "Недопустимое значение"),
-                "Общественная деятельность": levels_mapping.get(results_by_category[18], "Недопустимое значение"),
-                "Педагогика": levels_mapping.get(results_by_category[19], "Недопустимое значение"),
-                "Юриспруденция": levels_mapping.get(results_by_category[20], "Недопустимое значение"),
-                "Сфера обслуживания": levels_mapping.get(results_by_category[21], "Недопустимое значение"),
-                "Математика": levels_mapping.get(results_by_category[22], "Недопустимое значение"),
-                "Экономика": levels_mapping.get(results_by_category[23], "Недопустимое значение"),
-                "Иностранные языки": levels_mapping.get(results_by_category[24], "Недопустимое значение"),
-                "Изобразительное искусство": levels_mapping.get(results_by_category[25], "Недопустимое значение"),
-                "Сценическое искусство": levels_mapping.get(results_by_category[26], "Недопустимое значение"),
-                "Музыка": levels_mapping.get(results_by_category[27], "Недопустимое значение"),
-                "Физкультура и спорт": levels_mapping.get(results_by_category[28], "Недопустимое значение")
-            }
-
-            categories_kk = {
-                "Биология": levels_mapping.get(results_by_category[0], "Жарамсыз мән"),
-                "География": levels_mapping.get(results_by_category[1], "Жарамсыз мән"),
-                "Геология": levels_mapping.get(results_by_category[2], "Жарамсыз мән"),
-                "Медицина": levels_mapping.get(results_by_category[3], "Жарамсыз мән"),
-                "Легкая и пищевая промышленность": levels_mapping.get(results_by_category[4], "Жарамсыз мән"),
-                "Физика": levels_mapping.get(results_by_category[5], "Жарамсыз мән"),
-                "Химия": levels_mapping.get(results_by_category[6], "Жарамсыз мән"),
-                "Техника": levels_mapping.get(results_by_category[7], "Жарамсыз мән"),
-                "Электро- и радиотехника": levels_mapping.get(results_by_category[8], "Жарамсыз мән"),
-                "Металлообработка": levels_mapping.get(results_by_category[9], "Жарамсыз мән"),
-                "Деревообработка": levels_mapping.get(results_by_category[10], "Жарамсыз мән"),
-                "Строительство": levels_mapping.get(results_by_category[11], "Жарамсыз мән"),
-                "Транспорт": levels_mapping.get(results_by_category[12], "Жарамсыз мән"),
-                "Авиация, морское дело": levels_mapping.get(results_by_category[13], "Жарамсыз мән"),
-                "Военные специальности": levels_mapping.get(results_by_category[14], "Жарамсыз мән"),
-                "История": levels_mapping.get(results_by_category[15], "Жарамсыз мән"),
-                "Литература": levels_mapping.get(results_by_category[16], "Жарамсыз мән"),
-                "Журналистика": levels_mapping.get(results_by_category[17], "Жарамсыз мән"),
-                "Общественная деятельность": levels_mapping.get(results_by_category[18], "Жарамсыз мән"),
-                "Педагогика": levels_mapping.get(results_by_category[19], "Жарамсыз мән"),
-                "Юриспруденция": levels_mapping.get(results_by_category[20], "Жарамсыз мән"),
-                "Сфера обслуживания": levels_mapping.get(results_by_category[21], "Жарамсыз мән"),
-                "Математика": levels_mapping.get(results_by_category[22], "Жарамсыз мән"),
-                "Экономика": levels_mapping.get(results_by_category[23], "Жарамсыз мән"),
-                "Иностранные языки": levels_mapping.get(results_by_category[24], "Жарамсыз мән"),
-                "Изобразительное искусство": levels_mapping.get(results_by_category[25], "Жарамсыз мән"),
-                "Сценическое искусство": levels_mapping.get(results_by_category[26], "Жарамсыз мән"),
-                "Музыка": levels_mapping.get(results_by_category[27], "Жарамсыз мән"),
-                "Физкультура и спорт": levels_mapping.get(results_by_category[28], "Жарамсыз мән")
-            }
-
-
-            if(user_language == "KZ"):
-                text = "Сауалнама нәтижелері"
-                categories = categories_kk
-            else:
-                text = "Результаты опроса"
-                categories = categories_ru
-
-            results = {'++': 0, '+': 0, '0': 0, '-': 0, '--': 0}
-
-            for answer in answers.values():
-                results[answer] += 1
-            # Здесь можно сделать что-то с results, например, передать их в шаблон
-            TestResult.objects.create(user_data_id=user_data_id, test_name="Survey", result=str(categories))
-
-            new_result = TestResult.objects.create(user_data_id=user_data_id, test_name="Survey",
-                                                   result=str(categories))
-            result_id = new_result.id
-
-            # Generate the admin change path
-            domain = 'https://gasyrfoundation.com'
-            admin_change_path = reverse('admin:test_app_testresult_change', args=(result_id,))
-            message_text = "Привет, вот ссылка на результат / Сәлем, нәтижеге сілтеме:"
-
-            # Use the helper function to create the WhatsApp link
-            whatsapp_link = create_whatsapp_link(domain, admin_change_path, message_text)
-
-            return render(request, "test_app/fourth_test/survey_result.html", {
-                'categories': categories,
-                'text': text,
-                'whatsapp_link': whatsapp_link,
-                'user_data_id': user_data_id,
-                'submit_text': submit_text
-            })
-    else:
-        if (user_language == "KZ"):
-            form = SurveyForm_kk(request.POST)
-        else:
-            form = SurveyForm(request.POST)
-        return render(request, "test_app/fourth_test/survey_test.html", {'form': form,
-                                                                         'user_data_id': user_data_id,
-                                                                         'submit_text': submit_text})
+# def survey_view(request, user_data_id):
+#     user_data = get_object_or_404(UserData, id=user_data_id)
+#     user_language = user_data.language
+#     submit_text = "Бастау" if user_language == "KZ" else "ПОЛУЧИТЬ РЕЗУЛЬТАТ"
+#
+#
+#     if request.method == 'POST':
+#         if(user_language == "KZ"):
+#             form = SurveyForm_kk(request.POST)
+#         else:
+#             form = SurveyForm(request.POST)
+#         if form.is_valid():
+#             answers = form.cleaned_data
+#             results = answers.values()
+#
+#             # Инициализация списка результатов для каждой категории
+#             results_by_category = [0] * 29
+#             levels_mapping_ru = {
+#                 -12: "высшая степень отрицания данного интереса",
+#                 -11: "высшая степень отрицания данного интереса",
+#                 -10: "высшая степень отрицания данного интереса",
+#                 -9: "высшая степень отрицания данного интереса",
+#                 -8: "высшая степень отрицания данного интереса",
+#                 -7: "выраженный интерес",
+#                 -6: "выраженный интерес",
+#                 -5: "выраженный интерес",
+#                 -4: "интерес выражен слабо",
+#                 -3: "интерес выражен слабо",
+#                 -2: "интерес выражен слабо",
+#                 -1: "интерес выражен слабо",
+#                 0: "интерес отрицается",
+#                 1: "интерес выражен слабо",
+#                 2: "интерес выражен слабо",
+#                 3: "интерес выражен слабо",
+#                 4: "интерес выражен слабо",
+#                 5: "выраженный интерес",
+#                 6: "выраженный интерес",
+#                 7: "выраженный интерес",
+#                 8: "ярко выраженный интерес",
+#                 9: "ярко выраженный интерес",
+#                 10: "ярко выраженный интерес",
+#                 11: "ярко выраженный интерес",
+#                 12: "ярко выраженный интерес",
+#             }
+#
+#             levels_mapping_kk = {
+#                 -12: "осы қызығушылықтың ең жоғары дәрежесінің теріске шығарылуы",
+#                 -11: "осы қызығушылықтың ең жоғары дәрежесінің теріске шығарылуы",
+#                 -10: "осы қызығушылықтың ең жоғары дәрежесінің теріске шығарылуы",
+#                 -9: "осы қызығушылықтың ең жоғары дәрежесінің теріске шығарылуы",
+#                 -8: "осы қызығушылықтың ең жоғары дәрежесінің теріске шығарылуы",
+#                 -7: "білдірілген қызығушылық",
+#                 -6: "білдірілген қызығушылық",
+#                 -5: "білдірілген қызығушылық",
+#                 -4: "қызығушылық аз білдірілген",
+#                 -3: "қызығушылық аз білдірілген",
+#                 -2: "қызығушылық аз білдірілген",
+#                 -1: "қызығушылық аз білдірілген",
+#                 0: "қызығушылық теріске шығарылады",
+#                 1: "қызығушылық аз білдірілген",
+#                 2: "қызығушылық аз білдірілген",
+#                 3: "қызығушылық аз білдірілген",
+#                 4: "қызығушылық аз білдірілген",
+#                 5: "білдірілген қызығушылық",
+#                 6: "білдірілген қызығушылық",
+#                 7: "білдірілген қызығушылық",
+#                 8: "қатты білдірілген қызығушылық",
+#                 9: "қатты білдірілген қызығушылық",
+#                 10: "қатты білдірілген қызығушылық",
+#                 11: "қатты білдірілген қызығушылық",
+#                 12: "қатты білдірілген қызығушылық",
+#             }
+#             if(user_language == "KZ"):
+#                 levels_mapping = levels_mapping_kk
+#             else:
+#                 levels_mapping = levels_mapping_ru
+#
+#             # Определение значений для каждой переменной в зависимости от ответов
+#             for i, result in enumerate(results, start=1):
+#                 question_index = (i - 1) % 29  # Вычисляем индекс вопроса от 0 до 28 для каждого i
+#                 if result == '++':
+#                     results_by_category[question_index] += 2
+#                 elif result == '+':
+#                     results_by_category[question_index] += 1
+#                 elif result == '-':
+#                     results_by_category[question_index] -= 1
+#                 elif result == '--':
+#                     results_by_category[question_index] -= 2
+#                 else:
+#                     pass  # Ничего не делаем, если ответ не указан
+#
+#             categories_ru = {
+#                 "Биология": levels_mapping.get(results_by_category[0], "Недопустимое значение"),
+#                 "География": levels_mapping.get(results_by_category[1], "Недопустимое значение"),
+#                 "Геология": levels_mapping.get(results_by_category[2], "Недопустимое значение"),
+#                 "Медицина": levels_mapping.get(results_by_category[3], "Недопустимое значение"),
+#                 "Легкая и пищевая промышленность": levels_mapping.get(results_by_category[4], "Недопустимое значение"),
+#                 "Физика": levels_mapping.get(results_by_category[5], "Недопустимое значение"),
+#                 "Химия": levels_mapping.get(results_by_category[6], "Недопустимое значение"),
+#                 "Техника": levels_mapping.get(results_by_category[7], "Недопустимое значение"),
+#                 "Электро- и радиотехника": levels_mapping.get(results_by_category[8], "Недопустимое значение"),
+#                 "Металлообработка": levels_mapping.get(results_by_category[9], "Недопустимое значение"),
+#                 "Деревообработка": levels_mapping.get(results_by_category[10], "Недопустимое значение"),
+#                 "Строительство": levels_mapping.get(results_by_category[11], "Недопустимое значение"),
+#                 "Транспорт": levels_mapping.get(results_by_category[12], "Недопустимое значение"),
+#                 "Авиация, морское дело": levels_mapping.get(results_by_category[13], "Недопустимое значение"),
+#                 "Военные специальности": levels_mapping.get(results_by_category[14], "Недопустимое значение"),
+#                 "История": levels_mapping.get(results_by_category[15], "Недопустимое значение"),
+#                 "Литература": levels_mapping.get(results_by_category[16], "Недопустимое значение"),
+#                 "Журналистика": levels_mapping.get(results_by_category[17], "Недопустимое значение"),
+#                 "Общественная деятельность": levels_mapping.get(results_by_category[18], "Недопустимое значение"),
+#                 "Педагогика": levels_mapping.get(results_by_category[19], "Недопустимое значение"),
+#                 "Юриспруденция": levels_mapping.get(results_by_category[20], "Недопустимое значение"),
+#                 "Сфера обслуживания": levels_mapping.get(results_by_category[21], "Недопустимое значение"),
+#                 "Математика": levels_mapping.get(results_by_category[22], "Недопустимое значение"),
+#                 "Экономика": levels_mapping.get(results_by_category[23], "Недопустимое значение"),
+#                 "Иностранные языки": levels_mapping.get(results_by_category[24], "Недопустимое значение"),
+#                 "Изобразительное искусство": levels_mapping.get(results_by_category[25], "Недопустимое значение"),
+#                 "Сценическое искусство": levels_mapping.get(results_by_category[26], "Недопустимое значение"),
+#                 "Музыка": levels_mapping.get(results_by_category[27], "Недопустимое значение"),
+#                 "Физкультура и спорт": levels_mapping.get(results_by_category[28], "Недопустимое значение")
+#             }
+#
+#             categories_kk = {
+#                 "Биология": levels_mapping.get(results_by_category[0], "Жарамсыз мән"),
+#                 "География": levels_mapping.get(results_by_category[1], "Жарамсыз мән"),
+#                 "Геология": levels_mapping.get(results_by_category[2], "Жарамсыз мән"),
+#                 "Медицина": levels_mapping.get(results_by_category[3], "Жарамсыз мән"),
+#                 "Легкая и пищевая промышленность": levels_mapping.get(results_by_category[4], "Жарамсыз мән"),
+#                 "Физика": levels_mapping.get(results_by_category[5], "Жарамсыз мән"),
+#                 "Химия": levels_mapping.get(results_by_category[6], "Жарамсыз мән"),
+#                 "Техника": levels_mapping.get(results_by_category[7], "Жарамсыз мән"),
+#                 "Электро- и радиотехника": levels_mapping.get(results_by_category[8], "Жарамсыз мән"),
+#                 "Металлообработка": levels_mapping.get(results_by_category[9], "Жарамсыз мән"),
+#                 "Деревообработка": levels_mapping.get(results_by_category[10], "Жарамсыз мән"),
+#                 "Строительство": levels_mapping.get(results_by_category[11], "Жарамсыз мән"),
+#                 "Транспорт": levels_mapping.get(results_by_category[12], "Жарамсыз мән"),
+#                 "Авиация, морское дело": levels_mapping.get(results_by_category[13], "Жарамсыз мән"),
+#                 "Военные специальности": levels_mapping.get(results_by_category[14], "Жарамсыз мән"),
+#                 "История": levels_mapping.get(results_by_category[15], "Жарамсыз мән"),
+#                 "Литература": levels_mapping.get(results_by_category[16], "Жарамсыз мән"),
+#                 "Журналистика": levels_mapping.get(results_by_category[17], "Жарамсыз мән"),
+#                 "Общественная деятельность": levels_mapping.get(results_by_category[18], "Жарамсыз мән"),
+#                 "Педагогика": levels_mapping.get(results_by_category[19], "Жарамсыз мән"),
+#                 "Юриспруденция": levels_mapping.get(results_by_category[20], "Жарамсыз мән"),
+#                 "Сфера обслуживания": levels_mapping.get(results_by_category[21], "Жарамсыз мән"),
+#                 "Математика": levels_mapping.get(results_by_category[22], "Жарамсыз мән"),
+#                 "Экономика": levels_mapping.get(results_by_category[23], "Жарамсыз мән"),
+#                 "Иностранные языки": levels_mapping.get(results_by_category[24], "Жарамсыз мән"),
+#                 "Изобразительное искусство": levels_mapping.get(results_by_category[25], "Жарамсыз мән"),
+#                 "Сценическое искусство": levels_mapping.get(results_by_category[26], "Жарамсыз мән"),
+#                 "Музыка": levels_mapping.get(results_by_category[27], "Жарамсыз мән"),
+#                 "Физкультура и спорт": levels_mapping.get(results_by_category[28], "Жарамсыз мән")
+#             }
+#
+#
+#             if(user_language == "KZ"):
+#                 text = "Сауалнама нәтижелері"
+#                 categories = categories_kk
+#             else:
+#                 text = "Результаты опроса"
+#                 categories = categories_ru
+#
+#             results = {'++': 0, '+': 0, '0': 0, '-': 0, '--': 0}
+#
+#             for answer in answers.values():
+#                 results[answer] += 1
+#             # Здесь можно сделать что-то с results, например, передать их в шаблон
+#             TestResult.objects.create(user_data_id=user_data_id, test_name="Survey", result=str(categories))
+#
+#             new_result = TestResult.objects.create(user_data_id=user_data_id, test_name="Survey",
+#                                                    result=str(categories))
+#             result_id = new_result.id
+#
+#             # Generate the admin change path
+#             domain = 'https://gasyrfoundation.com'
+#             admin_change_path = reverse('admin:test_app_testresult_change', args=(result_id,))
+#             message_text = "Привет, вот ссылка на результат / Сәлем, нәтижеге сілтеме:"
+#
+#             # Use the helper function to create the WhatsApp link
+#             whatsapp_link = create_whatsapp_link(domain, admin_change_path, message_text)
+#
+#             return render(request, "test_app/fourth_test/survey_result.html", {
+#                 'categories': categories,
+#                 'text': text,
+#                 'whatsapp_link': whatsapp_link,
+#                 'user_data_id': user_data_id,
+#                 'submit_text': submit_text
+#             })
+#     else:
+#         if (user_language == "KZ"):
+#             form = SurveyForm_kk(request.POST)
+#         else:
+#             form = SurveyForm(request.POST)
+#         return render(request, "test_app/fourth_test/survey_test.html", {'form': form,
+#                                                                          'user_data_id': user_data_id,
+#                                                                          'submit_text': submit_text})
 
 
 from django.shortcuts import render
@@ -755,3 +756,36 @@ def send_admin_result_via_whatsapp(request, result_id):
 
     # You could also return this link to a template to show a clickable link/button
     return HttpResponseRedirect(whatsapp_link)
+
+from django.http import HttpResponse
+
+
+def oprosnik_view(request, user_data_id):
+    user_data = get_object_or_404(UserData, id=user_data_id)
+    language = user_data.language
+    if request.method == 'POST':
+
+
+        if language == "KZ":
+            form = Oprosnik_kk(request.POST)
+        else:
+            form = Oprosnik(request.POST)
+
+        if form.is_valid():
+            # Собираем данные из формы
+            data = {
+                'question_1': form.cleaned_data['question_1'],
+                'question_2': form.cleaned_data['question_2'],
+                'question_3': form.cleaned_data['question_3'],
+            }
+            # Создаем запись в базе данных
+
+            TestResult.objects.create(user_data_id=user_data_id, test_name="Career Anchor Test", result=str(data))
+
+            return redirect('home', user_data_id=user_data.id)
+    else:
+        if language == "KZ":
+            form = Oprosnik_kk(request.POST)
+        else:
+            form = Oprosnik(request.POST)
+    return render(request, 'test_app/oprosnik.html', {'form': form})

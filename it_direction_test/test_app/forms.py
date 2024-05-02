@@ -65,3 +65,49 @@ class UserDataForm(forms.ModelForm):
         model = UserData
         fields = ['first_name', 'last_name', 'email', 'phone_number', 'language',
                   'grade', 'parent_first_name', 'parent_last_name', 'parent_phone_number']
+class Oprosnik(forms.Form):
+    question_1 = forms.CharField(
+        label='1)Какие профессии нравятся Вам? Что Вы любите делать больше всего?',
+        widget=forms.Textarea
+    )
+    question_2 = forms.CharField(
+        label='2)А что Вы умеете делать очень хорошо?',
+        widget=forms.Textarea
+    )
+    question_3 = forms.CharField(
+        label='3)Как Вы думаете, какие сейчас специальности востребованы на рынке? Какая из профессии имеет большие перспективы в будущем для Вас?',
+        widget=forms.Textarea
+    )
+
+    def add_error(self, field, error):
+        # Проверяем, является ли ошибка стандартной ошибкой о необходимости заполнения поля
+        if str(error) == 'This field is required.':
+            # Если да, то мы не добавляем ошибку к форме
+            pass
+        else:
+            # В противном случае, добавляем ошибку как обычно
+            super().add_error(field, error)
+
+
+class Oprosnik_kk(forms.Form):
+    question_1 = forms.CharField(
+        label='1)Сізге қандай мамандықтар ұнайды? Сіз не істегенді жақсы көресіз?',
+        widget=forms.Textarea
+    )
+    question_2 = forms.CharField(
+        label='2)Ал сіз өте жақсы не істей аласыз?',
+        widget=forms.Textarea
+    )
+    question_3 = forms.CharField(
+        label='3)Қазір нарықта қандай мамандықтар сұранысқа ие деп ойлайсыз? Болашақта сіз үшін қандай мамандықтың болашағы зор?',
+        widget=forms.Textarea
+    )
+
+    def add_error(self, field, error):
+        # Проверяем, является ли ошибка стандартной ошибкой о необходимости заполнения поля
+        if str(error) == 'This field is required.':
+            # Если да, то мы не добавляем ошибку к форме
+            pass
+        else:
+            # В противном случае, добавляем ошибку как обычно
+            super().add_error(field, error)

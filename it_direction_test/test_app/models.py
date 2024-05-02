@@ -163,3 +163,7 @@ class TestResult(models.Model):
     def __str__(self):
         return f"{self.test_name} result for {self.user_data}"
 
+
+
+
+
