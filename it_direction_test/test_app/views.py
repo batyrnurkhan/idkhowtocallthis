@@ -33,7 +33,7 @@ def index(request, user_data_id):
 
     return render(request, template_name, {
         'user_data_id': user_data_id,
-        'submit_text': submit_text  # Make sure to pass submit_text to your template
+        'submit_text': submit_text
     })
 
 
@@ -146,9 +146,9 @@ def test_view(request, user_data_id):
                 result2 = "Человек-художественный образ:",
                 result = "Эта группа представляет собой различные виды художественно-творческого труда, тип литературы, музыки, театра, образное искусство."
 
-        TestResult.objects.create(user_data_id=user_data_id, test_name="First test", result=result)
+        TestResult.objects.create(user_data_id=user_data_id, test_name="Тест-опросник на профориентацию", result=result)
 
-        new_result = TestResult.objects.create(user_data_id=user_data_id, test_name="First test", result=result)
+        new_result = TestResult.objects.create(user_data_id=user_data_id, test_name="Тест-опросник на профориентацию", result=result)
         result_id = new_result.id
 
         # Generate the admin change path
@@ -245,7 +245,7 @@ def holland_test_view(request, user_data_id):
             'А': 'Воображение и интуиция, эмоционально сложный взгляд на жизнь, независимость, гибкость и оригинальность мышления, развитые двигательные способности и восприятие'
         }
 
-        new_result = TestResult.objects.create(user_data_id=user_data_id, test_name="Holland Test",
+        new_result = TestResult.objects.create(user_data_id=user_data_id, test_name="Тест-опросник на определение типов мышления",
                                                result=dominant_type)
         result_id = new_result.id
 
@@ -378,11 +378,11 @@ def preference_test_view(request, user_data_id):
             elif preferred_category == "Material interests":
                 preferred_category = "Материальные интересы: планово-экономических видов работ: экономист, администратор, менеджер, предприниматель, аудитор, специалист по рекламе, брокер, агент страховых компаний, коммерсант, завхоз."
 
-        TestResult.objects.create(user_data_id=user_data_id, test_name="Preference Test", result=preferred_category)
+        TestResult.objects.create(user_data_id=user_data_id, test_name="Тест на профессиональные предпочтения", result=preferred_category)
 
         new_result = TestResult.objects.create(
             user_data=user_data,
-            test_name="Preference Test",
+            test_name="Тест на профессиональные предпочтения",
             result=preferred_category
         )
 
@@ -702,11 +702,11 @@ def career_anchor_test_view(request, user_data_id):
                         max_orientation = "Кәсіпкерлік"
 
 
-            TestResult.objects.create(user_data_id=user_data_id, test_name="Career Anchor Test", result=max_orientation)
+            TestResult.objects.create(user_data_id=user_data_id, test_name="Тест якоря", result=max_orientation)
 
             new_result = TestResult.objects.create(
                 user_data=user_data,
-                test_name="Career Anchor Test",
+                test_name="Тест якоря",
                 result=max_orientation
             )
 
@@ -774,13 +774,13 @@ def oprosnik_view(request, user_data_id):
         if form.is_valid():
             # Собираем данные из формы
             data = {
-                'question_1': form.cleaned_data['question_1'],
-                'question_2': form.cleaned_data['question_2'],
-                'question_3': form.cleaned_data['question_3'],
+                'Первый вопрос': form.cleaned_data['question_1'],
+                'Второй вопрос': form.cleaned_data['question_2'],
+                'Третий вопрос': form.cleaned_data['question_3'],
             }
             # Создаем запись в базе данных
 
-            TestResult.objects.create(user_data_id=user_data_id, test_name="Career Anchor Test", result=str(data))
+            TestResult.objects.create(user_data_id=user_data_id, test_name="Опросник", result=str(data))
 
             return redirect('home', user_data_id=user_data.id)
     else:

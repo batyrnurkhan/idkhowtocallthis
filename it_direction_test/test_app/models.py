@@ -30,8 +30,8 @@ class Question(models.Model):
     choice_b = models.CharField(max_length=512)
 
     class Meta:
-        verbose_name = 'First test | Вопрос и ответы'
-        verbose_name_plural = 'First test | Вопросы и ответы'
+        verbose_name = 'Тест-опросник на профориентацию | Вопрос и ответы'
+        verbose_name_plural = 'Тест-опросник на профориентацию | Вопросы и ответы'
 
     def __str__(self):
         return f'{self.text} - {self.choice_a} - {self.choice_b}'
@@ -42,8 +42,8 @@ class Question_kk(models.Model):
     choice_b = models.CharField(max_length=512)
 
     class Meta:
-        verbose_name = 'First test | сұрақтар және жауабтар'
-        verbose_name_plural = 'First test | сұрақтары және жауабтары'
+        verbose_name = 'Тест-опросник на профориентацию | сұрақтар және жауабтар'
+        verbose_name_plural = 'Тест-опросник на профориентацию | сұрақтары және жауабтары'
 
     def __str__(self):
         return f'{self.text} - {self.choice_a} - {self.choice_b}'
@@ -103,8 +103,8 @@ class MapQuestion(models.Model):
     language = models.CharField(max_length=2, choices=(('RU', 'Russian'), ('KZ', 'Kazakh')), default=('RU', 'Russian'))
 
     class Meta:
-        verbose_name = 'Survey Test | Вопрос и ответы'
-        verbose_name_plural = 'Survey Test | Вопросы ответы'
+        verbose_name = 'Тест на профессиональные предпочтения    | Вопрос и ответы'
+        verbose_name_plural = 'Тест на профессиональные предпочтения | Вопросы ответы'
 
     def __str__(self):
         return self.text
@@ -115,8 +115,8 @@ class MapQuestion_kk(models.Model):
     text = models.TextField()
 
     class Meta:
-        verbose_name = 'Survey Test | сұрағы және жауабтары'
-        verbose_name_plural = 'Survey Test | сұрақтары және жауабтары'
+        verbose_name = 'Тест на профессиональные предпочтения | сұрағы және жауабтары'
+        verbose_name_plural = 'Тест на профессиональные предпочтения | сұрақтары және жауабтары'
 
     def __str__(self):
         return self.text
@@ -124,8 +124,8 @@ class MapQuestion_kk(models.Model):
 class CareerAnchorQuestion(models.Model):
     text = models.CharField(max_length=1024)
     class Meta:
-        verbose_name = 'CareerAnchor | Вопрос'
-        verbose_name_plural = 'CareerAnchor | Вопросы'
+        verbose_name = 'Тест "Якоря карьеры" | Вопрос'
+        verbose_name_plural = 'Тест "Якоря карьеры" | Вопросы'
     def __str__(self):
         return self.text
 
@@ -133,8 +133,8 @@ class CareerAnchorQuestion_kk(models.Model):
     text = models.CharField(max_length=1024)
 
     class Meta:
-        verbose_name = 'CareerAnchor | сұрағы'
-        verbose_name_plural = 'CareerAnchor | сұрақтары'
+        verbose_name = 'Тест "Якоря карьеры" | сұрағы'
+        verbose_name_plural = 'Тест "Якоря карьеры" | сұрақтары'
 
     def __str__(self):
         return self.text
@@ -144,8 +144,8 @@ class CareerAnchorResponse(models.Model):
     score = models.IntegerField(default=0)
 
     class Meta:
-        verbose_name = 'CareerAnchor | Вопрос и ответ'
-        verbose_name_plural = 'CareerAnchor | Вопросы и ответы'
+        verbose_name = 'Тест "Якоря карьеры" | Вопрос и ответ'
+        verbose_name_plural = 'Тест "Якоря карьеры" | Вопросы и ответы'
 
     def __str__(self):
         return self.question
