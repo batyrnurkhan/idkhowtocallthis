@@ -286,7 +286,7 @@ body {
                 <img src="{% static 'test_app/img/accountcircleline1.svg' %}" alt="Individual Characteristics Test">
             </div>
             <div class="test-card2-text-container">
-                <h2>анкета - опросник</h2>
+                <h2>Анкета - опросник</h2>
                 <a href="{% url 'oprosnik' user_data_id %}" class="button">пройти тест</a>
             </div>
         </div>
@@ -296,17 +296,17 @@ body {
     <div class="grid">
         <div class="test-card">
             <img src="{% static 'test_app/img/map2line1.svg' %}" alt="Interest Map Test">
-            <h2>1. Тест-опросник на профориентацию</h2>
+            <h2>Тест на профессиональные предпочтения</h2>
             <a href="{% url 'preference_test' user_data_id %}" class="button">пройти тест</a>
         </div>
         <div class="test-card">
             <img src="{% static 'test_app/img/starline1.svg' %}" alt="Career Values Test">
-            <h2>Тест на диагностику ценностных ориентаций в карьере</h2>
+            <h2>Тест "Якоря карьеры"</h2>
             <a href="{% url 'career_anchor_test' user_data_id %}" class="button">пройти тест</a>
         </div>
         <div class="test-card">
             <img src="{% static 'test_app/img/Vector.svg' %}" alt="Professional Preferences Test">
-            <h2>2. Тест на профессиональные предпочтения</h2>
+            <h2> Тест-опросник на определение типов мышления </h2>
             <a href="{% url 'holland_test' user_data_id %}" class="button">пройти тест</a>
         </div>
     </div>

@@ -55,8 +55,8 @@ class HollandQuestion(models.Model):
 
 
     class Meta:
-        verbose_name = 'Holland test | Вопрос и ответы'
-        verbose_name_plural = 'Holland test |Вопросы ответы второго теста'
+        verbose_name = 'Тест на профессиональные предпочтения | Вопрос и ответы'
+        verbose_name_plural = 'Тесты на профессиональные предпочтения |Вопросы ответы второго теста'
 
     def __str__(self):
         return f"Question {self.id}"
@@ -68,8 +68,8 @@ class HollandQuestion_kk(models.Model):
     choice_b = models.CharField(max_length=512)
 
     class Meta:
-        verbose_name = 'Holland test | сұрағы және жауабы'
-        verbose_name_plural = 'Holland test | сұрақтары және жауабтары'
+        verbose_name = 'Кәсіби артықшылық сынағы | сұрағы және жауабы'
+        verbose_name_plural = 'Кәсіби артықшылық сынақтары | сұрақтары және жауабтары'
 
     def __str__(self):
         return f"Question {self.id}"
@@ -80,8 +80,8 @@ class PreferenceQuestion(models.Model):
     option_b = models.CharField(max_length=512)
 
     class Meta:
-        verbose_name = 'Preference test | Вопрос и ответ'
-        verbose_name_plural = 'Preference test | Вопросы и ответы'
+        verbose_name = 'Тест-опросник на профориентацию | Вопрос и ответ'
+        verbose_name_plural = 'Тесты-опросники на профориентацию | Вопросы и ответы'
 
     def __str__(self):
         return self.text
@@ -92,8 +92,8 @@ class PreferenceQuestion_kk(models.Model):
     option_b = models.CharField(max_length=512)
 
     class Meta:
-        verbose_name = 'Preference test | сұрағы және жауабтары'
-        verbose_name_plural = 'Preference test | сұрақтары және жауабтары'
+        verbose_name = 'Кәсіптік бағдарлауға арналған Тест-сауалнама | сұрағы және жауабтары'
+        verbose_name_plural = 'Кәсіптік бағдарлауға арналған Тест-сауалнамалар | сұрақтары және жауабтары'
 
     def __str__(self):
         return self.text
