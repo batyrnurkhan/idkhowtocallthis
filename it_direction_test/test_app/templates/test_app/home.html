@@ -276,7 +276,7 @@ body {
 
         <div class="text-containers">
             <div class="banner">
-                <h1 class="title">Тест-опросник на профориентацию</h1>
+                <h1 class="title">1. Тест-опросник на профориентацию</h1>
                 <a href="{% url 'test_view' user_data_id %}" class="button2">ПРОЙТИ ТЕСТИРОВАНИЕ</a>
             </div>
         </div>
@@ -286,8 +286,8 @@ body {
                 <img src="{% static 'test_app/img/accountcircleline1.svg' %}" alt="Individual Characteristics Test">
             </div>
             <div class="test-card2-text-container">
-                <h2>Анкета - опросник</h2>
-                <a href="{% url 'oprosnik' user_data_id %}" class="button">пройти тест</a>
+                <h2>2. Тест-опросник на определение типа личности</h2>
+                <a href="{% url 'holland_test' user_data_id %}" class="button">пройти тест</a>
             </div>
         </div>
     </div>
@@ -296,18 +296,18 @@ body {
     <div class="grid">
         <div class="test-card">
             <img src="{% static 'test_app/img/map2line1.svg' %}" alt="Interest Map Test">
-            <h2>Тест на профессиональные предпочтения</h2>
+            <h2>3. Тест на профессиональные предпочтения</h2>
             <a href="{% url 'preference_test' user_data_id %}" class="button">пройти тест</a>
         </div>
         <div class="test-card">
             <img src="{% static 'test_app/img/starline1.svg' %}" alt="Career Values Test">
-            <h2>Тест "Якоря карьеры"</h2>
+            <h2>4. Тест "Якоря карьеры"</h2>
             <a href="{% url 'career_anchor_test' user_data_id %}" class="button">пройти тест</a>
         </div>
         <div class="test-card">
             <img src="{% static 'test_app/img/Vector.svg' %}" alt="Professional Preferences Test">
-            <h2> Тест-опросник на определение типов мышления </h2>
-            <a href="{% url 'holland_test' user_data_id %}" class="button">пройти тест</a>
+            <h2>5. Анкета-опросник</h2>
+            <a href="{% url 'oprosnik' user_data_id %}" class="button">пройти тест</a>
         </div>
     </div>
 </div>

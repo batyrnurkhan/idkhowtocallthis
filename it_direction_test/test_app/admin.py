@@ -18,8 +18,6 @@ class TestResultAdmin(ExportActionMixin, admin.ModelAdmin):
     search_fields = ('user_data__first_name', 'user_data__last_name', 'test_name')
 
 
-admin.site.register(MapQuestion_kk)
-admin.site.register(MapQuestion)
 
 admin.site.register(Question)
 admin.site.register(Question_kk)
