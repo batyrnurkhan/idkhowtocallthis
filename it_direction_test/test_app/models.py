@@ -30,8 +30,8 @@ class Question(models.Model):
     choice_b = models.CharField(max_length=512)
 
     class Meta:
-        verbose_name = 'Тест-опросник на профориентацию | Вопрос и ответы'
-        verbose_name_plural = 'Тест-опросник на профориентацию | Вопросы и ответы'
+        verbose_name = '1. Тест-опросник на профориентацию | Вопрос и ответы'
+        verbose_name_plural = '1. Тест-опросник на профориентацию | Вопросы и ответы'
 
     def __str__(self):
         return f'{self.text} - {self.choice_a} - {self.choice_b}'
@@ -42,8 +42,8 @@ class Question_kk(models.Model):
     choice_b = models.CharField(max_length=512)
 
     class Meta:
-        verbose_name = 'Тест-опросник на профориентацию | сұрақтар және жауабтар'
-        verbose_name_plural = 'Тест-опросник на профориентацию | сұрақтары және жауабтары'
+        verbose_name = '1. Тест-опросник на профориентацию | сұрақтар және жауабтар'
+        verbose_name_plural = '1. Тест-опросник на профориентацию | сұрақтары және жауабтары'
 
     def __str__(self):
         return f'{self.text} - {self.choice_a} - {self.choice_b}'
@@ -55,8 +55,8 @@ class HollandQuestion(models.Model):
 
 
     class Meta:
-        verbose_name = 'Тест на профессиональные предпочтения | Вопрос и ответы'
-        verbose_name_plural = 'Тесты на профессиональные предпочтения |Вопросы ответы второго теста'
+        verbose_name = '2. Тест-опросник на определение типа личности | Вопрос и ответы'
+        verbose_name_plural = '2. Тест-опросник на определение типа личности |Вопросы ответы второго теста'
 
     def __str__(self):
         return f"Question {self.id}"
@@ -68,8 +68,8 @@ class HollandQuestion_kk(models.Model):
     choice_b = models.CharField(max_length=512)
 
     class Meta:
-        verbose_name = 'Кәсіби артықшылық сынағы | сұрағы және жауабы'
-        verbose_name_plural = 'Кәсіби артықшылық сынақтары | сұрақтары және жауабтары'
+        verbose_name = '2. Тұлға түрін анықтауға арналған тест-сауалнама | сұрағы және жауабы'
+        verbose_name_plural = '2. Тұлға түрін анықтауға арналған тест-сауалнама | сұрақтары және жауабтары'
 
     def __str__(self):
         return f"Question {self.id}"
@@ -80,8 +80,8 @@ class PreferenceQuestion(models.Model):
     option_b = models.CharField(max_length=512)
 
     class Meta:
-        verbose_name = 'Тест-опросник на профориентацию | Вопрос и ответ'
-        verbose_name_plural = 'Тесты-опросники на профориентацию | Вопросы и ответы'
+        verbose_name = '3. Тест на профессиональные предпочтения | Вопрос и ответ'
+        verbose_name_plural = '3. Тест на профессиональные предпочтения | Вопросы и ответы'
 
     def __str__(self):
         return self.text
@@ -92,8 +92,8 @@ class PreferenceQuestion_kk(models.Model):
     option_b = models.CharField(max_length=512)
 
     class Meta:
-        verbose_name = 'Кәсіптік бағдарлауға арналған Тест-сауалнама | сұрағы және жауабтары'
-        verbose_name_plural = 'Кәсіптік бағдарлауға арналған Тест-сауалнамалар | сұрақтары және жауабтары'
+        verbose_name = '3. Кәсіби артықшылық сынағы | сұрағы және жауабтары'
+        verbose_name_plural = '3. Кәсіби артықшылық сынағы | сұрақтары және жауабтары'
 
     def __str__(self):
         return self.text
@@ -124,8 +124,8 @@ class MapQuestion_kk(models.Model):
 class CareerAnchorQuestion(models.Model):
     text = models.CharField(max_length=1024)
     class Meta:
-        verbose_name = 'Тест "Якоря карьеры" | Вопрос'
-        verbose_name_plural = 'Тест "Якоря карьеры" | Вопросы'
+        verbose_name = '4. Тест "Якоря карьеры" | Вопрос'
+        verbose_name_plural = '4. Тест "Якоря карьеры" | Вопросы'
     def __str__(self):
         return self.text
 
@@ -133,8 +133,8 @@ class CareerAnchorQuestion_kk(models.Model):
     text = models.CharField(max_length=1024)
 
     class Meta:
-        verbose_name = 'Тест "Якоря карьеры" | сұрағы'
-        verbose_name_plural = 'Тест "Якоря карьеры" | сұрақтары'
+        verbose_name = '4. "Мансап зәкірі"тесті | сұрағы'
+        verbose_name_plural = '4. "Мансап зәкірі"тесті | сұрақтары'
 
     def __str__(self):
         return self.text
@@ -144,8 +144,8 @@ class CareerAnchorResponse(models.Model):
     score = models.IntegerField(default=0)
 
     class Meta:
-        verbose_name = 'Тест "Якоря карьеры" | Вопрос и ответ'
-        verbose_name_plural = 'Тест "Якоря карьеры" | Вопросы и ответы'
+        verbose_name = '4. Тест "Якоря карьеры" | Вопрос и ответ'
+        verbose_name_plural = '4. Тест "Якоря карьеры" | Вопросы и ответы'
 
     def __str__(self):
         return self.question

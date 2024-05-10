@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://4dc8-62-32-92-157.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = ['https://gasyrfoundation.com']
 
 
 INSTALLED_APPS = [
@@ -79,9 +79,10 @@ WSGI_APPLICATION = 'it_direction_test.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': 'db.sqlite3',
     }
 }
+
 
 
 # Password validation

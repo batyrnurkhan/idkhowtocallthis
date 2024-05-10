@@ -17,18 +17,22 @@ class TestResultAdmin(ExportActionMixin, admin.ModelAdmin):
     list_filter = ('test_name', 'created_at')
     search_fields = ('user_data__first_name', 'user_data__last_name', 'test_name')
 
-
-
 admin.site.register(Question)
 admin.site.register(Question_kk)
+
+class HollandQuestionAdmin(admin.ModelAdmin):
+    list_display = ('text', 'choice_a', 'choice_b')  # Fields to display in the admin list view
+
+class HollandQuestionKkAdmin(admin.ModelAdmin):
+    list_display = ('text', 'choice_a', 'choice_b')  # Fields to display in the admin list view
+
+# Register the models with their respective admin classes
+admin.site.register(HollandQuestion, HollandQuestionAdmin)
+admin.site.register(HollandQuestion_kk, HollandQuestionKkAdmin)
 
 admin.site.register(PreferenceQuestion)
 admin.site.register(PreferenceQuestion_kk)
 
-admin.site.register(HollandQuestion)
-admin.site.register(HollandQuestion_kk)
-
 admin.site.register(CareerAnchorQuestion)
 admin.site.register(CareerAnchorQuestion_kk)
-admin.site.register(CareerAnchorResponse)
 

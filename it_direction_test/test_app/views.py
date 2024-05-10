@@ -227,7 +227,6 @@ def calculate_holland_type(responses):
 
 def holland_test_view(request, user_data_id):
     user_data = get_object_or_404(UserData, id=user_data_id)
-    questions = HollandQuestion.objects.all()
     language = user_data.language
 
     if request.method == "POST":
@@ -245,8 +244,14 @@ def holland_test_view(request, user_data_id):
             'А': 'Воображение и интуиция, эмоционально сложный взгляд на жизнь, независимость, гибкость и оригинальность мышления, развитые двигательные способности и восприятие'
         }
 
-        new_result = TestResult.objects.create(user_data_id=user_data_id, test_name="Тест-опросник на определение типов мышления",
-                                               result=dominant_type)
+        personality_description = personality_descriptions.get(dominant_type, 'Description not found.')
+
+        # Combine dominant type and personality description into one string for saving
+        combined_result = f"{dominant_type} - {personality_description}"
+
+        # Save the combined result in the TestResult model
+        new_result = TestResult.objects.create(user_data_id=user_data_id, test_name="Тест-опросник на определение типа личности",
+                                               result=combined_result)
         result_id = new_result.id
 
         # Construct the admin URL manually
@@ -702,11 +707,11 @@ def career_anchor_test_view(request, user_data_id):
                         max_orientation = "Кәсіпкерлік"
 
 
-            TestResult.objects.create(user_data_id=user_data_id, test_name="Тест якоря", result=max_orientation)
+            TestResult.objects.create(user_data_id=user_data_id, test_name="Тест якоря карьеры", result=max_orientation)
 
             new_result = TestResult.objects.create(
                 user_data=user_data,
-                test_name="Тест якоря",
+                test_name="Тест якоря карьеры",
                 result=max_orientation
             )
 
