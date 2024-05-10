@@ -246,27 +246,22 @@ def holland_test_view(request, user_data_id):
 
         personality_description = personality_descriptions.get(dominant_type, 'Description not found.')
 
-        # Combine dominant type and personality description into one string for saving
         combined_result = f"{dominant_type} - {personality_description}"
 
-        # Save the combined result in the TestResult model
         new_result = TestResult.objects.create(user_data_id=user_data_id, test_name="Тест-опросник на определение типа личности",
                                                result=combined_result)
         result_id = new_result.id
 
-        # Construct the admin URL manually
         domain = 'https://gasyrfoundation.com'
         admin_path = reverse('admin:test_app_testresult_change', args=(result_id,))
         admin_url = f"{domain}{admin_path}"
 
-        # Construct the WhatsApp URL
         whatsapp_message = f"Привет, вот ссылка на результат / Сәлем, нәтижеге сілтеме: {admin_url}"
         encoded_whatsapp_message = quote(whatsapp_message)
         whatsapp_link = f"https://wa.me/77000660868?text={encoded_whatsapp_message}"
 
         personality_description = personality_descriptions.get(dominant_type, 'Description not found.')
 
-        # Return the response with the WhatsApp link
         return render(request, 'test_app/second_test/holland_results.html', {
             'result': dominant_type,
             'type_counts': type_counts,
@@ -277,7 +272,6 @@ def holland_test_view(request, user_data_id):
             'submit_text': "Return home",
         })
 
-    # This is the original code for GET requests to show the form
     submit_text = "ПОЛУЧИТЬ РЕЗУЛЬТАТ" if user_data.language != "KZ" else "Бастау"
     if (language == "KZ"):
         questions = HollandQuestion_kk.objects.all()
