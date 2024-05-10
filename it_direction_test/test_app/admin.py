@@ -17,22 +17,35 @@ class TestResultAdmin(ExportActionMixin, admin.ModelAdmin):
     list_filter = ('test_name', 'created_at')
     search_fields = ('user_data__first_name', 'user_data__last_name', 'test_name')
 
-admin.site.register(Question)
-admin.site.register(Question_kk)
+@admin.register(Question)
+class QuestionAdmin(ExportActionMixin, admin.ModelAdmin):
+    list_display = ('text', 'choice_a', 'choice_b')
 
-class HollandQuestionAdmin(admin.ModelAdmin):
-    list_display = ('text', 'choice_a', 'choice_b')  # Fields to display in the admin list view
+@admin.register(Question_kk)
+class QuestionKkAdmin(ExportActionMixin, admin.ModelAdmin):
+    list_display = ('text', 'choice_a', 'choice_b')
 
-class HollandQuestionKkAdmin(admin.ModelAdmin):
-    list_display = ('text', 'choice_a', 'choice_b')  # Fields to display in the admin list view
+  # Fields to display in the admin list view
 
 # Register the models with their respective admin classes
-admin.site.register(HollandQuestion, HollandQuestionAdmin)
-admin.site.register(HollandQuestion_kk, HollandQuestionKkAdmin)
+@admin.register(HollandQuestion)
+class HollandQuestionAdmin(ExportActionMixin, admin.ModelAdmin):
+    list_display = ('text', 'choice_a', 'choice_b')  # Fields to display in the admin list view
 
-admin.site.register(PreferenceQuestion)
-admin.site.register(PreferenceQuestion_kk)
+@admin.register(HollandQuestion_kk)
+class HollandQuestionKkAdmin(ExportActionMixin, admin.ModelAdmin):
+    list_display = ('text', 'choice_a', 'choice_b')
 
-admin.site.register(CareerAnchorQuestion)
-admin.site.register(CareerAnchorQuestion_kk)
+@admin.register(PreferenceQuestion)
+class PreferenceQuestionAdmin(ExportActionMixin, admin.ModelAdmin):
+    list_display = ('text', 'option_a', 'option_b')
+@admin.register(PreferenceQuestion_kk)
+class PreferenceQuestionKkAdmin(ExportActionMixin, admin.ModelAdmin):
+    list_display = ('text', 'option_a', 'option_b')
+@admin.register(CareerAnchorQuestion)
+class CareerAnchorQuestionAdmin(ExportActionMixin, admin.ModelAdmin):
+    list_display = ('text',)
+@admin.register(CareerAnchorQuestion_kk)
+class CareerAnchorQuestionKkAdmin(ExportActionMixin, admin.ModelAdmin):
+    list_display = ('text',)
 

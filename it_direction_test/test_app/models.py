@@ -98,28 +98,6 @@ class PreferenceQuestion_kk(models.Model):
     def __str__(self):
         return self.text
 
-class MapQuestion(models.Model):
-    text = models.TextField()
-    language = models.CharField(max_length=2, choices=(('RU', 'Russian'), ('KZ', 'Kazakh')), default=('RU', 'Russian'))
-
-    class Meta:
-        verbose_name = 'Тест на профессиональные предпочтения    | Вопрос и ответы'
-        verbose_name_plural = 'Тест на профессиональные предпочтения | Вопросы ответы'
-
-    def __str__(self):
-        return self.text
-
-
-
-class MapQuestion_kk(models.Model):
-    text = models.TextField()
-
-    class Meta:
-        verbose_name = 'Тест на профессиональные предпочтения | сұрағы және жауабтары'
-        verbose_name_plural = 'Тест на профессиональные предпочтения | сұрақтары және жауабтары'
-
-    def __str__(self):
-        return self.text
 
 class CareerAnchorQuestion(models.Model):
     text = models.CharField(max_length=1024)
@@ -133,7 +111,7 @@ class CareerAnchorQuestion_kk(models.Model):
     text = models.CharField(max_length=1024)
 
     class Meta:
-        verbose_name = '4. "Мансап зәкірі"тесті | сұрағы'
+        verbose_name = '4. "Мансап зәкірі" тесті | сұрағы'
         verbose_name_plural = '4. "Мансап зәкірі"тесті | сұрақтары'
 
     def __str__(self):
