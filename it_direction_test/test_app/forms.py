@@ -64,7 +64,7 @@ class UserDataForm(forms.ModelForm):
     class Meta:
         model = UserData
         fields = ['first_name', 'last_name', 'email', 'phone_number', 'language',
-                  'grade', 'parent_first_name', 'parent_last_name', 'parent_phone_number']
+                  'grade', 'parent_first_name', 'parent_last_name', 'parent_phone_number', 'city']
 class Oprosnik(forms.Form):
     question_1 = forms.CharField(
         label='1)Какие профессии нравятся Вам? Что Вы любите делать больше всего?',

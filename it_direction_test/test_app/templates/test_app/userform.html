@@ -183,7 +183,18 @@
         <label for="id_parent_phone_number">Номер телефона родителя</label>
         <input type="tel" name="parent_phone_number" id="id_parent_phone_number" placeholder="+7 ( ___ ) ____ - __ - __" required>
     </div>
-            <button type="submit">Начать тестирование</button>
+    <div class="form-group">
+        
+        <label for="id_city">Город</label>
+        <select name="city" id="id_city" required>
+            <option value="">Выберите город</option>
+            <option value="Almaty">Алматы</option>
+            <option value="Astana">Астана</option>
+            <option value="Shymkent">Шымкент</option>
+            <!-- Добавьте другие города при необходимости -->
+        </select>
+    </div>
+        <button type="submit">Начать тестирование</button>
         </form>
     </div>
 </div>

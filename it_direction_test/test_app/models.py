@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class UserData(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -14,14 +15,20 @@ class UserData(models.Model):
     parent_last_name = models.CharField(max_length=100, default='', blank=True)
     parent_phone_number = models.CharField(max_length=100, default='', blank=True)
 
+    CITY_CHOICES = [
+        ('Almaty', 'Алматы'),
+        ('Astana', 'Астана'),
+        ('Shymkent', 'Шымкент'),
+
+    ]
+    city = models.CharField(max_length=50, choices=CITY_CHOICES, blank=True, null=True)
+
     class Meta:
         verbose_name = 'Данные клиента'
         verbose_name_plural = 'Данные клиентов'
 
-
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
-
 
 
 class Question(models.Model):

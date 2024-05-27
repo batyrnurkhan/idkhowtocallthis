@@ -248,8 +248,9 @@ def holland_test_view(request, user_data_id):
 
         combined_result = f"{dominant_type} - {personality_description}"
 
-        new_result = TestResult.objects.create(user_data_id=user_data_id, test_name="Тест-опросник на определение типа личности",
-                                               result=combined_result)
+        new_result = TestResult.objects.create(user_data_id=user_data_id,
+                                               test_name="Тест-опросник на определение типа личности",
+                                               result=type_counts)
         result_id = new_result.id
 
         domain = 'https://gasyrfoundation.com'
