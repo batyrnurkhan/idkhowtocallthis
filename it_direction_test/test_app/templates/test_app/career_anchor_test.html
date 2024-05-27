@@ -153,6 +153,15 @@ input[type="submit"]:hover {
     </div>
     <div class="form-container">
         <form method="post">
+        <p style="font-size: 1.5em">Насколько Вы согласны с каждым из следующих утверждений?
+            <br>Варианты ответов от 1 до 10, которые их них:
+            <br>1 – совершенно не согласен,
+            <br>2,3,4,
+            <br>5 – менее согласен,
+            <br>6 – более согласен,
+            <br>7,8,9,
+            <br>10 – полностью согласен
+        </p>
             {% csrf_token %}
             {% for field in form %}
             <div class="question">
