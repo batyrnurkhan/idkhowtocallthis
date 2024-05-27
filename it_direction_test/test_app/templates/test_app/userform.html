@@ -155,7 +155,7 @@
             <div class="form-group">
     <label for="id_grade">Класс</label>
     <select name="grade" id="id_grade" required>
-        <option value="">Выберите класс</option>
+        <option value="" id = "class_user">Выберите класс</option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -184,14 +184,12 @@
         <input type="tel" name="parent_phone_number" id="id_parent_phone_number" placeholder="+7 ( ___ ) ____ - __ - __" required>
     </div>
     <div class="form-group">
-        
         <label for="id_city">Город</label>
         <select name="city" id="id_city" required>
-            <option value="">Выберите город</option>
+            <option id="select_city" value="">Выберите город</option>
             <option value="Almaty">Алматы</option>
             <option value="Astana">Астана</option>
             <option value="Shymkent">Шымкент</option>
-            <!-- Добавьте другие города при необходимости -->
         </select>
     </div>
         <button type="submit">Начать тестирование</button>
@@ -259,6 +257,10 @@ function formatPhoneNumber(e) {
     'parentFirstName': 'Имя родителя',
     'parentLastName': 'Фамилия родителя',
     'parentPhoneNumber': 'Номер телефона родителя',
+    'city': 'Город',
+                'selectcity': "Выберите город",
+        'classuser': "Выберите класс"
+
     },
     'KZ': {
     'selectLanguage': 'Тілді тандаңыз',
@@ -271,6 +273,10 @@ function formatPhoneNumber(e) {
     'parentFirstName': 'Ата-ананың аты', // Used for placeholder
     'parentLastName': 'Ата-ананың тегі', // Used for placeholder
     'parentPhoneNumber': 'Ата-ананың телефон нөмірі',
+            'city': 'Қала',
+        'selectcity': "Қаланы тандаңыз",
+        'classuser': "Классты тандаңыз"
+
   }
   };
 
@@ -287,6 +293,9 @@ function formatPhoneNumber(e) {
   document.querySelector('label[for="id_parent_first_name"]').textContent = translations[language]['parentFirstName'];
   document.querySelector('label[for="id_parent_last_name"]').textContent = translations[language]['parentLastName'];
   document.querySelector('label[for="id_parent_phone_number"]').textContent = translations[language]['parentPhoneNumber'];
+  document.querySelector('label[for="id_city"]').textContent = translations[language]['city'];
+  document.querySelector('option[id="class_user"]').textContent = translations[language]['classuser'];
+  document.querySelector('option[id="select_city"]').textContent = translations[language]['selectcity'];
 
   document.getElementById('id_email').placeholder = language === 'KZ' ? 'Электрондық поштаны енгізіңіз' : translations[language]['email']; // Assuming you want to update this for Kazakh
 }
