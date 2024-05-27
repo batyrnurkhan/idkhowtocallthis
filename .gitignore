@@ -1,5 +1,5 @@
 it_direction_test/test_app/migrations/__pycache__/__init__.cpython-310.pyc
-it_direction_test/db.sqlite3
+it_direction_test/db_backup.sqlite3
 it_direction_test/it_direction_test/__pycache__/__init__.cpython-310.pyc
 it_direction_test/it_direction_test/__pycache__/settings.cpython-310.pyc
 it_direction_test/it_direction_test/__pycache__/urls.cpython-310.pyc
@@ -13,4 +13,4 @@ it_direction_test/test_app/__pycache__/urls.cpython-310.pyc
 it_direction_test/test_app/__pycache__/views.cpython-310.pyc
 it_direction_test/test_app/migrations/0001_initial.py
 it_direction_test/test_app/migrations/__pycache__/0001_initial.cpython-310.pyc
-it_direction_test/db.sqlite3
+it_direction_test/db_backup.sqlite3
