@@ -148,7 +148,7 @@ def test_view(request, user_data_id):
 
         TestResult.objects.create(user_data_id=user_data_id, test_name="Тест-опросник на профориентацию", result=result)
 
-        new_result = TestResult.objects.create(user_data_id=user_data_id, test_name="Тест-опросник на профориентацию", result=result)
+        new_result = TestResult.objects.create(user_data_id=user_data_id, test_name="Тест-опросник на профориентацию", result=result2 + ". " +result)
         result_id = new_result.id
 
         # Generate the admin change path
