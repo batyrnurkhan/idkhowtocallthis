@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import *
+from .views_backup import *
 
 urlpatterns = [
     path('test/<int:user_data_id>/', test_view, name='test_view'),
